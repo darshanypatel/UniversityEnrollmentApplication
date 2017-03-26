@@ -1,2 +1,2 @@
-# dbms
-DBMS project
+# DBMS_Project
+University enrollment application
