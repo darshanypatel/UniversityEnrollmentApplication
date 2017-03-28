@@ -27,108 +27,108 @@ public class ViewStudentDetails extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        sIdLabel = new javax.swing.JLabel();
+        sId = new javax.swing.JTextField();
+        fNameLabel = new javax.swing.JLabel();
+        fName = new javax.swing.JTextField();
+        lNameLabel = new javax.swing.JLabel();
+        lName = new javax.swing.JTextField();
+        dobLabel = new javax.swing.JLabel();
+        dob = new javax.swing.JTextField();
+        sLevelLabel = new javax.swing.JLabel();
+        sLevel = new javax.swing.JTextField();
+        sResStatusLabel = new javax.swing.JLabel();
+        sResStatus = new javax.swing.JTextField();
+        amountLabel = new javax.swing.JLabel();
+        amount = new javax.swing.JTextField();
+        gpaLabel = new javax.swing.JLabel();
+        gpa = new javax.swing.JTextField();
+        findButton = new javax.swing.JButton();
+        phoneLabel = new javax.swing.JLabel();
+        phone = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
+        addressLabel = new javax.swing.JLabel();
+        address = new javax.swing.JTextField();
+        editGrade = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Enter Student ID:");
+        sIdLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        sIdLabel.setText("Enter Student ID:");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        sId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("First Name : ");
+        fNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        fNameLabel.setText("First Name : ");
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        fName.setEditable(false);
+        fName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Last Name :");
+        lNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lNameLabel.setText("Last Name :");
 
-        jTextField3.setEditable(false);
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lName.setEditable(false);
+        lName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("D.O.B(MM-DD-YYYY) :");
+        dobLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        dobLabel.setText("D.O.B(MM-DD-YYYY) :");
 
-        jTextField4.setEditable(false);
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        dob.setEditable(false);
+        dob.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Student's Level : ");
+        sLevelLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        sLevelLabel.setText("Student's Level : ");
 
-        jTextField5.setEditable(false);
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        sLevel.setEditable(false);
+        sLevel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("Student's Residency Status : ");
+        sResStatusLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        sResStatusLabel.setText("Student's Residency Status : ");
 
-        jTextField6.setEditable(false);
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        sResStatus.setEditable(false);
+        sResStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Amount Owed (if any) :");
+        amountLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        amountLabel.setText("Amount Owed (if any) :");
 
-        jTextField7.setEditable(false);
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        amount.setEditable(false);
+        amount.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("GPA :");
+        gpaLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        gpaLabel.setText("GPA :");
 
-        jTextField8.setEditable(false);
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        gpa.setEditable(false);
+        gpa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton1.setText("Find");
+        findButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        findButton.setText("Find");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("Phone :");
+        phoneLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        phoneLabel.setText("Phone :");
 
-        jTextField9.setEditable(false);
-        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        phone.setEditable(false);
+        phone.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setText("Email :");
+        emailLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        emailLabel.setText("Email :");
 
-        jTextField10.setEditable(false);
-        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        email.setEditable(false);
+        email.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Address :");
+        addressLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addressLabel.setText("Address :");
 
-        jTextField11.setEditable(false);
-        jTextField11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        address.setEditable(false);
+        address.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("Edit Grade");
+        editGrade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        editGrade.setText("Edit Grade");
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton3.setText("Go Back");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        backButton.setText("Go Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -142,60 +142,60 @@ public class ViewStudentDetails extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
+                                .addComponent(emailLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField10))
+                                .addComponent(email))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
+                                .addComponent(phoneLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
+                                    .addComponent(fNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lNameLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)))
+                                    .addComponent(fName)
+                                    .addComponent(lName)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(sResStatusLabel)
                                 .addGap(25, 25, 25)
-                                .addComponent(jTextField6))
+                                .addComponent(sResStatus))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addComponent(amountLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField7))
+                                .addComponent(amount))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4))
+                                .addComponent(dob))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel11)
+                                .addComponent(addressLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField11))
+                                .addComponent(address))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
+                                        .addComponent(gpaLabel)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(gpa, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(51, 51, 51)
-                                        .addComponent(jButton2))
+                                        .addComponent(editGrade))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
+                                        .addComponent(sLevelLabel)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(sLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sId, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(32, 32, 32)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3)))
+                                        .addComponent(backButton)))
                                 .addGap(0, 2, Short.MAX_VALUE)))
                         .addGap(118, 118, 118))))
         );
@@ -204,85 +204,85 @@ public class ViewStudentDetails extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lNameLabel)
+                    .addComponent(lName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sLevelLabel)
+                    .addComponent(sLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sResStatusLabel)
+                    .addComponent(sResStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(amountLabel)
+                    .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(gpaLabel)
+                    .addComponent(gpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editGrade))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(phoneLabel)
+                    .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailLabel)
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addressLabel)
+                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField address;
+    private javax.swing.JLabel addressLabel;
+    private javax.swing.JTextField amount;
+    private javax.swing.JLabel amountLabel;
+    private javax.swing.JButton backButton;
+    private javax.swing.JTextField dob;
+    private javax.swing.JLabel dobLabel;
+    private javax.swing.JButton editGrade;
+    private javax.swing.JTextField email;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField fName;
+    private javax.swing.JLabel fNameLabel;
+    private javax.swing.JButton findButton;
+    private javax.swing.JTextField gpa;
+    private javax.swing.JLabel gpaLabel;
+    private javax.swing.JTextField lName;
+    private javax.swing.JLabel lNameLabel;
+    private javax.swing.JTextField phone;
+    private javax.swing.JLabel phoneLabel;
+    private javax.swing.JTextField sId;
+    private javax.swing.JLabel sIdLabel;
+    private javax.swing.JTextField sLevel;
+    private javax.swing.JLabel sLevelLabel;
+    private javax.swing.JTextField sResStatus;
+    private javax.swing.JLabel sResStatusLabel;
     // End of variables declaration//GEN-END:variables
 }

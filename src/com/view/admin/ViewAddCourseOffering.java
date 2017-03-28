@@ -27,18 +27,18 @@ public class ViewAddCourseOffering extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        view = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton1.setText("View Course Offering");
+        view.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        view.setText("View Course Offering");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton2.setText("Add course Offering");
+        add.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        add.setText("Add course Offering");
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton3.setText("Go Back");
+        back.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        back.setText("Go Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -48,12 +48,12 @@ public class ViewAddCourseOffering extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addComponent(jButton1)
+                        .addComponent(view)
                         .addGap(36, 36, 36)
-                        .addComponent(jButton2))
+                        .addComponent(add))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(248, 248, 248)
-                        .addComponent(jButton3)))
+                        .addComponent(back)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -61,18 +61,18 @@ public class ViewAddCourseOffering extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(add)
+                    .addComponent(view))
                 .addGap(54, 54, 54)
-                .addComponent(jButton3)
+                .addComponent(back)
                 .addContainerGap(119, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton add;
+    private javax.swing.JButton back;
+    private javax.swing.JButton view;
     // End of variables declaration//GEN-END:variables
 }
