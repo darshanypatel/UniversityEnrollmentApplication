@@ -54,12 +54,12 @@ public class SQL_Helper {
     }
     
     public static void main(String args[]) throws SQLException {
-        get_connection();
-        stmt = get_statement_object();
+        //get_connection();
+        //stmt = get_statement_object();
         
-        experiment();
+        digest("hogwarts");
         
-        close_connection();
+        //close_connection();
     }
     
     public static boolean check_login_credentials(long id, String password,
@@ -112,12 +112,16 @@ public class SQL_Helper {
     // TODO add record in belongs table
     public static boolean add_student(long student_id, String fname,
                                       String lname, String dob, String CL, String RL, double bill,
-                                      long dept_id, String email_id, long phone, String address)
+                                      String dept_name, String email_id, long phone, String address)
     throws SQLException {
         
         ResultSet rs;
-        int classification_id = 0, residency_id = 0;
+        int dept_id = 0, classification_id = 0, residency_id = 0;
         try {
+            rs = stmt.executeQuery("select dept_id from department where dept_name = " + dept_name);
+            if (rs.next()) 
+                dept_id = rs.getInt("dept_id");            
+            
             rs = stmt.executeQuery("select rl_id from residency_level "
                                    + "where rl = " + RL);
             if (rs.next())
@@ -220,6 +224,7 @@ public class SQL_Helper {
                 next_prereq_id = 1;
             }
             
+            // change prereq_courses to course_id first
             for (int i = 0; i < prereq_courses.size(); i++) {
                 stmt.executeQuery("insert into prereq_courses (prereq_id, "
                                   + "prereq_course_id, grade) values (" + next_prereq_id
