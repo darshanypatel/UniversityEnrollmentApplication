@@ -5,6 +5,8 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+
 /**
  *
  * @author Yash
@@ -27,27 +29,32 @@ public class AddDropDeadline extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        deadline = new javax.swing.JLabel();
+        yes = new javax.swing.JButton();
+        no = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Are you sure you want to enforce deadlines ?");
+        deadline.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        deadline.setText("Are you sure you want to enforce deadlines ?");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Yes");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        yes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        yes.setText("Yes");
+        yes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                yesActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("No");
+        no.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        no.setText("No");
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton3.setText("Go Back");
+        back.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        back.setText("Go Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,41 +64,47 @@ public class AddDropDeadline extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(jLabel1))
+                        .addComponent(deadline))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jButton1)
+                        .addComponent(yes)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton2)
+                        .addComponent(no)
                         .addGap(42, 42, 42)
-                        .addComponent(jButton3)))
+                        .addComponent(back)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addComponent(jLabel1)
+                .addComponent(deadline)
                 .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(yes)
+                    .addComponent(no)
+                    .addComponent(back))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesActionPerformed
         // TODO add your handling code here:
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_yesActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.closeAddDropDeadline();
+        AdminViewController.showAdminHomePage();
+    }//GEN-LAST:event_backActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton back;
+    private javax.swing.JLabel deadline;
+    private javax.swing.JButton no;
+    private javax.swing.JButton yes;
     // End of variables declaration//GEN-END:variables
 }

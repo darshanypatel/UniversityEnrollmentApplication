@@ -5,6 +5,8 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+
 /**
  *
  * @author Yash
@@ -27,21 +29,33 @@ public class ViewAddCourse extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        view = new javax.swing.JButton();
+        add = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
-        jLabel1.setText("jLabel1");
+        view.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        view.setText("View Course");
+        view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewActionPerformed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton1.setText("View Course");
+        add.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        add.setText("Add Course");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton2.setText("Add Course");
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jButton3.setText("Go Back");
+        back.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        back.setText("Go Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -51,12 +65,12 @@ public class ViewAddCourse extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(jButton1)
+                        .addComponent(view)
                         .addGap(57, 57, 57)
-                        .addComponent(jButton2))
+                        .addComponent(add))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(176, 176, 176)
-                        .addComponent(jButton3)))
+                        .addComponent(back)))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,19 +78,36 @@ public class ViewAddCourse extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(view)
+                    .addComponent(add))
                 .addGap(46, 46, 46)
-                .addComponent(jButton3)
+                .addComponent(back)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+       AdminViewController.closeViewAddCourse();
+        AdminViewController.showAdminHomePage();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
+        // TODO add your handling code here:
+       AdminViewController.closeViewAddCourse();
+        AdminViewController.showViewCourse();
+    }//GEN-LAST:event_viewActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.closeViewAddCourse();
+        AdminViewController.showAddCourse();
+    }//GEN-LAST:event_addActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton add;
+    private javax.swing.JButton back;
+    private javax.swing.JButton view;
     // End of variables declaration//GEN-END:variables
 }
