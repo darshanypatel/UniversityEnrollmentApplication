@@ -6,8 +6,8 @@
 package dbpro;
 
 import com.view.LoginPage;
-import com.view.StudentPage;
 import com.view.admin.AdminHomePage;
+import com.view.student.StudentHomePage;
 import javax.swing.JFrame;
 
 /**
@@ -34,13 +34,14 @@ public class DBPro {
     
     
    public static void ShowStudentPage(){
-       StudentPage sp=new StudentPage();
+StudentHomePage home_page=new StudentHomePage();
        stuPage = new JFrame();
        stuPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuPage.add(sp); // Add JPanel with components to JFrame
+        stuPage.add(home_page); // Add JPanel with components to JFrame
+        stuPage.setVisible(true); 
         stuPage.setSize(700,600);
         login.setVisible(false);
-        stuPage.setVisible(true);
+       stuPage.setVisible(true); 
      }
    
    public static void ShowAdminHomePage(){       
