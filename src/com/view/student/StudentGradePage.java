@@ -5,12 +5,15 @@
  */
 package com.view.student;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Jasleen
  */
 public class StudentGradePage extends javax.swing.JPanel {
-
+     private static JFrame stuGrade;
+     private static JFrame stuHome;
     /**
      * Creates new form StudentGradePage
      */
@@ -44,6 +47,11 @@ public class StudentGradePage extends javax.swing.JPanel {
         jTextField1.setText("jTextField1");
 
         jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -81,7 +89,27 @@ public class StudentGradePage extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         ViewGrades home_page=new ViewGrades();
+       stuGrade = new JFrame();
+       stuGrade.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        stuGrade.add(home_page); // Add JPanel with components to JFrame
+        stuGrade.setVisible(true); 
+        stuGrade.setSize(700,600);
+        this.setVisible(false);
+       stuGrade.setVisible(true); 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+           StudentHomePage home_page=new StudentHomePage();
+       stuHome = new JFrame();
+       stuHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        stuHome.add(home_page); // Add JPanel with components to JFrame
+        stuHome.setVisible(true); 
+        stuHome.setSize(700,600);
+        this.setVisible(false);
+       stuHome.setVisible(true); 
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
