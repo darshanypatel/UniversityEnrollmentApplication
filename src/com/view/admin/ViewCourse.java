@@ -5,6 +5,8 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+
 /**
  *
  * @author Yash
@@ -112,6 +114,11 @@ public class ViewCourse extends javax.swing.JPanel {
 
         back.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         back.setText("Go Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -203,6 +210,12 @@ public class ViewCourse extends javax.swing.JPanel {
     private void creditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_creditsActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+         AdminViewController.closeViewCourse();
+        AdminViewController.showViewAddCourse();
+    }//GEN-LAST:event_backActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

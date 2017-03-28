@@ -36,20 +36,13 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="deadline" min="-2" pref="343" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="logout" min="-2" pref="161" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="enrollStudent" min="-2" pref="343" max="-2" attributes="0"/>
-                              <Component id="viewAddCourse" min="-2" pref="343" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                      </Group>
+                  <Component id="logout" min="-2" pref="161" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="enrollStudent" min="-2" pref="343" max="-2" attributes="0"/>
+                      <Component id="viewAddCourse" min="-2" pref="343" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="302" max="-2" attributes="0"/>
@@ -124,6 +117,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="View My Profile"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewProfileActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="enrollStudent">
       <Properties>
@@ -135,6 +131,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Enroll a new Student"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enrollStudentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="viewAddCourse">
       <Properties>
@@ -146,6 +145,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="View/Add Courses"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewAddCourseActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="viewAddCourseOffering">
       <Properties>
@@ -157,6 +159,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="View/Add Course Offering"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewAddCourseOfferingActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="specialEnrollment">
       <Properties>
@@ -168,6 +173,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="View/Approve Special Enrollment Requests"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="specialEnrollmentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="deadline">
       <Properties>
@@ -179,6 +187,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Enforce Add/Drop Deadline"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deadlineActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="logout">
       <Properties>

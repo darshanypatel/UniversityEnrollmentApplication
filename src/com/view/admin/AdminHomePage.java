@@ -5,6 +5,8 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+
 /**
  *
  * @author Yash
@@ -53,26 +55,56 @@ public class AdminHomePage extends javax.swing.JPanel {
         viewProfile.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         viewProfile.setForeground(new java.awt.Color(0, 51, 153));
         viewProfile.setText("View My Profile");
+        viewProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProfileActionPerformed(evt);
+            }
+        });
 
         enrollStudent.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enrollStudent.setForeground(new java.awt.Color(0, 51, 153));
         enrollStudent.setText("Enroll a new Student");
+        enrollStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enrollStudentActionPerformed(evt);
+            }
+        });
 
         viewAddCourse.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         viewAddCourse.setForeground(new java.awt.Color(0, 51, 153));
         viewAddCourse.setText("View/Add Courses");
+        viewAddCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewAddCourseActionPerformed(evt);
+            }
+        });
 
         viewAddCourseOffering.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         viewAddCourseOffering.setForeground(new java.awt.Color(0, 51, 153));
         viewAddCourseOffering.setText("View/Add Course Offering");
+        viewAddCourseOffering.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewAddCourseOfferingActionPerformed(evt);
+            }
+        });
 
         specialEnrollment.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         specialEnrollment.setForeground(new java.awt.Color(0, 51, 153));
         specialEnrollment.setText("View/Approve Special Enrollment Requests");
+        specialEnrollment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                specialEnrollmentActionPerformed(evt);
+            }
+        });
 
         deadline.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         deadline.setForeground(new java.awt.Color(0, 51, 153));
         deadline.setText("Enforce Add/Drop Deadline");
+        deadline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deadlineActionPerformed(evt);
+            }
+        });
 
         logout.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         logout.setForeground(new java.awt.Color(0, 51, 153));
@@ -97,15 +129,11 @@ public class AdminHomePage extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(deadline, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(156, 156, 156))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(enrollStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(viewAddCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(148, 148, 148)))))
+                    .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(enrollStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(viewAddCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(148, 148, 148))
             .addGroup(layout.createSequentialGroup()
                 .addGap(302, 302, 302)
                 .addComponent(specialEnrollment, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +166,38 @@ public class AdminHomePage extends javax.swing.JPanel {
 
     private void viewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewStudentActionPerformed
         // TODO add your handling code here:
+        AdminViewController.showViewStudentDetails();
     }//GEN-LAST:event_viewStudentActionPerformed
+
+    private void viewProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProfileActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.showAdminProfile();
+    }//GEN-LAST:event_viewProfileActionPerformed
+
+    private void enrollStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollStudentActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.showEnrollStudent();
+    }//GEN-LAST:event_enrollStudentActionPerformed
+
+    private void viewAddCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAddCourseActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.showViewAddCourse();
+    }//GEN-LAST:event_viewAddCourseActionPerformed
+
+    private void viewAddCourseOfferingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAddCourseOfferingActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.showViewAddCourseOffering();
+    }//GEN-LAST:event_viewAddCourseOfferingActionPerformed
+
+    private void deadlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deadlineActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.showAddDropDeadline();
+    }//GEN-LAST:event_deadlineActionPerformed
+
+    private void specialEnrollmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_specialEnrollmentActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.showSpecialEnrollment();
+    }//GEN-LAST:event_specialEnrollmentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

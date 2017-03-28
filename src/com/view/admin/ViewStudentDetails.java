@@ -5,6 +5,8 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+
 /**
  *
  * @author Yash
@@ -123,6 +125,11 @@ public class ViewStudentDetails extends javax.swing.JPanel {
 
         editGrade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         editGrade.setText("Edit Grade");
+        editGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editGradeActionPerformed(evt);
+            }
+        });
 
         backButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         backButton.setText("Go Back");
@@ -255,7 +262,14 @@ public class ViewStudentDetails extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+         AdminViewController.closeViewStudentDetails();
+        AdminViewController.showAdminHomePage();
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void editGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editGradeActionPerformed
+        // TODO add your handling code here:
+        gpa.setEditable(true);
+    }//GEN-LAST:event_editGradeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

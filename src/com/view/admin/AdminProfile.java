@@ -5,6 +5,8 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+
 /**
  *
  * @author Yash
@@ -146,6 +148,8 @@ public class AdminProfile extends javax.swing.JPanel {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
+        AdminViewController.closeAdminProfile();
+        AdminViewController.showAdminHomePage();
     }//GEN-LAST:event_backActionPerformed
 
 

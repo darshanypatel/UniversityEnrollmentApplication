@@ -5,6 +5,8 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+
 /**
  *
  * @author Yash
@@ -33,12 +35,27 @@ public class ViewAddCourseOffering extends javax.swing.JPanel {
 
         view.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         view.setText("View Course Offering");
+        view.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewActionPerformed(evt);
+            }
+        });
 
         add.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         add.setText("Add course Offering");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
 
         back.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         back.setText("Go Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,6 +85,24 @@ public class ViewAddCourseOffering extends javax.swing.JPanel {
                 .addContainerGap(119, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.closeViewAddCourseOffering();
+        AdminViewController.showAdminHomePage();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.closeViewAddCourseOffering();
+        AdminViewController.showViewCourseOffering();
+    }//GEN-LAST:event_viewActionPerformed
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.closeViewAddCourseOffering();
+        AdminViewController.showAddCourseOffering();
+    }//GEN-LAST:event_addActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

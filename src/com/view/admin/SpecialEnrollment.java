@@ -5,6 +5,8 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+
 /**
  *
  * @author Yash
@@ -37,7 +39,13 @@ public class SpecialEnrollment extends javax.swing.JPanel {
 
         back.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         back.setText("Go Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
+        select.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         select.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         reject.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -69,9 +77,15 @@ public class SpecialEnrollment extends javax.swing.JPanel {
                     .addComponent(approve)
                     .addComponent(back)
                     .addComponent(reject))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+       AdminViewController.closeSpecialEnrollment();
+        AdminViewController.showAdminHomePage();
+    }//GEN-LAST:event_backActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

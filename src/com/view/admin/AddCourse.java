@@ -5,6 +5,9 @@
  */
 package com.view.admin;
 
+import dbpro.AdminViewController;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Yash
@@ -84,6 +87,11 @@ public class AddCourse extends javax.swing.JPanel {
 
         back.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         back.setText("Go Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         courseIDLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         courseIDLabel.setText("Course Id :");
@@ -144,7 +152,7 @@ public class AddCourse extends javax.swing.JPanel {
                         .addComponent(submit)
                         .addGap(18, 18, 18)
                         .addComponent(back)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,6 +200,12 @@ public class AddCourse extends javax.swing.JPanel {
     private void creditsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_creditsActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.closeAddCourse();
+        AdminViewController.showViewAddCourse();
+    }//GEN-LAST:event_backActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
