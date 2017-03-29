@@ -5,10 +5,12 @@
  */
 package Connection;
 
+import com.view.LoginPage;
 import java.sql.*;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -18,7 +20,7 @@ public class SQL_Helper {
     
     public static Statement stmt;
     public static Connection con;
-    
+    private static JFrame login;
     public static void get_connection() {
         try {
             //step1 load the driver class
@@ -44,22 +46,40 @@ public class SQL_Helper {
         return stmt;
     }
     
-    public static void close_connection() {
+    public static int close_connection() {
         try {
             //step5 close the connection object
             con.close();
+            return 0;
         } catch (Exception e) {
             System.out.println(e);
         }
+        return 0;
     }
     
-    public static void main(String args[]) throws SQLException {
-        //get_connection();
-        //stmt = get_statement_object();
+    public static void main(String args[]) throws SQLException{
+        connect();
+        LoginPage main = new LoginPage();
+        login = new JFrame(); //ConfirmOrder.getFrame();
+        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        login.setDefaultCloseOperation(SQL_Helper.close_connection());
+        login.add(main); // Add JPanel with components to JFrame
+        login.setSize(550,500);
+        login.setResizable(false);
+        login.setVisible(true);  
+        System.out.println("Main End");
         
-        digest("hogwarts");
-        
-        //close_connection();
+    }
+    
+    public static void connect() throws SQLException {
+        get_connection();
+        stmt = get_statement_object();
+       
+      
+    }
+    
+    public static void disconnect() throws SQLException{
+         close_connection();
     }
     
     public static boolean check_login_credentials(long id, String password,
@@ -118,30 +138,33 @@ public class SQL_Helper {
         ResultSet rs;
         int dept_id = 0, classification_id = 0, residency_id = 0;
         try {
-            rs = stmt.executeQuery("select dept_id from department where dept_name = " + dept_name);
+            System.out.println("Starting......"+dept_id+"     "+dept_name);
+            rs = stmt.executeQuery("select dept_id from department where dept_name = '" + dept_name+"'");
             if (rs.next()) 
                 dept_id = rs.getInt("dept_id");            
-            
+    
+            System.out.println("Connection.SQL_Helper.add_student():   "+dept_id+"     "+dept_name);
             rs = stmt.executeQuery("select rl_id from residency_level "
-                                   + "where rl = " + RL);
+                                   + "where rl = '" + RL+"'");
             if (rs.next())
                 residency_id = rs.getInt("rl_id");
             
             rs = stmt.executeQuery("select cl_id from classification_level "
-                                   + "where cl = " + CL);
+                                   + "where cl = '" + CL+"'");
             if (rs.next())
                 classification_id = rs.getInt("cl_id");
             
             stmt.executeQuery("insert into students (student_id, dept_id, "
                               + "fname, lname, dob, cl_id, rl_id, bill, gpa, password, "
                               + "email, phone, address) values (" + student_id + "," +
-                              dept_id + "," + fname + "," + lname + "," + dob + ","
+                              dept_id + ",'" + fname + "','" + lname + "','" + dob + "',"
                               + classification_id + "," + residency_id + "," + bill +
-                              ", 0.0," + student_id + "," + email_id + "," + phone + ","
-                              + address + ")");
+                              ", 0.0,'" + digest(student_id+"") + "','" + email_id + "'," + phone + ",'"
+                              + address + "')");
+            
         } catch (SQLException e) {
-            //System.out.println("Can't add student...student_id exists!");
-            return false;
+            System.out.println("Can't add student...student_id exists!    "+e.toString());
+            
         }
         
         return true;

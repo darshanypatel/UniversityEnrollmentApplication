@@ -5,7 +5,11 @@
  */
 package com.view.admin;
 
+import Connection.SQL_Helper;
 import dbpro.AdminViewController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,6 +50,8 @@ public class EnrollStudent extends javax.swing.JPanel {
         amount = new javax.swing.JTextField();
         submit = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        deptLabel = new javax.swing.JLabel();
+        dept = new javax.swing.JTextField();
 
         enrollLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         enrollLabel.setForeground(new java.awt.Color(0, 0, 153));
@@ -88,6 +94,9 @@ public class EnrollStudent extends javax.swing.JPanel {
             }
         });
 
+        deptLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        deptLabel.setText("Department :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,12 +137,16 @@ public class EnrollStudent extends javax.swing.JPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(residencyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(residency, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(submit)
-                        .addGap(86, 86, 86)
-                        .addComponent(back)))
+                                    .addComponent(residency, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(submit)
+                                .addGap(78, 78, 78)
+                                .addComponent(back))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(deptLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -169,16 +182,29 @@ public class EnrollStudent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amountlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(submit)
-                    .addComponent(back))
-                .addGap(32, 32, 32))
+                    .addComponent(deptLabel)
+                    .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(back)
+                    .addComponent(submit))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-        // TODO add your handling code here:
+        try {
+            //SQL_Helper.connect();
+          //   System.out.println(SQL_Helper.add_student(Long.parseLong(sid.getText()), fName.getText(), lName.getText(), dob.getText(), level.getText(), residency.getText(), Double.parseDouble(amount.getText()), dept.getText(), "test@test.com",999, "Drive west, Raleigh"));
+        
+         System.out.println(SQL_Helper.add_student(2001, "YASHDSD", "vORA", "18-JUN-90", "Graduate", "International", 2000000, "CS", "test123@test.com",9234567890l, "Drive west, RaleighEE"));
+     
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(EnrollStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_submitActionPerformed
 
@@ -193,6 +219,8 @@ public class EnrollStudent extends javax.swing.JPanel {
     private javax.swing.JTextField amount;
     private javax.swing.JLabel amountlabel;
     private javax.swing.JButton back;
+    private javax.swing.JTextField dept;
+    private javax.swing.JLabel deptLabel;
     private javax.swing.JTextField dob;
     private javax.swing.JLabel dobLabel;
     private javax.swing.JLabel enrollLabel;
