@@ -72,7 +72,7 @@ public class SQL_Helper {
 //        login.setVisible(true);  
 //        System.out.println("Main End");
         
-//        if (check_login_credentials(200157725l, "cdrinku", 2)) {
+//        if (check_login_credentials("xyz1", "cdrinku", 2)) {
 //            System.out.println("welcome!" + current_student_id);
 //        }
 
@@ -149,20 +149,20 @@ public class SQL_Helper {
     
     public static boolean check_login_credentials(String username, String password,
                                                   int student_or_admin) throws SQLException {
-        long id;
         String table_name = student_or_admin == 1 ? "admin" : "students";
+        String s_or_a = student_or_admin == 1 ? "admin" : "student";
         ResultSet rs = stmt.executeQuery("select " + "password from " +
-                                         table_name + " where username = " + username);
+                                         table_name + " where username = '" + username + "'");
         if (rs.next()) {
             String password_digest1 = rs.getString("password");
             String password_digest2 = digest(password);
             if (password_digest1.equals(password_digest2)) {
-                ResultSet rs2 = stmt2.executeQuery("select " + table_name + "_id from " + table_name + " where username = '" + username + "'");
+                ResultSet rs2 = stmt2.executeQuery("select " + s_or_a + "_id from " + table_name + " where username = '" + username + "'");
                 rs2.next();
                 if (student_or_admin == 1) { 
-                    current_admin_id = rs2.getInt(table_name + "_id");
+                    current_admin_id = rs2.getInt(s_or_a + "_id");
                 } else {
-                    current_student_id = rs2.getInt(table_name + "_id");
+                    current_student_id = rs2.getInt(s_or_a + "_id");
                 }
                 return true;
             } else {
@@ -514,8 +514,9 @@ public class SQL_Helper {
             int class_size, int max_waitlist_size, String location) 
             throws SQLException {
         
-        int course_id = 0, next_offering_id, next_semester_id, next_schedule_id
+        int course_id = 0, next_semester_id, next_schedule_id
                 , class_location_id;
+        long next_offering_id;
         try {
             con.setAutoCommit(false);
             // getting course_id corresponding to the 'id'
@@ -588,7 +589,7 @@ public class SQL_Helper {
             rs = stmt.executeQuery("select offering_id from course_offering where "
                                    + "rownum <= 1 order by offering_id desc");
             if (rs.next()) {
-                next_offering_id = rs.getInt("offering_id") + 1;
+                next_offering_id = rs.getLong("offering_id") + 1;
             } else {
                 next_offering_id = 1;
             }
@@ -721,33 +722,94 @@ public class SQL_Helper {
     }
     
     
-    // view courses
+    // chandu - view courses
     public static ArrayList<String> get_courses() {
         ArrayList<String> course_list = new ArrayList();
-        
+        // can use get_course_offering_list here! or change signature of get_course_offering_list
         return course_list;
     }
     
-    // enforce add/drop deadline
+    // chandu - enforce add/drop deadline
+    
+    
+    
     // enroll for a course (check if classification is same as course cl_id)
-    // drop course
-    // view pending/rejected/waitlisted courses
-    // view grades
+    public static boolean enroll_course(long offering_id, int credits) throws SQLException {
+        long student_id = current_student_id;
+        int course_id, cl_id_of_current_student, cl_id_of_course, prereq_id, min_credits, max_credits;
+        String special_permission;
+        double min_gpa;
+        try {
+            con.setAutoCommit(false);
+            
+            ResultSet rs = stmt.executeQuery("select course_id from offering where offering_id = " + offering_id);
+            rs.next();
+            course_id = rs.getInt("course_id");
+            
+            rs = stmt.executeQuery("select min_credits, max_credits, cl_id from course where course_id = " + course_id);
+            rs.next();
+            min_credits = rs.getInt("min_credits");
+            max_credits = rs.getInt("max_credits");
+            if (credits > max_credits || credits < min_credits) {
+                System.out.println("credits not in correct range!");
+                return false;
+            }
+            cl_id_of_course = rs.getInt("cl_id");
+            
+            rs = stmt.executeQuery("select cl_id from students where student_id = " + student_id);
+            rs.next();
+            cl_id_of_current_student = rs.getInt("cl_id");
+            
+            if (cl_id_of_course != cl_id_of_current_student) {
+                System.out.println("cl of student is not equal to cl of course");
+                return false;
+            }
+            
+            rs = stmt.executeQuery("select prereq_id, special_permission, min_gpa from course_prereq where course_id = " + course_id);
+            rs.next();
+            prereq_id = rs.getInt("prereq_id");
+            special_permission = rs.getString("special_permission");
+            min_gpa = rs.getDouble("min_gpa");
+            
+            
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            con.rollback();
+            return false;
+        }
+        return true;
+    }
+    
+    // chandu - drop course
+    // chandu - view pending/rejected/waitlisted courses
+    
+    // not tested
     public static ArrayList<String> get_grades() {
         ArrayList<String> grades_list = new ArrayList();
         try {
-            stmt.executeQuery("select * from enrolls");
+            ResultSet rs = stmt.executeQuery("select * from enrolls where student_id = " + current_student_id + " and grade is not null");
+            if (rs.next()) {
+                int course_id = rs.getInt("course_id");
+                ResultSet rs2 = stmt2.executeQuery("select id from course where course_id = " + course_id);
+                rs2.next();
+                grades_list.add(rs2.getString("id") + " " + rs.getString("grade"));
+            }
+            rs = stmt.executeQuery("select gpa from students where student_id = " + current_student_id);
+            rs.next();
+            grades_list.add(rs.getDouble("gpa") + "");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return grades_list;        
     }
     
-    // view bill
+    // chandu - view bill
     
     
-    // pay bill
+    // chandu - pay bill
     
+    // chandu - view_enrollment_requests
     public static ArrayList<ArrayList<String>> view_enrollment_requests() 
     throws SQLException {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
@@ -755,6 +817,7 @@ public class SQL_Helper {
         return result;
     }
     
+    // chandu - approve_enrollment_request
     public static boolean approve_enrollment_request() {
         try {
             stmt.executeQuery("");
@@ -770,5 +833,6 @@ public class SQL_Helper {
 
 // add departments manually
 // add one page which adds faculty
-// remove course_id from course_prereq table? or drop 'has' table
+// remove course_id from course_prereq table? or drop 'has' table (better to drop table 'has')
 // trigger for after update profile of student, if CL or RL changes => bill
+// get_course_offering_list can be changed to view courses of particular SemYear
