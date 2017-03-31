@@ -52,6 +52,14 @@ public class EnrollStudent extends javax.swing.JPanel {
         back = new javax.swing.JButton();
         deptLabel = new javax.swing.JLabel();
         dept = new javax.swing.JTextField();
+        userNameLabel = new javax.swing.JLabel();
+        username = new javax.swing.JTextField();
+        addressLabel = new javax.swing.JLabel();
+        address = new javax.swing.JTextField();
+        contactLabel = new javax.swing.JLabel();
+        contact = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
 
         enrollLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         enrollLabel.setForeground(new java.awt.Color(0, 0, 153));
@@ -60,23 +68,37 @@ public class EnrollStudent extends javax.swing.JPanel {
         sidLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         sidLabel.setText("Enter Student Id :");
 
+        sid.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         lNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lNameLabel.setText("Enter Student's Last Name :");
+
+        lName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         fNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         fNameLabel.setText("Enter Student's First Name :");
 
+        fName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         dobLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        dobLabel.setText("Enter Student’s D.O.B(MM-DD-YYYY) :");
+        dobLabel.setText("Enter Student’s D.O.B (DD-MMM-YY) :");
+
+        dob.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         levelLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         levelLabel.setText("Enter Student’s Level :");
 
+        level.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         residencyLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         residencyLabel.setText("Enter Student’s Residency Status :");
 
+        residency.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         amountlabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         amountlabel.setText("Enter Amount Owed(if any):");
+
+        amount.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         submit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         submit.setText("Submit");
@@ -95,7 +117,29 @@ public class EnrollStudent extends javax.swing.JPanel {
         });
 
         deptLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        deptLabel.setText("Department :");
+        deptLabel.setText("Enter Department :");
+
+        dept.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        userNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        userNameLabel.setText("Enter User Name :");
+
+        username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        addressLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addressLabel.setText("Enter Address :");
+
+        address.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        contactLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        contactLabel.setText("Enter Contact No. :");
+
+        contact.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        emailLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        emailLabel.setText("Enter Email :");
+
+        email.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -104,61 +148,79 @@ public class EnrollStudent extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
+                        .addGap(186, 186, 186)
                         .addComponent(enrollLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(sidLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sid, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(fNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contactLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(levelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(amountlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(sidLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(amount))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(residencyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sid, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(fNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(residency, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(37, 37, 37)
+                                    .addComponent(submit)
+                                    .addGap(78, 78, 78)
+                                    .addComponent(back))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(deptLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(userNameLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(username))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(levelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(level))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(amountlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(amount))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(residencyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(residency, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(addressLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(address)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(submit)
-                                .addGap(78, 78, 78)
-                                .addComponent(back))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(deptLabel)
+                                .addComponent(emailLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(163, Short.MAX_VALUE))
+                                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap()
                 .addComponent(enrollLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sidLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -168,29 +230,45 @@ public class EnrollStudent extends javax.swing.JPanel {
                     .addComponent(lName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userNameLabel)
+                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addressLabel)
+                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(contactLabel)
+                    .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailLabel)
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deptLabel)
+                    .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(levelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(residencyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(residency, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amountlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deptLabel)
-                    .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back)
                     .addComponent(submit))
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -199,7 +277,7 @@ public class EnrollStudent extends javax.swing.JPanel {
             //SQL_Helper.connect();
           //   System.out.println(SQL_Helper.add_student(Long.parseLong(sid.getText()), fName.getText(), lName.getText(), dob.getText(), level.getText(), residency.getText(), Double.parseDouble(amount.getText()), dept.getText(), "test@test.com",999, "Drive west, Raleigh"));
         
-         System.out.println(SQL_Helper.add_student(2001, "YASHDSD", "vORA", "18-JUN-90", "Graduate", "International", 2000000, "CS", "test123@test.com",9234567890l, "Drive west, RaleighEE"));
+         System.out.println(SQL_Helper.add_student(Long.parseLong(sid.getText()),username.getText(), fName.getText(), lName.getText(), dob.getText(), level.getText(), residency.getText(), Long.parseLong(amount.getText()), dept.getText(),email.getText(),Long.parseLong(contact.getText()), address.getText()));
      
         
         } catch (SQLException ex) {
@@ -216,13 +294,19 @@ public class EnrollStudent extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField address;
+    private javax.swing.JLabel addressLabel;
     private javax.swing.JTextField amount;
     private javax.swing.JLabel amountlabel;
     private javax.swing.JButton back;
+    private javax.swing.JTextField contact;
+    private javax.swing.JLabel contactLabel;
     private javax.swing.JTextField dept;
     private javax.swing.JLabel deptLabel;
     private javax.swing.JTextField dob;
     private javax.swing.JLabel dobLabel;
+    private javax.swing.JTextField email;
+    private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel enrollLabel;
     private javax.swing.JTextField fName;
     private javax.swing.JLabel fNameLabel;
@@ -235,5 +319,7 @@ public class EnrollStudent extends javax.swing.JPanel {
     private javax.swing.JTextField sid;
     private javax.swing.JLabel sidLabel;
     private javax.swing.JButton submit;
+    private javax.swing.JLabel userNameLabel;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,12 @@
  */
 package com.view.admin;
 
+import Connection.SQL_Helper;
 import dbpro.AdminViewController;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,6 +52,12 @@ public class AddCourseOffering extends javax.swing.JPanel {
         waitlist = new javax.swing.JTextField();
         submit = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        yearLabel = new javax.swing.JLabel();
+        year = new javax.swing.JTextField();
+        showFaculty = new javax.swing.JButton();
+        locationLabel = new javax.swing.JLabel();
+        location = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         cIDLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cIDLabel.setText("Course Id : ");
@@ -59,7 +70,7 @@ public class AddCourseOffering extends javax.swing.JPanel {
         sem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         facultyLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        facultyLabel.setText("Faculty Name(s) :");
+        facultyLabel.setText("Faculty ID(s) :");
 
         faculty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -90,6 +101,11 @@ public class AddCourseOffering extends javax.swing.JPanel {
 
         submit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         submit.setText("Submit");
+        submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitActionPerformed(evt);
+            }
+        });
 
         back.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         back.setText("Go Back");
@@ -99,52 +115,89 @@ public class AddCourseOffering extends javax.swing.JPanel {
             }
         });
 
+        yearLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        yearLabel.setText("Year :");
+
+        showFaculty.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        showFaculty.setText("Show faculty List");
+        showFaculty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showFacultyActionPerformed(evt);
+            }
+        });
+
+        locationLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        locationLabel.setText("Class Location :");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("Add Course Offering");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dayLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(day))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(facultyLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(faculty, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cStartLabel)
-                            .addComponent(cEndLabel)
-                            .addComponent(cSizeLabel)
-                            .addComponent(wlSizeLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(classStart)
-                            .addComponent(classEnd)
-                            .addComponent(classSize)
-                            .addComponent(waitlist, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(yearLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cStartLabel)
+                                    .addComponent(cSizeLabel)
+                                    .addComponent(wlSizeLabel)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(submit)
+                                        .addComponent(cEndLabel))
+                                    .addComponent(locationLabel))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(38, 38, 38)
+                                        .addComponent(back))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(location)
+                                            .addComponent(classStart)
+                                            .addComponent(classEnd)
+                                            .addComponent(classSize)
+                                            .addComponent(waitlist, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(semLabel)
+                                .addGap(23, 23, 23)
+                                .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cIDLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(dayLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(day))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(facultyLabel)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(faculty, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(54, 54, 54)
+                                .addComponent(showFaculty))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(semLabel)
-                        .addGap(26, 26, 26)
-                        .addComponent(sem))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(submit)
-                        .addGap(51, 51, 51)
-                        .addComponent(back))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cIDLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(courseID)))
-                .addContainerGap(292, Short.MAX_VALUE))
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel1)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cIDLabel))
@@ -152,11 +205,16 @@ public class AddCourseOffering extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(semLabel)
                     .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(yearLabel)
+                    .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(facultyLabel)
-                    .addComponent(faculty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addComponent(faculty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showFaculty))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dayLabel)
                     .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,15 +230,19 @@ public class AddCourseOffering extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(classSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cSizeLabel))
-                .addGap(36, 36, 36)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wlSizeLabel)
                     .addComponent(waitlist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(locationLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submit)
                     .addComponent(back))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,6 +251,34 @@ public class AddCourseOffering extends javax.swing.JPanel {
        AdminViewController.closeAddCourseOffering();
         AdminViewController.showViewAddCourseOffering();
     }//GEN-LAST:event_backActionPerformed
+
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        ArrayList<Integer> facs=new ArrayList<Integer>();   
+        if(faculty.getText().contains(""))
+                facs=new ArrayList<Integer>();
+        
+        else if(faculty.getText().contains(",")){
+        
+        String fc[]=faculty.getText().split(",");
+       
+       for(int i=0;i<fc.length;i++)
+                facs.add(Integer.parseInt(fc[i].trim()));
+       }
+        else{
+            facs.add(Integer.parseInt(faculty.getText().trim()));
+        }
+        
+        try {
+            SQL_Helper.add_course_offering(courseID.getText().trim(),sem.getText().trim(),Integer.parseInt(year.getText().trim()),facs,day.getText().trim(),classStart.getText().trim(),classEnd.getText().trim(),Integer.parseInt(classSize.getText().trim()),Integer.parseInt(waitlist.getText().trim()),location.getText().trim());
+        } catch (SQLException ex) {
+            Logger.getLogger(AddCourseOffering.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_submitActionPerformed
+
+    private void showFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showFacultyActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.showViewFaculty();
+    }//GEN-LAST:event_showFacultyActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -205,10 +295,16 @@ public class AddCourseOffering extends javax.swing.JPanel {
     private javax.swing.JLabel dayLabel;
     private javax.swing.JTextField faculty;
     private javax.swing.JLabel facultyLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField location;
+    private javax.swing.JLabel locationLabel;
     private javax.swing.JTextField sem;
     private javax.swing.JLabel semLabel;
+    private javax.swing.JButton showFaculty;
     private javax.swing.JButton submit;
     private javax.swing.JTextField waitlist;
     private javax.swing.JLabel wlSizeLabel;
+    private javax.swing.JTextField year;
+    private javax.swing.JLabel yearLabel;
     // End of variables declaration//GEN-END:variables
 }

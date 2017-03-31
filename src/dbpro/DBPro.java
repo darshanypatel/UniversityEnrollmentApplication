@@ -28,8 +28,8 @@ public class DBPro {
     private static JFrame stuPage;
     private static JFrame adminPage;
     public static void main(String[] args) throws SQLException {
-         try {
-            SQL_Helper.connect();
+        /*  try {
+           SQL_Helper.connect();
           //   System.out.println(SQL_Helper.add_student(Long.parseLong(sid.getText()), fName.getText(), lName.getText(), dob.getText(), level.getText(), residency.getText(), Double.parseDouble(amount.getText()), dept.getText(), "test@test.com",999, "Drive west, Raleigh"));
         
          System.out.println(SQL_Helper.add_student(20030, "YASH", "vORA", "18-JUN-90", "Graduate", "International", 200000, "CSxx", "test@test.",1234567890, "Drive west, Raleigh"));
@@ -39,23 +39,18 @@ public class DBPro {
             Logger.getLogger(EnrollStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        /*
+        */
         System.out.println("Start Main");
         SQL_Helper.connect();
         LoginPage main = new LoginPage();
         login = new JFrame(); //ConfirmOrder.getFrame();
         login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        login.setDefaultCloseOperation(SQL_Helper.close_connection());
+        
         login.add(main); // Add JPanel with components to JFrame
         login.setSize(550,500);
         login.setResizable(false);
         login.setVisible(true);  
         System.out.println("Main End");
-        */
-        
-        
-        
-        
     }
     
     
@@ -70,7 +65,20 @@ public class DBPro {
      }
    
    public static void ShowAdminHomePage(){       
-       //login.setVisible(false);
+       login.setVisible(false);
        AdminViewController.showAdminHomePage();
      }
+   
+  
+   
+   public static void ShowLoginPage(){
+        LoginPage main = new LoginPage();
+        login = new JFrame(); //ConfirmOrder.getFrame();
+        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        login.add(main); // Add JPanel with components to JFrame
+        login.setSize(550,500);
+        login.setResizable(false);
+        login.setVisible(true);  
+   }
 }

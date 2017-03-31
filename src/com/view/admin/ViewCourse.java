@@ -5,7 +5,13 @@
  */
 package com.view.admin;
 
+import Connection.SQL_Helper;
 import dbpro.AdminViewController;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,14 +47,16 @@ public class ViewCourse extends javax.swing.JPanel {
         gpaLabel = new javax.swing.JLabel();
         gpa = new javax.swing.JTextField();
         prereqLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        preReq = new javax.swing.JList<>();
         spApprovalLabel = new javax.swing.JLabel();
         spApproval = new javax.swing.JTextField();
         creditsLabel = new javax.swing.JLabel();
         credits = new javax.swing.JTextField();
         show = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        preReq = new javax.swing.JTextField();
+        preGradeLabel = new javax.swing.JLabel();
+        preGrade = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jTextField6.setText("jTextField6");
 
@@ -84,14 +92,6 @@ public class ViewCourse extends javax.swing.JPanel {
         prereqLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         prereqLabel.setText("List of prerequisite courses :");
 
-        preReq.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        preReq.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(preReq);
-
         spApprovalLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         spApprovalLabel.setText("Special Approval Required :");
 
@@ -111,6 +111,11 @@ public class ViewCourse extends javax.swing.JPanel {
 
         show.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         show.setText("Show");
+        show.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showActionPerformed(evt);
+            }
+        });
 
         back.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         back.setText("Go Back");
@@ -120,6 +125,19 @@ public class ViewCourse extends javax.swing.JPanel {
             }
         });
 
+        preReq.setEditable(false);
+        preReq.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        preGradeLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        preGradeLabel.setText("PreReq Grades :");
+
+        preGrade.setEditable(false);
+        preGrade.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("View Course :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,6 +145,11 @@ public class ViewCourse extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(preGradeLabel)
+                        .addGap(27, 27, 27)
+                        .addComponent(preGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(spApprovalLabel)
@@ -134,8 +157,8 @@ public class ViewCourse extends javax.swing.JPanel {
                             .addComponent(spApproval, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(prereqLabel)
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(preReq))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(gpaLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -169,7 +192,9 @@ public class ViewCourse extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(courseLabel)
                     .addComponent(courseId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,11 +216,15 @@ public class ViewCourse extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gpaLabel)
                     .addComponent(gpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prereqLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(preReq, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(preGradeLabel)
+                    .addComponent(preGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spApprovalLabel)
                     .addComponent(spApproval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,7 +232,7 @@ public class ViewCourse extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(creditsLabel)
                     .addComponent(credits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -216,6 +245,43 @@ public class ViewCourse extends javax.swing.JPanel {
          AdminViewController.closeViewCourse();
         AdminViewController.showViewAddCourse();
     }//GEN-LAST:event_backActionPerformed
+
+    private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
+        try {
+            // TODO add your handling code here:
+            ArrayList<String> course= SQL_Helper.get_course_details(courseId.getText().trim());
+            
+            System.out.println(course + "Size is:"+ course.size());
+            
+            
+            courseName.setText(course.get(0));
+            deptName.setText(course.get(1));
+            level.setText(course.get(2));
+            gpa.setText(course.get(3));
+            preReq.setText(course.get(4));
+            preGrade.setText(course.get(5));
+            spApproval.setText(course.get(6));
+            if(course.get(7).equals(course.get(8)))
+                    credits.setText(course.get(7));
+            else if(course.get(8) == null)
+                    credits.setText(course.get(7));
+            else
+              credits.setText(course.get(7)+" - "+course.get(8));  
+            
+       } catch (SQLException ex) {
+           courseName.setText("");
+            deptName.setText("");
+            level.setText("");
+            gpa.setText("");
+            preReq.setText("");
+            preGrade.setText("");
+            spApproval.setText("");
+            credits.setText("");
+            JOptionPane.showMessageDialog(null, "Course ID not found!");  
+            Logger.getLogger(ViewCourse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_showActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -230,11 +296,13 @@ public class ViewCourse extends javax.swing.JPanel {
     private javax.swing.JLabel deptNameLabel;
     private javax.swing.JTextField gpa;
     private javax.swing.JLabel gpaLabel;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField level;
     private javax.swing.JLabel levelLabel;
-    private javax.swing.JList<String> preReq;
+    private javax.swing.JTextField preGrade;
+    private javax.swing.JLabel preGradeLabel;
+    private javax.swing.JTextField preReq;
     private javax.swing.JLabel prereqLabel;
     private javax.swing.JButton show;
     private javax.swing.JTextField spApproval;

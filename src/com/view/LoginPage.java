@@ -5,6 +5,12 @@
  */
 package com.view;
 
+import Connection.SQL_Helper;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Yash
@@ -27,22 +33,22 @@ public class LoginPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        userNameLabel = new javax.swing.JLabel();
-        userNameText = new javax.swing.JTextField();
+        userIDLabel = new javax.swing.JLabel();
+        userIDText = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
         Login = new javax.swing.JButton();
         categoryText = new javax.swing.JLabel();
         category = new javax.swing.JComboBox<>();
         passwordText = new javax.swing.JPasswordField();
 
-        userNameLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        userNameLabel.setText("User Name:");
+        userIDLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        userIDLabel.setText("UserName:");
 
-        userNameText.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        userNameText.setToolTipText("");
-        userNameText.addActionListener(new java.awt.event.ActionListener() {
+        userIDText.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        userIDText.setToolTipText("");
+        userIDText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameTextActionPerformed(evt);
+                userIDTextActionPerformed(evt);
             }
         });
 
@@ -79,12 +85,12 @@ public class LoginPage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(categoryText, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(userNameText)
+                            .addComponent(userIDText)
                             .addComponent(category, 0, 203, Short.MAX_VALUE)
                             .addComponent(passwordText)))
                     .addGroup(layout.createSequentialGroup()
@@ -97,8 +103,8 @@ public class LoginPage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userIDText, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -114,14 +120,36 @@ public class LoginPage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        // TODO add your handling code here:
-        if(category.getSelectedIndex() == 0)
-            dbpro.DBPro.ShowStudentPage();
+        try {
+            
+            if(userIDText.getText().equals("") || passwordText.toString().equals(""))
+                JOptionPane.showMessageDialog(null, "User ID and Password Required!");
+            else{
+            //SQL_Helper.connect();
+               // System.out.println("Password is: "+new String(passwordText.getPassword()));
+            if(SQL_Helper.check_login_credentials(userIDText.getText(), new String(passwordText.getPassword()), category.getSelectedIndex())){
+                
+                if(category.getSelectedIndex() == 0)
+                    dbpro.DBPro.ShowStudentPage();
+                else
+                    dbpro.DBPro.ShowAdminHomePage();
+            }
+            
+            else{
+                System.out.println("Password is: "+passwordText.toString());
+                JOptionPane.showMessageDialog(null, "Invalid Credentials");
+            }
+            }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+        
+        }
     }//GEN-LAST:event_LoginActionPerformed
 
-    private void userNameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextActionPerformed
+    private void userIDTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userNameTextActionPerformed
+    }//GEN-LAST:event_userIDTextActionPerformed
 
     private void categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryActionPerformed
         // TODO add your handling code here:
@@ -134,7 +162,7 @@ public class LoginPage extends javax.swing.JPanel {
     private javax.swing.JLabel categoryText;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordText;
-    private javax.swing.JLabel userNameLabel;
-    private javax.swing.JTextField userNameText;
+    private javax.swing.JLabel userIDLabel;
+    private javax.swing.JTextField userIDText;
     // End of variables declaration//GEN-END:variables
 }
