@@ -5,8 +5,14 @@
  */
 package com.view.admin;
 
+import Connection.SQL_Helper;
 import dbpro.AdminViewController;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,6 +54,9 @@ public class AddCourse extends javax.swing.JPanel {
         courseNameLabel = new javax.swing.JLabel();
         courseName = new javax.swing.JTextField();
         preReq = new javax.swing.JTextField();
+        preGradeLabel = new javax.swing.JLabel();
+        preGrade = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         deptLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         deptLabel.setText("Department Name :");
@@ -81,6 +90,11 @@ public class AddCourse extends javax.swing.JPanel {
 
         submit.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         submit.setText("Submit");
+        submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitActionPerformed(evt);
+            }
+        });
 
         preReqLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         preReqLabel.setText("Enter prerequisite courses :");
@@ -105,59 +119,72 @@ public class AddCourse extends javax.swing.JPanel {
 
         preReq.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        preGradeLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        preGradeLabel.setText("Enter prerequisite Grades :");
+
+        preGrade.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("Add Course");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(approvalLabel)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(approval, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(preReqLabel)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(preReq))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(gpaLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(gpa))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(levelLabel)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(deptLabel)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(courseNameLabel)
-                                        .addComponent(courseIDLabel))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(courseName))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(creditsLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(credits, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(preGradeLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(preGrade))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
+                        .addComponent(approvalLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(approval, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(creditsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(credits, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
                         .addComponent(submit)
                         .addGap(18, 18, 18)
-                        .addComponent(back)))
+                        .addComponent(back))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(preReqLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(preReq))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gpaLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(gpa))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(levelLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(deptLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(dept, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(courseNameLabel)
+                            .addComponent(courseIDLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(courseName, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                            .addComponent(courseID))))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(courseIDLabel)
                     .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,7 +208,11 @@ public class AddCourse extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(preReqLabel)
                     .addComponent(preReq, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(preGradeLabel)
+                    .addComponent(preGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(approvalLabel)
                     .addComponent(approval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -193,7 +224,7 @@ public class AddCourse extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submit)
                     .addComponent(back))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -206,6 +237,77 @@ public class AddCourse extends javax.swing.JPanel {
         AdminViewController.closeAddCourse();
         AdminViewController.showViewAddCourse();
     }//GEN-LAST:event_backActionPerformed
+
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        ArrayList<String> prereq_courses=new ArrayList<String>();
+        
+        if(preReq.getText().contains(""))
+                prereq_courses=new ArrayList<String>();
+        
+        else if(preReq.getText().contains(",")){
+        
+        String pr[]=preReq.getText().split(",");
+       
+       for(int i=0;i<pr.length;i++)
+                prereq_courses.add(pr[i].trim());
+       }
+        else{
+            prereq_courses.add(preReq.getText().trim());
+        }
+        ArrayList<Double> prereq_grades=new ArrayList<Double>();
+        
+        if(preGrade.getText().contains(""))
+               prereq_grades=new ArrayList<Double>();
+        
+        else if(gpa.getText().contains(",")){
+        
+       String prg[]=gpa.getText().split(",");
+       
+       for(int i=0;i<prg.length;i++)
+                prereq_grades.add(Double.parseDouble(prg[i].trim()));
+        }
+        else 
+            prereq_grades.add(Double.parseDouble(gpa.getText().trim()));
+       int min=0;
+       int max=0;
+        if(credits.getText().contains("-")){
+            String[] cr=credits.getText().split("-");
+            if(cr.length != 2)
+                JOptionPane.showMessageDialog(null, "Invalid Input : Credits \n Correct Format: 3 or 3-5");
+            if(Integer.parseInt(cr[0]) > Integer.parseInt(cr[1])){
+                min=Integer.parseInt(cr[1]);
+                max=Integer.parseInt(cr[0]) ;
+            }
+            else{
+                min=Integer.parseInt(cr[0]);
+                max=Integer.parseInt(cr[1]);
+            }
+                    }
+        else  if (credits.getText().matches("[0-9]+") && credits.getText().length() ==1){
+           min= Integer.parseInt(credits.getText().trim());
+           max= Integer.parseInt(credits.getText().trim());
+        }
+        else
+          JOptionPane.showMessageDialog(null, "Invalid Input : Credits \n Correct Format: 3 or 3-5");  
+        
+        double GPA=0;
+        if(gpa.getText().equals(""))
+            GPA = 0;
+        else
+            GPA=Double.parseDouble(gpa.getText().trim());
+        try {
+            if(SQL_Helper.add_course(courseID.getText().trim(),courseName.getText().trim() , dept.getText().trim(), level.getText().trim(), GPA, prereq_courses, prereq_grades, approval.getText().trim(), min,max ))
+            {   
+                JOptionPane.showMessageDialog(null, "Course Added Successfully!!!");  
+                AdminViewController.closeAddCourse();
+                AdminViewController.showViewAddCourse();
+                ;}
+            else
+                JOptionPane.showMessageDialog(null, "Error Occured!");  
+        } catch (SQLException ex) {
+            Logger.getLogger(AddCourse.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_submitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -222,8 +324,11 @@ public class AddCourse extends javax.swing.JPanel {
     private javax.swing.JLabel deptLabel;
     private javax.swing.JTextField gpa;
     private javax.swing.JLabel gpaLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField level;
     private javax.swing.JLabel levelLabel;
+    private javax.swing.JTextField preGrade;
+    private javax.swing.JLabel preGradeLabel;
     private javax.swing.JTextField preReq;
     private javax.swing.JLabel preReqLabel;
     private javax.swing.JButton submit;

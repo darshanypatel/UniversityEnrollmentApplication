@@ -5,7 +5,13 @@
  */
 package com.view.admin;
 
+import Connection.SQL_Helper;
 import dbpro.AdminViewController;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,7 +20,7 @@ import dbpro.AdminViewController;
 public class ViewCourseOffering extends javax.swing.JPanel {
 
     /**
-     * Creates new form ViewCourseOffering
+     * Creates new form AddCourseOffering
      */
     public ViewCourseOffering() {
         initComponents();
@@ -29,29 +35,39 @@ public class ViewCourseOffering extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        courseLabel = new javax.swing.JLabel();
+        cIDLabel = new javax.swing.JLabel();
         courseID = new javax.swing.JTextField();
         semLabel = new javax.swing.JLabel();
         sem = new javax.swing.JTextField();
         facultyLabel = new javax.swing.JLabel();
         faculty = new javax.swing.JTextField();
-        daysLabel = new javax.swing.JLabel();
-        days = new javax.swing.JTextField();
-        startTimeLabel = new javax.swing.JLabel();
-        classStartTime = new javax.swing.JTextField();
-        classEndTimeLabel = new javax.swing.JLabel();
-        classEndTime = new javax.swing.JTextField();
+        dayLabel = new javax.swing.JLabel();
+        day = new javax.swing.JTextField();
+        cStartLabel = new javax.swing.JLabel();
+        classStart = new javax.swing.JTextField();
+        cEndLabel = new javax.swing.JLabel();
+        classEnd = new javax.swing.JTextField();
         classSize = new javax.swing.JTextField();
-        classSizeLabel = new javax.swing.JLabel();
-        waitListLabel = new javax.swing.JLabel();
-        waitList = new javax.swing.JTextField();
+        cSizeLabel = new javax.swing.JLabel();
+        wlSizeLabel = new javax.swing.JLabel();
+        waitlist = new javax.swing.JTextField();
+        yearLabel = new javax.swing.JLabel();
+        year = new javax.swing.JTextField();
+        showOff = new javax.swing.JButton();
+        locationLabel = new javax.swing.JLabel();
+        location = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        cOffLabel = new javax.swing.JLabel();
+        cOff = new javax.swing.JTextField();
         find = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        curEnrollLabel = new javax.swing.JLabel();
+        curEnroll = new javax.swing.JTextField();
 
-        courseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        courseLabel.setText("Course Id : ");
+        cIDLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cIDLabel.setText("Course Id : ");
 
+        courseID.setEditable(false);
         courseID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         semLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -61,43 +77,76 @@ public class ViewCourseOffering extends javax.swing.JPanel {
         sem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         facultyLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        facultyLabel.setText("Faculty Name(s) :");
+        facultyLabel.setText("Faculty ID(s) :");
 
         faculty.setEditable(false);
         faculty.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        daysLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        daysLabel.setText("Days of the Week :");
+        dayLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        dayLabel.setText("Days of the Week :");
 
-        days.setEditable(false);
-        days.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        day.setEditable(false);
+        day.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        startTimeLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        startTimeLabel.setText("Class Start Time :");
+        cStartLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cStartLabel.setText("Class Start Time :");
 
-        classStartTime.setEditable(false);
-        classStartTime.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        classStart.setEditable(false);
+        classStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        classEndTimeLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        classEndTimeLabel.setText("Class End Time :");
+        cEndLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cEndLabel.setText("Class End Time :");
 
-        classEndTime.setEditable(false);
-        classEndTime.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        classEnd.setEditable(false);
+        classEnd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         classSize.setEditable(false);
         classSize.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        classSizeLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        classSizeLabel.setText("Class Size :");
+        cSizeLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cSizeLabel.setText("Class Size :");
 
-        waitListLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        waitListLabel.setText("Wait List Size :");
+        wlSizeLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        wlSizeLabel.setText("Wait List Size :");
 
-        waitList.setEditable(false);
-        waitList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        waitlist.setEditable(false);
+        waitlist.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        yearLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        yearLabel.setText("Year :");
+
+        year.setEditable(false);
+
+        showOff.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        showOff.setText("Show Course Offering Ids");
+        showOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showOffActionPerformed(evt);
+            }
+        });
+
+        locationLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        locationLabel.setText("Class Location :");
+
+        location.setEditable(false);
+        location.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("View Course Offering");
+
+        cOffLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cOffLabel.setText("Course Offering Id :");
+
+        cOff.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         find.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         find.setText("Find");
+        find.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findActionPerformed(evt);
+            }
+        });
 
         back.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         back.setText("Go Back");
@@ -107,102 +156,142 @@ public class ViewCourseOffering extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(daysLabel)
-                            .addGap(18, 18, 18)
-                            .addComponent(days))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(facultyLabel)
-                            .addGap(18, 18, 18)
-                            .addComponent(faculty, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(startTimeLabel)
-                                .addComponent(classEndTimeLabel)
-                                .addComponent(classSizeLabel)
-                                .addComponent(waitListLabel))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(classStartTime)
-                                .addComponent(classEndTime)
-                                .addComponent(classSize)
-                                .addComponent(waitList, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(semLabel)
-                            .addGap(26, 26, 26)
-                            .addComponent(sem)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(courseLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(find)
-                        .addGap(35, 35, 35)
-                        .addComponent(back)))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(courseLabel)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(find)
-                        .addComponent(back)))
-                .addGap(67, 67, 67)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(semLabel)
-                    .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(facultyLabel)
-                    .addComponent(faculty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(daysLabel)
-                    .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(startTimeLabel)
-                    .addComponent(classStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(classEndTimeLabel)
-                    .addComponent(classEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(classSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(classSizeLabel))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(waitListLabel)
-                    .addComponent(waitList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
+        curEnrollLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        curEnrollLabel.setText("Current Enrollment :");
+
+        curEnroll.setEditable(false);
+        curEnroll.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(yearLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(semLabel)
+                                .addGap(23, 23, 23)
+                                .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cIDLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(dayLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(day))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(facultyLabel)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(faculty, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cOffLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cOff, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(find)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(back)
+                                .addGap(18, 18, 18)
+                                .addComponent(showOff))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(locationLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(location))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(curEnrollLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(curEnroll))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cStartLabel)
+                                        .addComponent(cSizeLabel)
+                                        .addComponent(wlSizeLabel)
+                                        .addComponent(cEndLabel))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(classStart)
+                                        .addComponent(classEnd)
+                                        .addComponent(classSize)
+                                        .addComponent(waitlist, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cOffLabel)
+                    .addComponent(cOff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showOff)
+                    .addComponent(find)
+                    .addComponent(back))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cIDLabel))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(semLabel)
+                    .addComponent(sem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(yearLabel)
+                    .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(facultyLabel)
+                    .addComponent(faculty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dayLabel)
+                    .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cStartLabel)
+                    .addComponent(classStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cEndLabel)
+                    .addComponent(classEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(classSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cSizeLabel))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(wlSizeLabel)
+                    .addComponent(waitlist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(curEnrollLabel)
+                    .addComponent(curEnroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(locationLabel))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void showOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showOffActionPerformed
+        // TODO add your handling code here:
+        AdminViewController.showViewCourseOfferings();
+    }//GEN-LAST:event_showOffActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
@@ -210,26 +299,68 @@ public class ViewCourseOffering extends javax.swing.JPanel {
         AdminViewController.showViewAddCourseOffering();
     }//GEN-LAST:event_backActionPerformed
 
+    private void findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findActionPerformed
+        try {
+            // TODO add your handling code here:
+            ArrayList<String> co= SQL_Helper.get_course_offering_details(Long.parseLong(cOff.getText().trim()));
+            
+            courseID.setText(co.get(0));
+            sem.setText(co.get(1));
+            faculty.setText(co.get(3));
+            day.setText(co.get(4));
+            classStart.setText(co.get(5));
+            classEnd.setText(co.get(6));
+            classSize.setText(co.get(7));
+            waitlist.setText(co.get(8));
+            curEnroll.setText(co.get(9));
+            location.setText(co.get(10));
+        } catch (SQLException ex) {
+             courseID.setText("");
+            sem.setText("");
+            faculty.setText("");
+            day.setText("");
+            classStart.setText("");
+            classEnd.setText("");
+            classSize.setText("");
+            waitlist.setText("");
+            curEnroll.setText("");
+            location.setText("");
+            JOptionPane.showMessageDialog(null, "Course Offering ID not found!");  
+           
+            Logger.getLogger(ViewCourseOffering.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_findActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
-    private javax.swing.JTextField classEndTime;
-    private javax.swing.JLabel classEndTimeLabel;
+    private javax.swing.JLabel cEndLabel;
+    private javax.swing.JLabel cIDLabel;
+    private javax.swing.JTextField cOff;
+    private javax.swing.JLabel cOffLabel;
+    private javax.swing.JLabel cSizeLabel;
+    private javax.swing.JLabel cStartLabel;
+    private javax.swing.JTextField classEnd;
     private javax.swing.JTextField classSize;
-    private javax.swing.JLabel classSizeLabel;
-    private javax.swing.JTextField classStartTime;
+    private javax.swing.JTextField classStart;
     private javax.swing.JTextField courseID;
-    private javax.swing.JLabel courseLabel;
-    private javax.swing.JTextField days;
-    private javax.swing.JLabel daysLabel;
+    private javax.swing.JTextField curEnroll;
+    private javax.swing.JLabel curEnrollLabel;
+    private javax.swing.JTextField day;
+    private javax.swing.JLabel dayLabel;
     private javax.swing.JTextField faculty;
     private javax.swing.JLabel facultyLabel;
     private javax.swing.JButton find;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField location;
+    private javax.swing.JLabel locationLabel;
     private javax.swing.JTextField sem;
     private javax.swing.JLabel semLabel;
-    private javax.swing.JLabel startTimeLabel;
-    private javax.swing.JTextField waitList;
-    private javax.swing.JLabel waitListLabel;
+    private javax.swing.JButton showOff;
+    private javax.swing.JTextField waitlist;
+    private javax.swing.JLabel wlSizeLabel;
+    private javax.swing.JTextField year;
+    private javax.swing.JLabel yearLabel;
     // End of variables declaration//GEN-END:variables
 }
