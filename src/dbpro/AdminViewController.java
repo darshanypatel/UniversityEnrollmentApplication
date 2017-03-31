@@ -6,6 +6,7 @@
 package dbpro;
 
 import com.view.admin.*;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 /**
  *
@@ -29,6 +30,7 @@ public class AdminViewController {
    private static JFrame addCourses;
    private static JFrame addCourseOffering;
    private static JFrame addDropDeadline;
+   private static JFrame enforceDropDeadline;
    private static JFrame adminHomePage;
    private static JFrame adminProfile;
    private static JFrame enrollStudent;
@@ -38,7 +40,8 @@ public class AdminViewController {
    private static JFrame viewCourse;
    private static JFrame viewCourseOffering;
    private static JFrame viewStudentDetails;
-   
+   private static JFrame facultyList;
+   private static JFrame cOffList;
    
    public static void showAddCourse(){
        AddCourse ac=new AddCourse();
@@ -55,7 +58,7 @@ public class AdminViewController {
        addCourseOffering = new JFrame();
        addCourseOffering.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        addCourseOffering.add(ac); // Add JPanel with components to JFrame
-       addCourseOffering.setSize(700,700);
+       addCourseOffering.setSize(950,700);
        adminHomePage.setVisible(false);
        addCourseOffering.setVisible(true);
     }
@@ -65,10 +68,20 @@ public class AdminViewController {
        addDropDeadline = new JFrame();
        addDropDeadline.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        addDropDeadline.add(add); // Add JPanel with components to JFrame
-       addDropDeadline.setSize(600,300);
+       addDropDeadline.setSize(600,500);
        adminHomePage.setVisible(false);
        addDropDeadline.setVisible(true);
     }    
+    
+    public static void showEnforceDropDeadline(){
+       EnforceDropDeadline enf=new EnforceDropDeadline();
+       enforceDropDeadline = new JFrame();
+       enforceDropDeadline.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       enforceDropDeadline.add(enf); // Add JPanel with components to JFrame
+       enforceDropDeadline.setSize(600,300);
+       adminHomePage.setVisible(false);
+       enforceDropDeadline.setVisible(true);
+    }
     
     public static void showAdminHomePage(){
        AdminHomePage ahp=new AdminHomePage();
@@ -79,7 +92,7 @@ public class AdminViewController {
        adminHomePage.setVisible(true);
     } 
     
-     public static void showAdminProfile(){
+     public static void showAdminProfile() throws SQLException{
        AdminProfile ap=new AdminProfile();
        adminProfile = new JFrame();
        adminProfile.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,7 +107,7 @@ public class AdminViewController {
        enrollStudent = new JFrame();
        enrollStudent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        enrollStudent.add(es); // Add JPanel with components to JFrame
-       enrollStudent.setSize(700,700);
+       enrollStudent.setSize(700,900);
        adminHomePage.setVisible(false);
        enrollStudent.setVisible(true);
     }  
@@ -134,17 +147,38 @@ public class AdminViewController {
        viewCourse = new JFrame();
        viewCourse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        viewCourse.add(vc); // Add JPanel with components to JFrame
-       viewCourse.setSize(700,700);
+       viewCourse.setSize(700,750);
        adminHomePage.setVisible(false);
        viewCourse.setVisible(true);
     }
+      
+      public static void showViewFaculty(){
+       FacultyList fl=new FacultyList();
+       facultyList = new JFrame();
+       facultyList.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+       facultyList.add(fl); // Add JPanel with components to JFrame
+       facultyList.setSize(500,400);
+       //adminHomePage.setVisible(false);
+       facultyList.setVisible(true);
+    }
+      
+      public static void showViewCourseOfferings(){
+       CourseOfferings co=new CourseOfferings();
+       cOffList = new JFrame();
+       cOffList.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+       cOffList.add(co); // Add JPanel with components to JFrame
+       cOffList.setSize(600,400);
+       //adminHomePage.setVisible(false);
+       cOffList.setVisible(true);
+    }
+      
       
       public static void showViewCourseOffering(){
        ViewCourseOffering vco=new ViewCourseOffering();
        viewCourseOffering = new JFrame();
        viewCourseOffering.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        viewCourseOffering.add(vco); // Add JPanel with components to JFrame
-       viewCourseOffering.setSize(700,600);
+       viewCourseOffering.setSize(1000,900);
        adminHomePage.setVisible(false);
        viewCourseOffering.setVisible(true);
     }
@@ -159,6 +193,10 @@ public class AdminViewController {
        viewStudentDetails.setVisible(true);
     }
       
+       public static void closeAdminHomePage(){
+       adminHomePage.setVisible(false);
+   }
+      
       public static void closeAddCourse(){
           addCourses.setVisible(false);
       } 
@@ -169,6 +207,10 @@ public class AdminViewController {
       
       public static void closeAddDropDeadline(){
           addDropDeadline.setVisible(false);
+      } 
+      
+      public static void closeEnforceDropDeadline(){
+          enforceDropDeadline.setVisible(false);
       } 
       
       public static void closeAdminProfile(){
@@ -190,6 +232,15 @@ public class AdminViewController {
        public static void closeViewAddCourseOffering(){
           viewAddCourseOffering.setVisible(false);
       } 
+       
+       public static void closeFacultyList(){
+          facultyList.setVisible(false);
+      } 
+       
+       public static void closeCourseOfferingList(){
+          cOffList.setVisible(false);
+      }
+       
        
        public static void closeViewCourse(){
           viewCourse.setVisible(false);
