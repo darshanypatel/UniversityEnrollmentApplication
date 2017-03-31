@@ -61,10 +61,10 @@ public class SQL_Helper {
 //
 //        System.out.println(add_course("CSC591", "IOT", "CS", "Graduate", 0.0, courses, grades, "", 3, 3));
 
-//        ArrayList<String> result = get_course_details("CSC591");
-//        for (int i = 0; i < result.size(); i++) {
-//            System.out.print(result.get(i) + " ");
-//        }
+        ArrayList<String> result = get_course_details("CSC540");
+        for (int i = 0; i < result.size(); i++) {
+            System.out.print(result.get(i) + " ");
+        }
 
 //        ArrayList<String> list = get_admin_profile(1111l);
 //        for (int i = 0; i < list.size(); i++) {
@@ -381,10 +381,9 @@ public class SQL_Helper {
     
     public static ArrayList<String> get_course_details(String id)
     throws SQLException {
-        String classification = "", dept_name = "", special_permission = "";
+        String special_permission;
         ArrayList<String> result = new ArrayList();
-        double min_gpa = 0.0;
-        int prereq_id = 0, prereq_course_id, course_id = 0;
+        int prereq_id, prereq_course_id, course_id;
         
         // get course_id of 'id'
         ResultSet course_id_rs = stmt.executeQuery("select course_id from "
@@ -393,45 +392,22 @@ public class SQL_Helper {
             course_id = course_id_rs.getInt("course_id");
         } else {
             System.out.println("Course doesn't exist!");
+            return result;
         }
         
-        // find courses with "course_id"
-        ResultSet rs = stmt.executeQuery("select cl_id, dept_id, min_credits, max_credits, title from course where course_id"
-                                         + " = " + course_id);
+        ResultSet rs = stmt.executeQuery("select c.cl, d.dept_name, co.min_credits, co.max_credits, co.title, cp.min_gpa, cp.special_permission, cp.prereq_id from course co, course_prereq cp, department d, classification_level c where co.course_id"
+                                         + " = " + course_id + " and co.course_id = cp.course_id and c.cl_id = co.cl_id and d.dept_id = co.dept_id");
         rs.next();
         
-        int cl_id = rs.getInt("cl_id");
-        int dept_id = rs.getInt("dept_id");
         int min_credits = rs.getInt("min_credits");
-        int max_credits = rs.getInt("max_credits");
-        String title = rs.getString("title");
+        int max_credits = rs.getInt("max_credits");        
+        special_permission = rs.getString("special_permission");
+        prereq_id = rs.getInt("prereq_id");        
         
-        // find course_prereq from "course_id"
-        ResultSet course_prereq_rs = stmt.executeQuery("select * from "
-                + "course_prereq where course_id = " + course_id);
-        
-        if (course_prereq_rs.next()) {
-            min_gpa = course_prereq_rs.getDouble("min_gpa");
-            special_permission = course_prereq_rs.getString("special_permission");
-            prereq_id = course_prereq_rs.getInt("prereq_id");            
-        }
-        
-        // find classification name from "cl_id"
-        ResultSet rs_temp = stmt.executeQuery("select cl from classification_level "
-                                              + "where cl_id = " + cl_id);
-        if (rs_temp.next())
-            classification = rs_temp.getString("cl");
-        
-        // find department name from "dept_id"
-        rs_temp = stmt.executeQuery("select dept_name from department "
-                                    + "where dept_id = " + dept_id);
-        if (rs_temp.next())
-            dept_name = rs_temp.getString("dept_name");
-        
-        result.add(title);
-        result.add(dept_name);
-        result.add(classification);
-        result.add(min_gpa + "");
+        result.add(rs.getString("title"));
+        result.add(rs.getString("dept_name"));
+        result.add(rs.getString("cl"));
+        result.add(rs.getDouble("min_gpa") + "");
         
         // find prereq_courses from "prereq_id"
         ResultSet prereq_courses_rs = stmt.executeQuery("select PREREQ_COURSE_ID, grade from "
@@ -640,9 +616,10 @@ public class SQL_Helper {
         rs2.next();
         result.add(rs2.getString("id"));
         
-        rs2 = stmt2.executeQuery("select semester_name from semester where semester_id = " + rs.getInt("semester_id"));
+        rs2 = stmt2.executeQuery("select semester_name, year from semester where semester_id = " + rs.getInt("semester_id"));
         rs2.next();
         result.add(rs2.getString("semester_name"));
+        String year = rs2.getInt("year") + "";        
         
         rs2 = stmt2.executeQuery("select faculty_id from teaches where offering_id = " + course_offering_id);
         ArrayList faculty_ids = new ArrayList();
@@ -671,6 +648,7 @@ public class SQL_Helper {
         rs2 = stmt2.executeQuery("select class_location_name from class_location where class_location_id = " + rs.getInt("location_id"));
         rs2.next();
         result.add(rs2.getString("class_location_name"));
+        result.add(year);
         
         return result;
     }
