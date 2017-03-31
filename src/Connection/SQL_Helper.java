@@ -10,6 +10,8 @@ import java.sql.*;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -20,45 +22,8 @@ public class SQL_Helper {
     
     public static Statement stmt, stmt2;
     public static Connection con, con2;
-    private static long current_admin_id, current_student_id;
+    private static long current_admin_id = 0, current_student_id = 0;
     private static JFrame login;
-    public static void get_connection() {
-        try {
-            //step1 load the driver class
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            
-            //step2 create  the connection object
-            con = DriverManager.getConnection(
-                                              "jdbc:oracle:thin:@//orca.csc.ncsu.edu:1521/orcl.csc.ncsu.edu", "cddashud", "Root!23");
-            con2 = DriverManager.getConnection(
-                                              "jdbc:oracle:thin:@//orca.csc.ncsu.edu:1521/orcl.csc.ncsu.edu", "cddashud", "Root!23");
-            
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println(e);
-        }
-    }
-    
-    public static void get_statement_object() {
-        try {
-            //step3 create the statement object
-            stmt = con.createStatement();
-            stmt2 = con2.createStatement();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-    
-    public static int close_connection() {
-        try {
-            //step5 close the connection object
-            con.close();
-            con2.close();
-            return 0;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return 0;
-    }
     
     public static void main(String args[]) throws SQLException{
         connect();
@@ -72,8 +37,11 @@ public class SQL_Helper {
 //        login.setVisible(true);  
 //        System.out.println("Main End");
         
-//        if (check_login_credentials("xyz1", "cdrinku", 2)) {
-//            System.out.println("welcome!" + current_student_id);
+//        digest("cdrinku");
+
+//        int s_or_a = 1;
+//        if (check_login_credentials("alby", "hogwarts", s_or_a)) {
+//            System.out.println("welcome!" + (s_or_a == 1 ? current_admin_id : current_student_id));
 //        }
 
 //        ArrayList<String> list = get_faculty_list();
@@ -86,13 +54,14 @@ public class SQL_Helper {
 
 //        ArrayList<String> courses = new ArrayList();
 //        ArrayList<Double> grades = new ArrayList();
+//        courses.add("CSC505");
+//        grades.add(3.33);
 //        courses.add("CSC501");
 //        grades.add(3.00);
 //
-//        if (add_course("CSC505", "ALGO", "CS", "Graduate", 3.0, courses, grades, "", 3, 3))
-//            System.out.println("Course added successfully.");
+//        System.out.println(add_course("CSC591", "IOT", "CS", "Graduate", 0.0, courses, grades, "", 3, 3));
 
-//        ArrayList<String> result = get_course_details("CSC505");
+//        ArrayList<String> result = get_course_details("CSC591");
 //        for (int i = 0; i < result.size(); i++) {
 //            System.out.print(result.get(i) + " ");
 //        }
@@ -102,8 +71,7 @@ public class SQL_Helper {
 //            System.out.println(list.get(i));
 //        }
         
-//        if (add_student(200157725L, "chandu", "dash", "01-JAN-93", "Graduate", "International", 0, "CS", "cdashudu@ncsu.edu", 5108906594L, "2309 Champion Court"))
-//            System.out.println("student added successfully.");
+//        System.out.println(add_student(200157726L, "jkjabbal", "jasleen", "jabbal", "01-MAR-92", "Graduate", "International", 0, "CS", "jkjabbal@ncsu.edu", 8923047643L, "Champion Court"));            
     
 //        current_student_id = 200157725L;
 //        if (edit_student_profile("Chandu", "Dash", "01-JAN-93", "Undergraduate", "International", "ECE", "cdashudu@ncsu.edu", 5108906594L, "2309 Champion Court", "cdrinku"))
@@ -111,7 +79,7 @@ public class SQL_Helper {
 
 //        update_student_grade(200157724, 4.0);
 
-        
+//        current_student_id = 200157726;
 //        ArrayList<String> list = get_student_profile();
 //        for (int i = 0; i < list.size(); i++) {
 //            System.out.println(list.get(i));
@@ -133,46 +101,95 @@ public class SQL_Helper {
 //            System.out.println(list.get(i));
 //        } 
 
+//        if (add_department("IMSE")) {
+//            System.out.println("Department added successfully!");
+//        }
+//        
+//        ArrayList<String> list = get_departments();
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println(list.get(i));
+//        }
 
         disconnect();
         
     }
     
+    // done
+    public static void get_connection() {
+        try {
+            //step1 load the driver class
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            
+            //step2 create  the connection object
+            con = DriverManager.getConnection(
+                                              "jdbc:oracle:thin:@//orca.csc.ncsu.edu:1521/orcl.csc.ncsu.edu", "cddashud", "Root!23");
+            con2 = DriverManager.getConnection(
+                                              "jdbc:oracle:thin:@//orca.csc.ncsu.edu:1521/orcl.csc.ncsu.edu", "cddashud", "Root!23");
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    // done
+    public static void get_statement_object() {
+        try {
+            //step3 create the statement object
+            stmt = con.createStatement();
+            stmt2 = con2.createStatement();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    // done
+    public static int close_connection() {
+        try {
+            //step5 close the connection object
+            con.close();
+            con2.close();
+            return 0;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
+    // done
     public static void connect() throws SQLException {
         get_connection();
         get_statement_object();
     }
     
+    // done
     public static void disconnect() throws SQLException{
          close_connection();
     }
     
-    public static boolean check_login_credentials(String username, String password,
-                                                  int student_or_admin) throws SQLException {
+    // done
+    public static String check_login_credentials(String username, String 
+            password, int student_or_admin) throws SQLException {
         String table_name = student_or_admin == 1 ? "admin" : "students";
         String s_or_a = student_or_admin == 1 ? "admin" : "student";
-        ResultSet rs = stmt.executeQuery("select " + "password from " +
-                                         table_name + " where username = '" + username + "'");
+        
+        ResultSet rs = stmt.executeQuery("select " + s_or_a + "_id from " + 
+                table_name + " where username = '" + username + "' and '" + 
+                digest(password) + "' = (select password from " + table_name 
+                + " where username = '" + username + "')");
         if (rs.next()) {
-            String password_digest1 = rs.getString("password");
-            String password_digest2 = digest(password);
-            if (password_digest1.equals(password_digest2)) {
-                ResultSet rs2 = stmt2.executeQuery("select " + s_or_a + "_id from " + table_name + " where username = '" + username + "'");
-                rs2.next();
-                if (student_or_admin == 1) { 
-                    current_admin_id = rs2.getInt(s_or_a + "_id");
-                } else {
-                    current_student_id = rs2.getInt(s_or_a + "_id");
-                }
-                return true;
+            if (student_or_admin == 1) { 
+                current_admin_id = rs.getInt(s_or_a + "_id");
             } else {
-                System.out.println("password stored : " + password_digest1 + 
-                        "\npassword entered : " + password_digest2);
+                current_student_id = rs.getInt(s_or_a + "_id");
             }
-        } 
-        return false;
+            return "Success";
+        } else {
+            System.out.println("cant login");            
+            return "Invalid credentials!";
+        }
     }
     
+    // done
     public static String digest(String password) {
         StringBuilder sb = new StringBuilder();
         try {
@@ -182,20 +199,48 @@ public class SQL_Helper {
             for (byte b : digest) {
                 sb.append(String.format("%02x", b & 0xff));
             }
-            System.out.println("original:" + password);
-            System.out.println("digested(hex):" + sb.toString());
+//            System.out.println("original:" + password);
+//            System.out.println("digested(hex):" + sb.toString());
         } catch (NoSuchAlgorithmException e) {
             System.out.println(e);
         }
         return sb.toString();
     }
     
+    // done
+    public static ArrayList<String> get_departments() {
+        ArrayList<String> departments = new ArrayList();
+        
+        try {
+            ResultSet rs = stmt.executeQuery("select dept_name from department");
+            while (rs.next()) {
+                departments.add(rs.getString("dept_name"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error in selecting department list! " + 
+                    ex.getMessage());            
+        }
+        
+        return departments;
+    }
+    
+    // done
+    public static String add_department(String dept_name) {        
+        try {
+            stmt.executeQuery("insert into department (dept_id, dept_name) values (dept_seq.nextval, '" + dept_name + "')");            
+        } catch (SQLException ex) {            
+            System.out.println("Error in adding department! " + ex.getMessage());
+            return ex.getMessage();
+        }
+        return "Success";
+    }
+    
+    // done
     public static ArrayList<String> get_admin_profile()
     throws SQLException {
         
         ResultSet rs = stmt.executeQuery("select fname, lname, dob, admin_id "
-                                         + "from admin where admin_id = " + current_admin_id);
-        
+                                         + "from admin where admin_id = " + current_admin_id);        
         ArrayList<String> result = new ArrayList();
         
         if (rs.next()) {
@@ -204,187 +249,134 @@ public class SQL_Helper {
             result.add(rs.getDate("dob") + "");
             result.add(rs.getLong("admin_id") + "");
         } else {
-            System.out.println("admin not found!");
+            System.out.println("Admin not found!");
         }
         return result;
     }
     
-    // TODO add record in belongs table
-    public static boolean add_student(long student_id, String username, String fname,
+    // done
+    public static String add_student(long student_id, String username, String fname,
                                       String lname, String dob, String CL, String RL, double bill,
                                       String dept_name, String email_id, long phone, String address)
     throws SQLException {
-        ResultSet rs;
-        int dept_id = 0, classification_id = 0, residency_id = 0;
         try {
-            con.setAutoCommit(false);
-            rs = stmt.executeQuery("select dept_id from department where dept_name = '" + dept_name+"'");
-            if (rs.next()) 
-                dept_id = rs.getInt("dept_id");            
-    
-            rs = stmt.executeQuery("select rl_id from residency_level "
-                                   + "where rl = '" + RL+"'");
-            if (rs.next())
-                residency_id = rs.getInt("rl_id");
+            stmt.executeQuery("insert into students (username, student_id, dept_id, fname, lname, dob, cl_id, rl_id, bill, gpa, password, email, phone, address) "
+                    + "select "
+                    + "'" + username + "' as username, "
+                    + student_id + " as student_id, "
+                    + "d.dept_id as dept_id, "
+                    + "'" + fname + "' as fname, "
+                    + "'" + lname + "' as lname, "
+                    + "'" + dob + "' as dob, "
+                    + "c.cl_id as cl_id, "
+                    + "r.rl_id as rl_id, "
+                    + bill + " as bill, "
+                    + 0.0 + " as gpa, "
+                    + "'" + digest(student_id + "") + "' as password, "
+                    + "'" + email_id + "' as email, "
+                    + phone + " as phone, "
+                    + "'" + address + "' as address"
+                    + " from department d, classification_level c, residency_level r "
+                    + "where d.dept_name = '" + dept_name + "' and c.cl = '" + CL + "' and r.rl = '" + RL + "'");          
             
-            rs = stmt.executeQuery("select cl_id from classification_level "
-                                   + "where cl = '" + CL+"'");
-            if (rs.next())
-                classification_id = rs.getInt("cl_id");
-            
-            stmt.executeQuery("insert into students (username, student_id, dept_id, "
-                              + "fname, lname, dob, cl_id, rl_id, bill, gpa, password, "
-                              + "email, phone, address) values (" + username + "," + student_id + "," +
-                              dept_id + ",'" + fname + "','" + lname + "','" + dob + "',"
-                              + classification_id + "," + residency_id + "," + bill +
-                              ", 0.0,'" + digest(student_id+"") + "','" + email_id + "'," + phone + ",'"
-                              + address + "')");
-            
-            con.commit();
         } catch (SQLException e) {
-            System.out.println("Can't add student! " + e.getMessage());   
-            con.rollback();
-            return false;
+            System.out.println("Can't add student! " + e.getMessage());               
+            return e.getMessage();
         }
-        return true;
+        return "Success";
     }
     
+    // done
     public static ArrayList<String> get_student_profile() {
         
-        int rl_id, cl_id;
-        String residency = "", classification = "", bill, gpa, phone, address,
-                email;
         long student_id = current_student_id;
         try {
-            ResultSet rs = stmt.executeQuery("select * from students "
-                    + "where student_id = " + student_id);
-            rs.next();
             
-            ArrayList<String> result = new ArrayList();
-            result.add(rs.getString("fname"));
-            result.add(rs.getString("lname"));
-            result.add(rs.getDate("dob") + "");
-            bill = rs.getDouble("bill") + "";
-            gpa = rs.getDouble("gpa") + "";
-            phone = rs.getLong("phone") + "";
-            email = rs.getString("email");
-            
-            address = rs.getString("address");
-            
-            rl_id = rs.getInt("rl_id");
-            cl_id = rs.getInt("cl_id");
-            
-            rs = stmt.executeQuery("select cl from classification_level "
-                                   + "where cl_id = " + cl_id);
-            if (rs.next())
-                classification = rs.getString("cl");
-            
-            result.add(classification);
-            
-            rs = stmt.executeQuery("select rl from residency_level "
-                                   + "where rl_id = " + rl_id);
-            if (rs.next())
-                residency = rs.getString("rl");
-            
-            result.add(residency);
-            
-            result.add(bill);
-            result.add(gpa);
-            result.add(phone);
-            result.add(email);
-            result.add(address);
-            
-            return result;
-            
+            ResultSet rs = stmt.executeQuery("select students.*, c.cl, r.rl "
+                    + "from students, classification_level c, residency_level r"
+                    + " where student_id = " + student_id + " and c.cl_id = "
+                            + "students.cl_id and r.rl_id = students.rl_id");            
+            if (rs.next()) {           
+                ArrayList<String> result = new ArrayList();
+                result.add(rs.getString("fname"));
+                result.add(rs.getString("lname"));
+                result.add(rs.getDate("dob") + "");            
+                result.add(rs.getString("CL"));
+                result.add(rs.getString("RL"));            
+                result.add(rs.getDouble("bill") + "");
+                result.add(rs.getDouble("gpa") + "");
+                result.add(rs.getLong("phone") + "");
+                result.add(rs.getString("email"));
+                result.add(rs.getString("address"));
+                return result;
+            } else {
+                System.out.println("Student not found!");
+                return new ArrayList();
+            }
         } catch(SQLException e) {
             // blank arraylist => error
             System.out.println("Error: " + e.getMessage());
             return new ArrayList();
         }
-        
     }
     
+    // done - checking of gpa should be on the UI side
     public static void update_student_grade(long student_id, double gpa)
     throws SQLException {
         stmt.executeQuery("update students set gpa = " + gpa + " where "
                           + "student_id = " + student_id);
     }
     
-    public static boolean add_course(String id, String name, String
+    // done
+    public static String add_course(String id, String name, String
                                      dept_name, String level, double gpa_req, ArrayList<String>
                                      prereq_courses, ArrayList<Double> prereq_grades,
                                      String special_perm, int min_credits, int max_credits) throws SQLException {
         
-        int classification = 0;
-        int next_prereq_id, dept_id = 0, prereq_course_id, next_course_id;
         try {
             con.setAutoCommit(false);
-            ResultSet rs = stmt.executeQuery("select cl_id from "
-                                             + "classification_level " + "where cl = '" + level + "'");
-            if (rs.next())
-                classification = rs.getInt("cl_id");
-            
-            rs = stmt.executeQuery("select dept_id from "
-                                   + "department " + "where dept_name = '" + dept_name + "'");
-            if (rs.next())
-                dept_id = rs.getInt("dept_id");
-            
-            // getting the highest prereq_id
-            rs = stmt.executeQuery("select prereq_id from course_prereq where "
-                                   + "rownum <= 1 order by prereq_id desc");
-            if (rs.next()) {
-                next_prereq_id = rs.getInt("prereq_id") + 1;
-            } else {
-                next_prereq_id = 1;
-            }
-            
-            // getting the highest course_id
-            rs = stmt.executeQuery("select course_id from course where "
-                                   + "rownum <= 1 order by course_id desc");
-            if (rs.next()) {
-                next_course_id = rs.getInt("course_id") + 1;
-            } else {
-                next_course_id = 1;
-            }
             
             stmt.executeQuery("insert into course (course_id, title, dept_id, "
-                              + "min_credits, max_credits, cl_id, id) values (" + next_course_id
-                              + ",'" + name + "'," + dept_id + "," + min_credits + ","
-                              + max_credits + "," + classification + ",'" + id + "')");
-            
+                    + "min_credits, max_credits, cl_id, id) select "
+                    + "course_seq.nextval as course_id, '" + name + "' "
+                    + "as title, d.dept_id as dept_id, " 
+                    + min_credits + " as min_credits, " + max_credits
+                    + "as max_credits, c.cl_id as cl_id, '" + id + "' as id"
+                    + " from department d, classification_level c where "
+                    + "c.cl = '" + level + "' and d.dept_name = '" 
+                    + dept_name + "'");
+                    
             stmt.executeQuery("insert into course_prereq (prereq_id, course_id,"
-                              + " min_gpa, special_permission) values (" + 
-                        next_prereq_id + "," + next_course_id + "," + gpa_req + 
-                        ",'" + special_perm + "')");
-            
+                    + " min_gpa, special_permission) select prereq_seq.nextval "
+                    + "as prereq_id, course_seq.currval as course_id, " 
+                    + gpa_req + " as min_gpa, '" + special_perm + "' as "
+                            + "special_permission from dual");
+
             // remove this insert if not going to use 'has' table!
             // insert into 'has'
-            stmt.executeQuery("insert into has (prereq_id, course_id) values "
-                    + "(" + next_prereq_id + "," + next_course_id + ")");
+//            stmt.executeQuery("insert into has (prereq_id, course_id) values "
+//                    + "(prereq_seq.currval, " + next_course_id + ")");
             
-            // insert pre-req courses
             for (int i = 0; i < prereq_courses.size(); i++) {
-                String temp_course_id = prereq_courses.get(i);
-                rs = stmt.executeQuery("select course_id from course where id = '" + temp_course_id + "'");
-                if (rs.next()) {
-                    prereq_course_id = rs.getInt("course_id");
-                } else {
-                    System.out.println("Trying to add pre-req course which doesn't exist!");
-                    return false;
-                }
+                try {
                 stmt.executeQuery("insert into prereq_courses (prereq_id, "
-                                  + "prereq_course_id, grade) values (" + next_prereq_id
-                                  + "," + prereq_course_id + "," +
-                                  prereq_grades.get(i) + ")");
+                        + "prereq_course_id, grade) select prereq_seq.currval "
+                        + "as prereq_id, c.course_id as prereq_course_id, " 
+                        + prereq_grades.get(i) + " as grade from course c where"
+                                + " c.id = '" + prereq_courses.get(i) + "'");
+                } catch (SQLException e) {
+                    System.out.println("Trying to add pre-req course which doesn't exist!");
+                    return "Trying to add pre-req course which doesn't exist!";
+                }
             }
             
             con.commit();
         } catch (SQLException e) {
             System.out.println(e);
             con.rollback();
-            return false;
+            return e.getMessage();
         }
-        return true;
+        return "Success";
     }
     
     public static ArrayList<String> get_course_details(String id)
@@ -464,7 +456,6 @@ public class SQL_Helper {
         return result;
     }
     
-    // implement methods after this point
     public static ArrayList<String> get_faculty_list() {
         ArrayList<String> list = new ArrayList();
         try {
@@ -722,17 +713,8 @@ public class SQL_Helper {
     }
     
     
-    // chandu - view courses
-    public static ArrayList<String> get_courses() {
-        ArrayList<String> course_list = new ArrayList();
-        // can use get_course_offering_list here! or change signature of get_course_offering_list
-        return course_list;
-    }
-    
-    // chandu - enforce add/drop deadline
-    
-    
-    
+    // implement methods after this point
+    // not tested
     // enroll for a course (check if classification is same as course cl_id)
     public static boolean enroll_course(long offering_id, int credits) throws SQLException {
         long student_id = current_student_id;
@@ -781,10 +763,6 @@ public class SQL_Helper {
         return true;
     }
     
-    // chandu - drop course
-    // chandu - view pending/rejected/waitlisted courses
-    
-    // not tested
     public static ArrayList<String> get_grades() {
         ArrayList<String> grades_list = new ArrayList();
         try {
@@ -804,10 +782,17 @@ public class SQL_Helper {
         return grades_list;        
     }
     
-    // chandu - view bill
-    
-    
     // chandu - pay bill
+    // chandu - view bill
+    // chandu - enforce add/drop deadline
+    // chandu - drop course
+    // chandu - view pending/rejected/waitlisted courses
+    // chandu - view courses
+    public static ArrayList<String> get_courses() {
+        ArrayList<String> course_list = new ArrayList();
+        // can use get_course_offering_list here! or change signature of get_course_offering_list
+        return course_list;
+    }
     
     // chandu - view_enrollment_requests
     public static ArrayList<ArrayList<String>> view_enrollment_requests() 
@@ -830,9 +815,14 @@ public class SQL_Helper {
     
 }
 
-
-// add departments manually
+// TODO 
+// add record in 'belongs' table when adding a student or else drop 'belongs' table    
+// create page to add a new department
 // add one page which adds faculty
 // remove course_id from course_prereq table? or drop 'has' table (better to drop table 'has')
-// trigger for after update profile of student, if CL or RL changes => bill
 // get_course_offering_list can be changed to view courses of particular SemYear
+
+// trigger for after update profile of student, if CL or RL changes => bill
+// trigger for after enroll if enrolled then change bill
+// trigger for after drop if dropped then change bill
+// trigget for after 
