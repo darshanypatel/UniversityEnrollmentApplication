@@ -5,7 +5,10 @@
  */
 package com.view.student;
 
+import Connection.SQL_Helper;
+import dbpro.StudentViewController;
 import javax.swing.JFrame;
+import java.util.ArrayList;
 
 /**
  *
@@ -84,19 +87,20 @@ public class ViewGrades extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          StudentHomePage home_page=new StudentHomePage();
-       stuHome = new JFrame();
-       stuHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuHome.add(home_page); // Add JPanel with components to JFrame
-        stuHome.setVisible(true); 
-        stuHome.setSize(700,600);
-        this.setVisible(false);
-       stuHome.setVisible(true); 
+            this.setVisible(false);
+        StudentViewController.showStudentHomePage();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private static ArrayList<String> grades;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+       
+               grades = SQL_Helper.get_grades(-1);
+       String ac="";
+       for(int i =0;i<grades.size();i++){
+          ac = ac+ grades.get(i)+"\n";
+       }
+       jTextArea1.setText(ac);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

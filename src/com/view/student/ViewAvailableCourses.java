@@ -5,7 +5,10 @@
  */
 package com.view.student;
 
+import Connection.SQL_Helper;
+import dbpro.StudentViewController;
 import javax.swing.JFrame;
+import java.util.ArrayList;
 
 /**
  *
@@ -47,6 +50,11 @@ public class ViewAvailableCourses extends javax.swing.JPanel {
         });
 
         jButton2.setText("Show Available Courses");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,15 +87,20 @@ public class ViewAvailableCourses extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-          StudentHomePage home_page=new StudentHomePage();
-       stuHome = new JFrame();
-       stuHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuHome.add(home_page); // Add JPanel with components to JFrame
-        stuHome.setVisible(true); 
-        stuHome.setSize(700,600);
         this.setVisible(false);
-       stuHome.setVisible(true); 
+        StudentViewController.showStudentCoursePage();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private static ArrayList<String> available_courses;
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+       available_courses = SQL_Helper.get_course_offering_list();
+       String ac="";
+       for(int i =0;i<available_courses.size();i++){
+          ac = ac+ available_courses.get(i)+"\n";
+       }
+       jTextArea1.setText(ac);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

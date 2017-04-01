@@ -5,6 +5,7 @@
  */
 package com.view.student;
 
+import dbpro.StudentViewController;
 import javax.swing.JFrame;
 
 /**
@@ -144,98 +145,42 @@ public class StudentHomePage extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         StudentProfilePage home_page=new StudentProfilePage();
-       stuProfile = new JFrame();
-       stuProfile.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuProfile.add(home_page); // Add JPanel with components to JFrame
-        stuProfile.setVisible(true); 
-        stuProfile.setSize(700,600);
-        this.setVisible(false);
-       stuProfile.setVisible(true); 
+      StudentViewController.showStudentProfilePage();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        StudentCoursePage home_page=new StudentCoursePage();
-       stuCourse = new JFrame();
-       stuCourse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuCourse.add(home_page); // Add JPanel with components to JFrame
-        stuCourse.setVisible(true); 
-        stuCourse.setSize(700,600);
-        this.setVisible(false);
-       stuCourse.setVisible(true); 
+      StudentViewController.showStudentCoursePage();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         StudentCoursePage home_page=new StudentCoursePage();
-       stuCourse = new JFrame();
-       stuCourse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuCourse.add(home_page); // Add JPanel with components to JFrame
-        stuCourse.setVisible(true); 
-        stuCourse.setSize(700,600);
-        this.setVisible(false);
-       stuCourse.setVisible(true);
+        StudentViewController.showStudentCoursePage();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-         StudentCoursePage home_page=new StudentCoursePage();
-       stuCourse = new JFrame();
-       stuCourse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuCourse.add(home_page); // Add JPanel with components to JFrame
-        stuCourse.setVisible(true); 
-        stuCourse.setSize(700,600);
-        this.setVisible(false);
-       stuCourse.setVisible(true);
+       StudentViewController.showStudentCoursePage();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-         StudentCoursePage home_page=new StudentCoursePage();
-       stuCourse = new JFrame();
-       stuCourse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuCourse.add(home_page); // Add JPanel with components to JFrame
-        stuCourse.setVisible(true); 
-        stuCourse.setSize(700,600);
-        this.setVisible(false);
-       stuCourse.setVisible(true);
+      StudentViewController.showStudentCoursePage();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-         StudentGradePage home_page=new StudentGradePage();
-       stuGrade = new JFrame();
-       stuGrade.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuGrade.add(home_page); // Add JPanel with components to JFrame
-        stuGrade.setVisible(true); 
-        stuGrade.setSize(700,600);
-        this.setVisible(false);
-       stuGrade.setVisible(true);
+      StudentViewController.showStudentGradePage();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-         StudentBillingPage home_page=new StudentBillingPage();
-       stuBill = new JFrame();
-       stuBill.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuBill.add(home_page); // Add JPanel with components to JFrame
-        stuBill.setVisible(true); 
-        stuBill.setSize(700,600);
-        this.setVisible(false);
-       stuBill.setVisible(true);
+       StudentViewController.showStudentBillingPage();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-         StudentBillingPage home_page=new StudentBillingPage();
-       stuBill = new JFrame();
-       stuBill.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuBill.add(home_page); // Add JPanel with components to JFrame
-        stuBill.setVisible(true); 
-        stuBill.setSize(700,600);
-        this.setVisible(false);
-       stuBill.setVisible(true);
+      StudentViewController.showStudentBillingPage();
     }//GEN-LAST:event_jButton9ActionPerformed
 
 
