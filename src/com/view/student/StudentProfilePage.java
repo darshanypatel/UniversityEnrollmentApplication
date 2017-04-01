@@ -5,6 +5,9 @@
  */
 package com.view.student;
 
+import Connection.SQL_Helper;
+import java.util.ArrayList;
+
 /**
  *
  * @author Jasleen
@@ -14,10 +17,23 @@ public class StudentProfilePage extends javax.swing.JPanel {
     /**
      * Creates new form StudentProfilePage
      */
+    private static ArrayList<String> student_profile;
     public StudentProfilePage() {
+        student_profile = new ArrayList<>();
+        student_profile = SQL_Helper.get_student_profile(-1);
+        load_elements(student_profile);
         initComponents();
     }
 
+    private void load_elements(ArrayList<String> stupro){
+     jTextField1.setText(stupro.get(0));
+     jTextField1.setText(stupro.get(1));
+     jTextField1.setText(stupro.get(8));
+     jTextField1.setText(stupro.get(7));
+     jTextField1.setText(stupro.get(3));
+     jTextField1.setText(stupro.get(4));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +60,7 @@ public class StudentProfilePage extends javax.swing.JPanel {
 
         jLabel1.setText("First Name");
 
-        jLabel2.setText("Last Name'");
+        jLabel2.setText("Last Name");
 
         jLabel3.setText("Email");
 
@@ -56,6 +72,11 @@ public class StudentProfilePage extends javax.swing.JPanel {
 
         jTextField1.setEditable(false);
         jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jTextField2.setEditable(false);
         jTextField2.setText("jTextField2");
@@ -80,6 +101,11 @@ public class StudentProfilePage extends javax.swing.JPanel {
         });
 
         jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -108,7 +134,7 @@ public class StudentProfilePage extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
                             .addComponent(jButton1))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,9 +171,7 @@ public class StudentProfilePage extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                    .addComponent(jButton2))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -161,6 +185,19 @@ public class StudentProfilePage extends javax.swing.JPanel {
         jTextField5.setEditable(true);
         jTextField6.setEditable(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String fname = jTextField1.getText().trim();
+        String lname = jTextField2.getText().trim();
+        String email = jTextField3.getText().trim();
+        long phone = Long.parseLong(jTextField4.getText().trim());
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

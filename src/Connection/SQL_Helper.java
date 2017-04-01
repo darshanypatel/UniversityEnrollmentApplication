@@ -827,7 +827,7 @@ public class SQL_Helper {
     return "Success";
     }
     // chandu - view bill
-    public static String view_bill(float amount) {
+    public static String view_bill() {
         try {
             ResultSet rs=stmt.executeQuery("select bill from students where student_id="+current_student_id);
             rs.next();
@@ -876,26 +876,7 @@ public class SQL_Helper {
         // can use get_course_offering_list here! or change signature of get_course_offering_list
         return course_list;
     }
-    
-    // chandu - view_enrollment_requests
-    public static ArrayList<ArrayList<String>> view_enrollment_requests() 
-    throws SQLException {
-        ArrayList<ArrayList<String>> result = new ArrayList<>();
         
-        return result;
-    }
-    
-    // chandu - approve_enrollment_request
-    public static boolean approve_enrollment_request() {
-        try {
-            stmt.executeQuery("");
-        } catch(SQLException e) {
-            System.out.println(e);
-            return false;
-        }
-        return true;
-    }
-    
      public static ArrayList<ArrayList<String>> view_enrollment_requests() {
     ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
         ArrayList<String> temp;
@@ -944,6 +925,55 @@ public class SQL_Helper {
         return "Success";
     }
     
+    public static ArrayList<ArrayList<String>> view_course_status() {
+        ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
+        ArrayList<String> temp;
+        try {
+            
+            ResultSet rs=stmt.executeQuery("select s.semester_name, s.year, e.status, c.id, c.title from "
+                    + "course c, enrolls e, semester s, course_offering co "
+                    + "where co.offering_id=e.offering_id and co.course_id=c.course_id and co.semester_id=s.semester_id and "
+                    + "e.student_id="+current_student_id);
+            while(rs.next())
+            {
+                temp=new ArrayList<String>();
+                temp.add(rs.getString("semester_name"));
+                temp.add(rs.getInt("year")+"");
+                temp.add(rs.getString("status"));
+                temp.add(rs.getString("id"));
+                result.add(temp);
+            }
+            
+        } catch (SQLException ex) {
+            
+            return new ArrayList<ArrayList<String>>();
+        }
+        return result;
+    }
+    
+    public static ArrayList<ArrayList<String>> view_pending_course() {
+        ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
+        ArrayList<String> temp;
+        try {
+            
+            ResultSet rs=stmt.executeQuery("select c.id, c.title from "
+                    + "course c, enrolls e, semester s, course_offering co "
+                    + "where co.offering_id=e.offering_id and co.course_id=c.course_id and co.semester_id=s.semester_id and e.status='P' and "
+                    + "e.student_id="+current_student_id);
+            while(rs.next())
+            {
+                temp=new ArrayList<String>();
+                temp.add(rs.getString("id"));
+                temp.add(rs.getString("title"));
+                result.add(temp);
+            }
+            
+        } catch (SQLException ex) {
+            
+            return new ArrayList<ArrayList<String>>();
+        }
+        return result;
+    }
     
 }
 
