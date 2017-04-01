@@ -20,7 +20,6 @@ public class SQL_Helper {
     public static Statement stmt, stmt2;
     public static Connection con, con2;
     private static long current_admin_id = 0, current_student_id = 0;
-    private static JFrame login;
     
     public static void main(String args[]) throws SQLException{
         connect();
@@ -366,13 +365,13 @@ public class SQL_Helper {
         return "Success";
     }
     
-    // done ... success is the first string passed
-    public static ArrayList<String> get_course_details(String id)
-    throws SQLException {
+    // done
+    public static ArrayList<String> get_course_details(String id) {
         String special_permission;
         ArrayList<String> result = new ArrayList();
         int prereq_id, prereq_course_id, course_id;
-        
+        try {
+            
         // get course_id of 'id'
         ResultSet course_id_rs = stmt.executeQuery("select course_id from "
                 + "course where id = '" + id + "'");
@@ -383,8 +382,6 @@ public class SQL_Helper {
             result.add("Course doesn't exist!");
             return result;
         }
-        
-        result.add("Success");
         
         ResultSet rs = stmt.executeQuery("select c.cl, d.dept_name, co.min_credits, co.max_credits, co.title, cp.min_gpa, cp.special_permission, cp.prereq_id from course co, course_prereq cp, department d, classification_level c where co.course_id"
                                          + " = " + course_id + " and co.course_id = cp.course_id and c.cl_id = co.cl_id and d.dept_id = co.dept_id");
@@ -419,7 +416,11 @@ public class SQL_Helper {
         result.add(special_permission);
         result.add(min_credits + "");
         result.add(max_credits + "");
-        
+        } catch (SQLException e) {
+            result = new ArrayList();
+            result.add(e.getMessage());
+            return result;
+        }
         return result;
     }
     
@@ -439,7 +440,7 @@ public class SQL_Helper {
         return list;
     }
     
-    // done ... success/error is the string passed
+    // done
     public static String add_faculty(String fname, String lname, String dept_name) {
         try {
             stmt.executeQuery("insert into faculty (faculty_id, fname, lname, "
