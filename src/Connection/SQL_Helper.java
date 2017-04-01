@@ -476,7 +476,6 @@ public class SQL_Helper {
         
         int course_id = 0, next_semester_id, next_schedule_id
                 , class_location_id;
-        long next_offering_id;
         try {
             con.setAutoCommit(false);
             // getting course_id corresponding to the 'id'
@@ -818,11 +817,60 @@ public class SQL_Helper {
     }
     
     // chandu - pay bill
+    public static String pay_bill(float amount) {
+        try {
+            stmt.executeQuery("update students set bill = (select bill from students where student_id="+current_student_id+")- "+amount + " where "
+                    + "student_id = " + current_student_id);
+        } catch (SQLException ex) {
+            return ex.getMessage();
+        }
+    return "Success";
+    }
     // chandu - view bill
+    public static String view_bill(float amount) {
+        try {
+            ResultSet rs=stmt.executeQuery("select bill from students where student_id="+current_student_id);
+            rs.next();
+            return rs.getDouble("bill")+"";
+        } catch (SQLException ex) {
+            
+            return ex.getMessage();
+        }
+        
+    }
     // chandu - enforce add/drop deadline
+     public static String enforce_addDrop_deadline(String semester_name, int year, String decision) {
+        try {
+            if(decision.equals("Yes"))
+            {
+                stmt.executeQuery("update semester set enforce_deadline='T' where semester_name='"+semester_name+"' and year="+year);
+                
+            }
+            
+        
+        } catch (SQLException ex) {
+            
+            return ex.getMessage();
+        }
+        return "Success";
+    }
     // chandu - drop course
-    // chandu - view pending/rejected/waitlisted courses
+    public static String drop_course(long offering_id) {
+        try {
+            stmt.executeQuery("update enrolls set status='D' where offering_id="+offering_id+" and student_id="+current_student_id);
+            
+            
+        } catch (SQLException ex) {
+            
+            return ex.getMessage();
+        }
+        return "Success";
+    }
+    
+    // chandu - view pending/rejected/waitlisted courses --enrolls
+    
     // chandu - view courses
+    
     public static ArrayList<String> get_courses() {
         ArrayList<String> course_list = new ArrayList();
         // can use get_course_offering_list here! or change signature of get_course_offering_list
