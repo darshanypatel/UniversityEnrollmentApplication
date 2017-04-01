@@ -896,6 +896,55 @@ public class SQL_Helper {
         return true;
     }
     
+     public static ArrayList<ArrayList<String>> view_enrollment_requests() {
+    ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
+        ArrayList<String> temp;
+        try {
+             
+            ResultSet rs=stmt.executeQuery("select s.semester_name,e.offering_id, e.STUDENT_ID, c.TITLE, c.id,s.year, st.fname, st.lname from course c, enrolls e, semester s, course_offering co, students st" +
+                 "where co.offering_id=e.offering_id and co.course_id=c.course_id and co.semester_id=s.semester_id and st.student_id=e.student_id and" +
+                    "e.status='P'");
+            while(rs.next())
+            {
+                temp=new ArrayList<String>();
+                temp.add(rs.getString("semester_name"));
+                temp.add(rs.getInt("offering_id")+"");
+                temp.add(rs.getLong("student_id")+"");
+                temp.add(rs.getString("title"));
+                temp.add(rs.getString("id"));
+                temp.add(rs.getInt("year")+"");
+                temp.add(rs.getString("fname"));
+                temp.add(rs.getString("lname"));
+                result.add(temp);
+            }
+             
+        } catch (SQLException ex) {
+             
+            return new ArrayList<ArrayList<String>>();
+        }
+    return result;
+    }
+    
+  // chandu - approve_enrollment_request
+    public static String approve_reject_enrollment_request(String stuId,String offeringID,String status) {
+        try {
+            
+            if(status.equals("approve"))
+            stmt.executeQuery("update enrolls e set e.status =" +
+                              "(Case when ((select c.current_enrollment from course_offering c,students s where e.OFFERING_id=c.OFFERING_id and e.student_id = s.student_id and s.student_id ="
+                    + stuId +" and e.offering_id="+offeringID+") < ((select c.max_enrollment from course_offering c,students s "
+                    + "where e.OFFERING_id=c.OFFERING_id and e.student_id = s.student_id and s.student_id ="+ stuId+" and e.offering_id="+offeringID+" ))) then 'E' ELSE 'W' END);");
+       
+                   else
+                       stmt.executeQuery("update enrolls e set e.status = 'R' where e.offering_id=" +offeringID +" and e.student_id = "+stuId+";");
+        } catch(SQLException e) {
+            System.out.println(e);
+            return e.getMessage();
+        }
+        return "Success";
+    }
+    
+    
 }
 
 // TODO 
