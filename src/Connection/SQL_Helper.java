@@ -464,7 +464,7 @@ public class SQL_Helper {
             String start_time, String end_time, 
             int class_size, int max_waitlist_size, String location) 
             throws SQLException {
-        
+        String first_time = "F";
         int course_id = 0, next_semester_id, next_schedule_id
                 , class_location_id;
         try {
@@ -507,7 +507,7 @@ public class SQL_Helper {
             } else {
                 // insert days and start-end time in schedule table
                 // first time --------
-                
+                first_time = "T";
                 stmt.executeQuery("insert into schedule (schedule_id, "
                         + "schedule_days, start_time, end_time) values (schedule_seq.nextval" 
                         + ",'" + days + "','" + start_time 
@@ -554,7 +554,11 @@ public class SQL_Helper {
             con.rollback();
             return e.getMessage();
         }
-        return "Success";
+        if (first_time.equals("T")) {
+            return "First Time";
+        } else {
+            return "Success";
+        }
     }
     
     public static ArrayList<String> get_course_offering_list() {
