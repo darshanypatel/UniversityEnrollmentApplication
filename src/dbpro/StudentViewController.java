@@ -24,6 +24,7 @@ public class StudentViewController {
    private static JFrame viewMyCourses;
    private static JFrame viewPendingCourses;
    private static JFrame dropCourse;
+   private static JFrame changePassword;
    
     public static void showStudentBillingPage(){
        StudentBillingPage ac=new StudentBillingPage();
@@ -64,7 +65,7 @@ public class StudentViewController {
         studentProfilePage.add(home_page); // Add JPanel with components to JFrame
         studentProfilePage.setVisible(true); 
         studentProfilePage.setSize(700,600);
-        studentHomePage.setVisible(false);
+       // studentHomePage.setVisible(false);
        studentProfilePage.setVisible(true); 
     }
     
@@ -127,5 +128,15 @@ public class StudentViewController {
         dropCourse.setVisible(true); 
         dropCourse.setSize(700,600);
        dropCourse.setVisible(true); 
+    }
+     
+      public static void showChangePassword(){
+      ChangePassword home_page=new ChangePassword();
+       changePassword = new JFrame();
+       changePassword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        changePassword.add(home_page); // Add JPanel with components to JFrame
+        changePassword.setVisible(true); 
+        changePassword.setSize(700,600);
+       changePassword.setVisible(true); 
     }
 }
