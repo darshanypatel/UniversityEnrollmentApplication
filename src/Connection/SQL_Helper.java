@@ -505,7 +505,9 @@ public class SQL_Helper {
                 // schedule exists
                 next_schedule_id = rs.getInt("semester_id");
             } else {
-                // insert days and start-end time in schedule table            
+                // insert days and start-end time in schedule table
+                // first time --------
+                
                 stmt.executeQuery("insert into schedule (schedule_id, "
                         + "schedule_days, start_time, end_time) values (schedule_seq.nextval" 
                         + ",'" + days + "','" + start_time 
@@ -627,14 +629,13 @@ public class SQL_Helper {
     // changed return type
     public static String edit_student_profile(String fname, String lname, 
             String dob, String email_id,
-            long phone, String address, String password) throws SQLException {
+            long phone, String address) throws SQLException {
         try {
             stmt.executeQuery("update students set "
                     + "fname = '" + fname + "', lname = '" + lname + 
                     "', dob = '" + dob + "', email = '" + 
                     email_id + "', phone = " + phone + ", address = '" + 
-                    address + "', password = '" + digest(password) + "' "
-                            + "where student_id = " + current_student_id);         
+                    address + "' where student_id = " + current_student_id);         
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return e.getMessage();            
@@ -642,6 +643,24 @@ public class SQL_Helper {
         return "Success";
     }
     
+    public static String edit_student_password(String old_password, 
+            String new_password) {
+        try {
+            ResultSet rs = stmt.executeQuery("select password from students "
+                    + "where student_id = " + current_student_id);
+            rs.next();
+            if (digest(old_password).equals(rs.getString("password"))) {
+                stmt.executeQuery("update students set password = '" + 
+                        digest(new_password) + "' where student_id = " 
+                        + current_student_id);
+            } else {
+                return "Old password is incorrect.";
+            }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+        return "Success";
+    }
     
     // implement methods after this point
     // not tested
@@ -956,4 +975,5 @@ public class SQL_Helper {
 // trigger for after update profile of student, if CL or RL changes => bill
 // trigger for after enroll if enrolled then change bill
 // trigger for after drop if dropped then change bill
-// trigget for after approving enrollment request, update current_enrollment in course_offering table
+// trigger for after approving enrollment request, update current_enrollment in course_offering table
+// trigger for before insert on enroll calculate credits of student
