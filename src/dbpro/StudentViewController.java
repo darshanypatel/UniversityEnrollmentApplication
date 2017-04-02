@@ -54,7 +54,7 @@ public class StudentViewController {
         studentCoursePage.add(home_page); // Add JPanel with components to JFrame
         studentCoursePage.setVisible(true); 
         studentCoursePage.setSize(700,600);
-        studentHomePage.setVisible(false);
+//        studentHomePage.setVisible(false);
        studentCoursePage.setVisible(true);
     }
     
