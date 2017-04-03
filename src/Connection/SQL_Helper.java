@@ -685,8 +685,13 @@ public class SQL_Helper {
         try {
             con.setAutoCommit(false);
             
-            ResultSet c = stmt.executeQuery("select offering_id, student_id from enrolls where status <> 'D' and student_id = " + student_id + " and offering_id = " + offering_id);
+            ResultSet c = stmt.executeQuery("select offering_id, student_id from enrolls where student_id = " + student_id + " and offering_id = " + offering_id);
             if (c.next()) {
+                c = stmt.executeQuery("select offering_id, student_id from enrolls where status <> 'D' and student_id = " + student_id + " and offering_id = " + offering_id);
+                if (c.next()) {
+                    stmt.executeQuery("delete from enrolls where student_id = " + student_id + " and offering_id = " + offering_id);
+                    enroll_course(offering_id, credits);
+                }
                 return "Already enrolled for this course!";
             }
             
@@ -992,7 +997,7 @@ public class SQL_Helper {
         try {
             ResultSet rs = stmt.executeQuery("select * from semester where ENFORCE_DEADLINE = 'F'");
             while (rs.next()) {
-                result.add(rs.getString("semeseter_name") + " " + rs.getInt("year"));
+                result.add(rs.getString("semester_name") + " " + rs.getInt("year"));
             }
         } catch (SQLException e) {
             return new ArrayList();
