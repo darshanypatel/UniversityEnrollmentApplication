@@ -753,19 +753,22 @@ public class SQL_Helper {
                     String temp = grades.get(prereq_course_id);
                     ResultSet rs2 = stmt2.executeQuery("select (case when "
                             + "(select grade_points from grades where grade = '" + temp + "') >= "
-                            + "(select grade_points from grades where grade = '" + required_grade + "' then 'T' else 'F' end) as check from dual");
-                    if (rs2.getString("check").equals("F")) {
+                            + "(select grade_points from grades where grade = '" + required_grade + "') then 'T' else 'F' end) as c from dual");
+                    rs2.next();
+                    if (rs2.getString("c").equals("F")) {
                         rs = stmt.executeQuery("select id, title from course where course_id = " + prereq_course_id);
+                        rs.next();
                         return "Not enough grade pointer in - " + rs.getString("id") + " " + rs.getString("title");
                     }
                 } else {
                     rs = stmt.executeQuery("select id, title from course where course_id = " + prereq_course_id);
+                    rs.next();
                     return "course - " + rs.getString("id") + " " + rs.getString("title") + " is required as a prerequisite";
                 }
             }
             
             String status;
-            if (special_permission != null && special_permission.equals("T")) {                
+            if (special_permission != null && special_permission.equals("Y")) {                
                 status = "P";
             } else {
                 // check current enrollment count and decide E/W accordingly
