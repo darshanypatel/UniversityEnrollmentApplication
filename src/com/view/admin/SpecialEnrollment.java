@@ -5,7 +5,10 @@
  */
 package com.view.admin;
 
+import Connection.SQL_Helper;
 import dbpro.AdminViewController;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,7 +19,12 @@ public class SpecialEnrollment extends javax.swing.JPanel {
     /**
      * Creates new form SpecialEnrollment
      */
+    
+   private static ArrayList<ArrayList<String>> er;
+
     public SpecialEnrollment() {
+        er=SQL_Helper.view_enrollment_requests();
+        
         initComponents();
     }
 
@@ -33,9 +41,15 @@ public class SpecialEnrollment extends javax.swing.JPanel {
         back = new javax.swing.JButton();
         select = new javax.swing.JComboBox<>();
         reject = new javax.swing.JButton();
+        enrollLabel = new javax.swing.JLabel();
 
         approve.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         approve.setText("Approve");
+        approve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveActionPerformed(evt);
+            }
+        });
 
         back.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         back.setText("Go Back");
@@ -45,39 +59,64 @@ public class SpecialEnrollment extends javax.swing.JPanel {
             }
         });
 
+        String[] eReqs=new String[er.size()+1];
+        eReqs[0]="Sem  Offering ID  StudentID  Course Title  Course ID  Year  First Name  Last Name";
+        String cur;
+        for(int i=0;i<er.size();i++){
+            cur=new String();
+            for(int j=0;j<er.get(i).size();j++){
+                cur.concat(er.get(i).get(j));
+                cur.concat(" ");
+            }
+            eReqs[i+1]=cur;
+        }
         select.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        select.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        select.setModel(new javax.swing.DefaultComboBoxModel<>(eReqs));
 
         reject.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         reject.setText("Reject");
+        reject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rejectActionPerformed(evt);
+            }
+        });
+
+        enrollLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enrollLabel.setText("Select Enrollment Request:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(enrollLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(355, 355, 355)
                         .addComponent(approve)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(reject)
                         .addGap(18, 18, 18)
                         .addComponent(back)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117)
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enrollLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(approve)
                     .addComponent(back)
                     .addComponent(reject))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -87,10 +126,38 @@ public class SpecialEnrollment extends javax.swing.JPanel {
         AdminViewController.showAdminHomePage();
     }//GEN-LAST:event_backActionPerformed
 
+    private void approveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveActionPerformed
+        // TODO add your handling code here:
+        String offeringID = SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()).get(1);
+        String stuID=SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()).get(2);
+       String status= SQL_Helper.approve_reject_enrollment_request(Long.parseLong(stuID),Long.parseLong(offeringID), "approve");
+        if(status.equals("Success")){
+             JOptionPane.showMessageDialog(null, "Request Approved Successfully!");
+        }
+        else
+             JOptionPane.showMessageDialog(null, "Some Error Occurred with error Code:\n"+status);
+        
+             this.repaint();
+            
+    }//GEN-LAST:event_approveActionPerformed
+
+    private void rejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectActionPerformed
+        // TODO add your handling code here:
+        String offeringID = SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()).get(1);
+        String stuID=SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()).get(2);
+          String status= SQL_Helper.approve_reject_enrollment_request(Long.parseLong(stuID),Long.parseLong(offeringID), "reject");
+         if(status.equals("Success")){
+             JOptionPane.showMessageDialog(null, "Request Rejected Successfully!");
+        }
+        else
+             JOptionPane.showMessageDialog(null, "Some Error Occurred with error Code:\n"+status);
+    }//GEN-LAST:event_rejectActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton approve;
     private javax.swing.JButton back;
+    private javax.swing.JLabel enrollLabel;
     private javax.swing.JButton reject;
     private javax.swing.JComboBox<String> select;
     // End of variables declaration//GEN-END:variables

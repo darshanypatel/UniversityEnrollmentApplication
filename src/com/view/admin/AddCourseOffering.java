@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -118,6 +119,8 @@ public class AddCourseOffering extends javax.swing.JPanel {
         yearLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         yearLabel.setText("Year :");
 
+        year.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         showFaculty.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         showFaculty.setText("Show faculty List");
         showFaculty.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +131,8 @@ public class AddCourseOffering extends javax.swing.JPanel {
 
         locationLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         locationLabel.setText("Class Location :");
+
+        location.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
@@ -249,6 +254,7 @@ public class AddCourseOffering extends javax.swing.JPanel {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
        AdminViewController.closeAddCourseOffering();
+       AdminViewController.closeFacultyList();
         AdminViewController.showViewAddCourseOffering();
     }//GEN-LAST:event_backActionPerformed
 
@@ -267,12 +273,20 @@ public class AddCourseOffering extends javax.swing.JPanel {
         else{
             facs.add(Integer.parseInt(faculty.getText().trim()));
         }
-        
-        try {
-            SQL_Helper.add_course_offering(courseID.getText().trim(),sem.getText().trim(),Integer.parseInt(year.getText().trim()),facs,day.getText().trim(),classStart.getText().trim(),classEnd.getText().trim(),Integer.parseInt(classSize.getText().trim()),Integer.parseInt(waitlist.getText().trim()),location.getText().trim());
-        } catch (SQLException ex) {
-            Logger.getLogger(AddCourseOffering.class.getName()).log(Level.SEVERE, null, ex);
+        String s=new String();
+        s=SQL_Helper.add_course_offering(courseID.getText().trim(),sem.getText().trim(),Integer.parseInt(year.getText().trim()),facs,day.getText().trim(),classStart.getText().trim(),classEnd.getText().trim(),Integer.parseInt(classSize.getText().trim()),Integer.parseInt(waitlist.getText().trim()),location.getText().trim()); 
+        if(s.equals("Success"))
+        {
+            JOptionPane.showMessageDialog(null, "Course Offering Added Successfully!!!");
+            AdminViewController.closeAddCourseOffering();
+            AdminViewController.showViewAddCourseOffering();
         }
+        else if(s.equals("First Time")){
+            
+            
+        }
+           else 
+            JOptionPane.showMessageDialog(null, "Error Occured with error code:\n\n"+s);
     }//GEN-LAST:event_submitActionPerformed
 
     private void showFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showFacultyActionPerformed

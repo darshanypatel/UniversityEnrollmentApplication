@@ -10,6 +10,7 @@ import dbpro.AdminViewController;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -281,6 +282,12 @@ public class EnrollStudent extends javax.swing.JPanel {
      
         
         } catch (SQLException ex) {
+            
+            try {
+                JOptionPane.showMessageDialog(null, SQL_Helper.add_student(Long.parseLong(sid.getText()),username.getText(), fName.getText(), lName.getText(), dob.getText(), level.getText(), residency.getText(), Long.parseLong(amount.getText()), dept.getText(),email.getText(),Long.parseLong(contact.getText()), address.getText()));
+            } catch (SQLException ex1) {
+                Logger.getLogger(EnrollStudent.class.getName()).log(Level.SEVERE, null, ex1);
+            }
             Logger.getLogger(EnrollStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
         

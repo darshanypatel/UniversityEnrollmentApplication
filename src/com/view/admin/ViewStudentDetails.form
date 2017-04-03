@@ -82,9 +82,14 @@
                                       <Component id="sLevel" min="-2" pref="471" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="sIdLabel" min="-2" pref="173" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="sId" min="-2" pref="248" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jLabel1" alignment="1" min="-2" pref="405" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="sIdLabel" min="-2" pref="173" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="sId" min="-2" pref="248" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Component id="findButton" min="-2" pref="107" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -103,14 +108,16 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="sIdLabel" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="sId" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="findButton" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="backButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="fNameLabel" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="fName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -159,9 +166,9 @@
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="addressLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="address" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="address" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -301,6 +308,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Find"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="findButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="phoneLabel">
       <Properties>
@@ -355,7 +365,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Edit Grade"/>
+        <Property name="text" type="java.lang.String" value="Edit GPA"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editGradeActionPerformed"/>
@@ -371,6 +381,17 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="36" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="0" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="View Student Details"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
