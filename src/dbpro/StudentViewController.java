@@ -8,6 +8,7 @@ package dbpro;
 import com.view.student.*;
 import java.sql.SQLException;
 import javax.swing.JFrame;
+import com.view.LoginPage;
 
 /**
  *
@@ -25,6 +26,8 @@ public class StudentViewController {
    private static JFrame viewPendingCourses;
    private static JFrame dropCourse;
    private static JFrame changePassword;
+   private static JFrame loginPage;
+   
    
     public static void showStudentBillingPage(){
        StudentBillingPage ac=new StudentBillingPage();
@@ -32,7 +35,7 @@ public class StudentViewController {
        studentBillingPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        studentBillingPage.add(ac); // Add JPanel with components to JFrame
        studentBillingPage.setSize(700,800);
-       studentHomePage.setVisible(false);
+//       studentHomePage.setVisible(false);
        studentBillingPage.setVisible(true);
     }
     
@@ -43,7 +46,7 @@ public class StudentViewController {
         studentGradePage.add(home_page); // Add JPanel with components to JFrame
         studentGradePage.setVisible(true); 
         studentGradePage.setSize(700,600);
-        studentHomePage.setVisible(false);
+//        studentHomePage.setVisible(false);
        studentGradePage.setVisible(true);
     }
     
@@ -138,5 +141,15 @@ public class StudentViewController {
         changePassword.setVisible(true); 
         changePassword.setSize(700,600);
        changePassword.setVisible(true); 
+    }
+      
+      public static void showLoginPage(){
+      LoginPage home_page=new LoginPage();
+       loginPage = new JFrame();
+       loginPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginPage.add(home_page); // Add JPanel with components to JFrame
+        loginPage.setVisible(true); 
+        loginPage.setSize(700,600);
+       loginPage.setVisible(true); 
     }
 }

@@ -36,9 +36,9 @@ public class DropCourse extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jLabel1.setText("Enter Course ID to be dropped");
+        jLabel1.setText("Enter Offering ID to be dropped");
 
-        jTextField1.setText("Course ID");
+        jTextField1.setText("Offering ID");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -68,7 +68,7 @@ public class DropCourse extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(36, 36, 36)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addComponent(jButton1)
@@ -93,11 +93,16 @@ public class DropCourse extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jTextField1.getText().isEmpty()){
+        if(jTextField1.getText().isEmpty()|| (jTextField1.getText().contentEquals("Offering ID"))){
           JOptionPane.showMessageDialog(null, "Invalid Input : Offering ID must be entered");   
         }else{
         long offering_id = Long.parseLong(jTextField1.getText());
-        SQL_Helper.drop_course(offering_id);
+        String result = SQL_Helper.drop_course(offering_id);
+        if(!result.contentEquals("Success")){
+          JOptionPane.showMessageDialog(null, result);
+        }else{
+         JOptionPane.showMessageDialog(null, "Invalid Input : Offering ID must be entered");
+        }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
