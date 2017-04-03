@@ -24,7 +24,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="cOffList" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="144" max="32767" attributes="0"/>
+              <EmptySpace pref="103" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,7 +57,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cOffListActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] cOffLists=new String[SQL_Helper.get_course_offering_list().size()+1];&#xa;cOffLists[0]=&quot;ID CourseID Sem-Year&quot;;&#xa;for(int i=0;i&lt;SQL_Helper.get_course_offering_list().size();i++)&#xa;    cOffLists[i+1]=SQL_Helper.get_course_offering_list().get(i);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] cOffLists=new String[SQL_Helper.get_course_offering_list(false).size()+1];&#xa;cOffLists[0]=&quot;ID CourseID Sem-Year&quot;;&#xa;for(int i=0;i&lt;SQL_Helper.get_course_offering_list(false).size();i++)&#xa;    cOffLists[i+1]=SQL_Helper.get_course_offering_list(false).get(i);"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>

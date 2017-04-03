@@ -89,7 +89,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] eReqs=new String[er.size()+1];&#xa;eReqs[0]=&quot;Sem  Offering ID  StudentID  Course Title  Course ID  Year  First Name  Last Name&quot;;&#xa;String cur;&#xa;for(int i=0;i&lt;er.size();i++){&#xa; cur=new String();&#xa;        for(int j=0;j&lt;er.get(i).size();j++){&#xa;                   cur.concat(er.get(i).get(j));&#xa;                   cur.concat(&quot; &quot;);&#xa;}&#xa;                eReqs[i+1]=cur;&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] eReqs=new String[er.size()+1];&#xa;eReqs[0]=&quot;Sem  Offering ID  StudentID  Course Title  Course ID  Year  First Name  Last Name&quot;;&#xa;String cur;&#xa;for(int i=0;i&lt;er.size();i++){&#xa; cur=new String();&#xa;        for(int j=0;j&lt;er.get(i).size();j++){&#xa;                   cur = cur + er.get(i).get(j);&#xa;                      cur= cur + &quot; &quot;;&#xa;                 &#xa;                eReqs[i+1]=cur;&#xa;}"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>

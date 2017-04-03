@@ -282,8 +282,8 @@ public class AddCourseOffering extends javax.swing.JPanel {
             AdminViewController.showViewAddCourseOffering();
         }
         else if(s.equals("First Time")){
-            
-            
+            AdminViewController.showCourseAddDropDeadline(sem.getText().trim(), year.getText().trim());
+            AdminViewController.closeAddCourseOffering();
         }
            else 
             JOptionPane.showMessageDialog(null, "Error Occured with error code:\n\n"+s);

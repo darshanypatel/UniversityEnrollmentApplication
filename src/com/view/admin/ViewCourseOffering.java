@@ -304,18 +304,25 @@ public class ViewCourseOffering extends javax.swing.JPanel {
         try {
             // TODO add your handling code here:
             ArrayList<String> co= SQL_Helper.get_course_offering_details(Long.parseLong(cOff.getText().trim()));
-            
+            int count = Integer.parseInt(co.get(2));
             courseID.setText(co.get(0));
             sem.setText(co.get(1));
-            faculty.setText(co.get(3));
-            day.setText(co.get(4));
-            classStart.setText(co.get(5));
-            classEnd.setText(co.get(6));
-            classSize.setText(co.get(7));
-            waitlist.setText(co.get(8));
-            curEnroll.setText(co.get(9));
-            location.setText(co.get(10));
-            year.setText(co.get(11));
+            year.setText(co.get(10+count));
+          
+            int i;
+            String faculty_str = "";
+            for (i = 0; i < count; i++) {
+                faculty_str += co.get(2+i);
+            }
+            faculty.setText(faculty_str);
+            day.setText(co.get(3+count));
+            classStart.setText(co.get(4+count));
+            classEnd.setText(co.get(5+count));
+            classSize.setText(co.get(6+count));
+            waitlist.setText(co.get(7+count));
+            curEnroll.setText(co.get(8+count));
+            location.setText(co.get(9+count));
+            
         } catch (SQLException ex) {
              courseID.setText("");
             sem.setText("");
