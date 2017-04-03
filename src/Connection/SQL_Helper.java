@@ -574,10 +574,19 @@ public class SQL_Helper {
         }
     }
     
-    public static ArrayList<String> get_course_offering_list() {
+    public static ArrayList<String> get_course_offering_list(boolean only_current_semester) {
         ArrayList<String> offering_list = new ArrayList();
         try {
-            ResultSet rs = stmt.executeQuery("select offering_id, course_id, semester_id from course_offering");
+            ResultSet rs;
+            if (only_current_semester) {
+                rs = stmt.executeQuery("select co.offering_id, co.course_id, "
+                        + "co.semester_id from course_offering co, semester s,"
+                        + " semester_duration sd where co.semester_id = "
+                        + "s.semester_id and s.semester_name = sd.semester_name"
+                        + " and current_date between sd.start_date and sd.end_date");
+            } else {
+                rs = stmt.executeQuery("select offering_id, course_id, semester_id from course_offering");
+            }
             while (rs.next()) {
                 int course_id = rs.getInt("course_id");
                 int sem_id = rs.getInt("semester_id");
@@ -906,9 +915,14 @@ public class SQL_Helper {
         ArrayList<String> temp;
         try {
              
-            ResultSet rs=stmt.executeQuery("select s.semester_name,e.offering_id, e.STUDENT_ID, c.TITLE, c.id,s.year, st.fname, st.lname from course c, enrolls e, semester s, course_offering co, students st" +
-                 "where co.offering_id=e.offering_id and co.course_id=c.course_id and co.semester_id=s.semester_id and st.student_id=e.student_id and" +
-                    "e.status='P'");
+            ResultSet rs=stmt.executeQuery("select s.semester_name,"
+                    + " e.offering_id, e.STUDENT_ID, c.TITLE, c.id, s.year, "
+                    + "st.fname, st.lname from course c, enrolls e, semester s,"
+                    + " course_offering co, students st where co.offering_id="
+                    + "e.offering_id and co.course_id=c.course_id and "
+                    + "co.semester_id=s.semester_id and "
+                    + "st.student_id=e.student_id and" +
+                    " e.status='P'");
             while(rs.next())
             {
                 temp=new ArrayList<String>();
@@ -1079,7 +1093,9 @@ public class SQL_Helper {
             return new ArrayList();
         }
         return grades_list;        
-    }    
+    }
+
+    //public static 
     
 }
 
