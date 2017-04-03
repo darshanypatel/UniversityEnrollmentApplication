@@ -5,11 +5,15 @@
  */
 package Connection;
 
+import com.view.student.StudentProfilePage;
 import java.sql.*;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import javax.swing.JFrame;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -320,7 +324,7 @@ public class SQL_Helper {
     // done
     public static String add_course(String id, String name, String
                                      dept_name, String level, double gpa_req, ArrayList<String>
-                                     prereq_courses, ArrayList<Double> prereq_grades,
+                                     prereq_courses, ArrayList<String> prereq_grades,
                                      String special_perm, int min_credits, int max_credits) throws SQLException {
         
         try {
@@ -346,8 +350,8 @@ public class SQL_Helper {
                 try {
                 stmt.executeQuery("insert into prereq_courses (prereq_id, "
                         + "prereq_course_id, grade) select prereq_seq.currval "
-                        + "as prereq_id, c.course_id as prereq_course_id, " 
-                        + prereq_grades.get(i) + " as grade from course c where"
+                        + "as prereq_id, c.course_id as prereq_course_id, '" 
+                        + prereq_grades.get(i) + "' as grade from course c where"
                                 + " c.id = '" + prereq_courses.get(i) + "'");
                 } catch (SQLException e) {
                     System.out.println("Trying to add pre-req course which doesn't exist!");
@@ -469,7 +473,7 @@ public class SQL_Helper {
             String start_time, String end_time, 
             int class_size, int max_waitlist_size, String location) {
         String first_time = "F";
-        int course_id = 0, next_semester_id, next_schedule_id
+        int course_id, next_semester_id, next_schedule_id
                 , class_location_id;
         try {
             con.setAutoCommit(false);
@@ -690,7 +694,7 @@ public class SQL_Helper {
                 c = stmt.executeQuery("select offering_id, student_id from enrolls where status = 'D' and student_id = " + student_id + " and offering_id = " + offering_id);
                 if (c.next()) {
                     stmt.executeQuery("delete from enrolls where student_id = " + student_id + " and offering_id = " + offering_id);
-                    enroll_course(offering_id, credits);
+                    return enroll_course(offering_id, credits);
                 }
                 return "Already enrolled for this course!";
             }
@@ -922,7 +926,7 @@ public class SQL_Helper {
   // chandu - approve_enrollment_request
     public static String approve_reject_enrollment_request(long student_id, long offering_id, String status) {
         try {
-            String s = "";
+            String s;
             if(status.equals("approve")) {
                 stmt.executeQuery("update enrolls e set e.status = (Case when "
                     + "((select c.current_enrollment from course_offering c where c.offering_id= " + offering_id + ") < "
@@ -943,7 +947,16 @@ public class SQL_Helper {
     }
     
     public static String insert_requests_record(long student_id, long admin_id, long offering_id, String status) {
-        
+        String input_pattern = "yyyy-MM-dd";
+        String output_pattern = "dd-MMM-yy";
+        String date = "";
+        //try{
+//            date = new SimpleDateFormat(output_pattern).format(new SimpleDateFormat(input_pattern).parse(System.));
+       // } catch (ParseException ex) {
+          //Logger.getLogger(StudentProfilePage.class.getName()).log(Level.SEVERE, null, ex);
+        //}
+        //stmt.executeQuery("insert into requests (STUDENT_ID, ADMIN_ID, OFFERING_ID, DATE_APPROVED, APPROVED_BY, STATUS) values (" + student_id + "," + admin_id + "," + offering_id + "," +  + ",'" + status + "')")
+        return "Success";
     }
     
     public static ArrayList<ArrayList<String>> view_course_status() {
