@@ -915,17 +915,17 @@ public class SQL_Helper {
     }
     
   // chandu - approve_enrollment_request
-    public static String approve_reject_enrollment_request(String stuId,String offeringID,String status) {
+    public static String approve_reject_enrollment_request(String student_id, String offering_id, String status) {
         try {
             
             if(status.equals("approve"))
-            stmt.executeQuery("update enrolls e set e.status =" +
-                              "(Case when ((select c.current_enrollment from course_offering c,students s where e.OFFERING_id=c.OFFERING_id and e.student_id = s.student_id and s.student_id ="
-                    + stuId +" and e.offering_id="+offeringID+") < ((select c.max_enrollment from course_offering c,students s "
-                    + "where e.OFFERING_id=c.OFFERING_id and e.student_id = s.student_id and s.student_id ="+ stuId+" and e.offering_id="+offeringID+" ))) then 'E' ELSE 'W' END);");
-       
-                   else
-                       stmt.executeQuery("update enrolls e set e.status = 'R' where e.offering_id=" +offeringID +" and e.student_id = "+stuId+";");
+                stmt.executeQuery("update enrolls e set e.status = (Case when "
+                    + "((select c.current_enrollment from course_offering c where c.offering_id= " + offering_id + ") < "
+                    + "(select c.max_enrollment from course_offering c where c.offering_id=" + offering_id + " )) "
+                    + "then 'E' ELSE 'W' END) where student_id = " + student_id + " and e.offering_id = " + offering_id);       
+            else
+               stmt.executeQuery("update enrolls e set e.status = 'R' where e.offering_id = " + offering_id + " and e.student_id = " + student_id);
+            
         } catch(SQLException e) {
             System.out.println(e);
             return e.getMessage();
