@@ -247,7 +247,7 @@ public class ViewCourse extends javax.swing.JPanel {
     }//GEN-LAST:event_backActionPerformed
 
     private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
-        try {
+
             // TODO add your handling code here:
             ArrayList<String> course= SQL_Helper.get_course_details(courseId.getText().trim());
             
@@ -268,18 +268,7 @@ public class ViewCourse extends javax.swing.JPanel {
             else
               credits.setText(course.get(7)+" - "+course.get(8));  
             
-       } catch (SQLException ex) {
-           courseName.setText("");
-            deptName.setText("");
-            level.setText("");
-            gpa.setText("");
-            preReq.setText("");
-            preGrade.setText("");
-            spApproval.setText("");
-            credits.setText("");
-            JOptionPane.showMessageDialog(null, "Course ID not found!");  
-            Logger.getLogger(ViewCourse.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
         
     }//GEN-LAST:event_showActionPerformed
 
