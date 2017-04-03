@@ -98,7 +98,10 @@ public class SQL_Helper {
 //        current_student_id = 200157724;
 //        System.out.println(enroll_course(1, 3));
 
-        insert_requests_record(200157724L, 1111, 1, "A");
+//        insert_requests_record(200157724L, 1111, 1, "A");
+
+//        current_student_id = 200157724;
+//        System.out.println(deadline_check());
 
         disconnect();
         
@@ -983,8 +986,9 @@ public class SQL_Helper {
         java.util.Date d = new java.util.Date();
         //date = new SimpleDateFormat(output_pattern).format(new SimpleDateFormat(input_pattern).parse(dateFormat.format(d)));
         date = dateFormat.format(d);
+        System.out.println(date);
         try {
-            stmt.executeQuery("insert into requests (STUDENT_ID, ADMIN_ID, OFFERING_ID, DATE_APPROVED, APPROVED_BY, STATUS) values (" + student_id + "," + admin_id + "," + offering_id + ",'" + date + "','" + status + "')");
+            stmt.executeQuery("insert into requests (STUDENT_ID, ADMIN_ID, OFFERING_ID, DATE_APPROVED, STATUS) values (" + student_id + "," + admin_id + "," + offering_id + ",'" + date + "','" + status + "')");
         } catch (SQLException ex) {
             Logger.getLogger(SQL_Helper.class.getName()).log(Level.SEVERE, null, ex);
             return ex.getMessage();
@@ -1106,9 +1110,56 @@ public class SQL_Helper {
     public static String deadline_check() {
         try {
             long student_id = current_student_id;
+            int credits_enrolled = 0, min_credits = 0, max_credits = 0;
+            String add_deadline_passed = "F", drop_deadline_passed = "F";            
+            // check if add_deadline is passed
+            ResultSet rs = stmt.executeQuery("select (case when (select "
+                    + "current_date from dual) > (select s.add_deadline from "
+                    + "semester s, semester_duration sd where s.semester_name "
+                    + "= sd.semester_name and current_date between "
+                    + "sd.start_date and sd.end_date) then 'T' else 'F' end) "
+                    + "as add_deadline_passed from dual");
+            ResultSet rs2 = stmt2.executeQuery("select (case when (select "
+                    + "current_date from dual) > (select s.drop_deadline "
+                    + "from semester s, semester_duration sd where s.semester_name "
+                    + "= sd.semester_name and current_date between sd.start_date "
+                    + "and sd.end_date) then 'T' else 'F' end) as "
+                    + "drop_deadline_passed from dual");
+            //System.out.println("2");
+            if (rs.next()) {
+                add_deadline_passed = rs.getString("add_deadline_passed");
+            }
+            if (rs2.next()) {
+                drop_deadline_passed = rs2.getString("drop_deadline_passed");
+            }
+            if (add_deadline_passed.equals("T") || drop_deadline_passed.equals("T")) {
+                // get currently credits enrolled
+                rs = stmt.executeQuery("select sum(e.credits) as s from enrolls e, course_offering co, semester s, semester_duration sd where e.student_id = " + student_id + " and e.status = 'E' and e.offering_id = co.offering_id and co.semester_id = s.semester_id and s.semester_name = sd.semester_name and current_date between sd.start_date and sd.end_date");
+                if (rs.next()) {
+                    credits_enrolled = rs.getInt("s");                
+                } else {
+                    // zero credits
+                    credits_enrolled = 0;
+                }
+                rs = stmt.executeQuery("select b.min_credits, b.max_credits "
+                        + "from billing b, students s where s.student_id = " 
+                        + student_id + " and s.rl_id = b.rl_id and s.cl_id = b.cl_id");
+                rs.next();
+                min_credits = rs.getInt("min_credits");
+                max_credits = rs.getInt("max_credits");
+            }
             
-            // get currently credits enrolled
-            stmt.executeQuery("select sum(credits) from enrolls where student_id = " + student_id + " and status = 'E' ");
+            if (add_deadline_passed.equals("T")) {                                
+                if (min_credits > credits_enrolled) {
+                    return "Less than min_credits";
+                }
+            }
+            
+            if (drop_deadline_passed.equals("T")) {
+                if (max_credits < credits_enrolled) {
+                    return "More than max_credits";
+                }
+            }
             
             return "Success";
         } catch (SQLException ex) {
@@ -1131,3 +1182,4 @@ public class SQL_Helper {
 // trigger for after drop if dropped then change bill
 // trigger for after approving enrollment request, update current_enrollment in course_offering table
 // trigger for before insert on enroll calculate credits of student ??
+
