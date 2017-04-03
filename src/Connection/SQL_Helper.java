@@ -27,7 +27,7 @@ public class SQL_Helper {
     public static void main(String args[]) throws SQLException{
         connect();
         
-//        digest("cdrinku");
+//        digest("200157724");
 
 //        int s_or_a = 1;
 //        if (check_login_credentials("alby", "hogwarts", s_or_a)) {
@@ -79,11 +79,10 @@ public class SQL_Helper {
 //            System.out.println(list.get(i));
 //        } 
 
-//        ArrayList<Integer> faculty = new ArrayList();
-//        faculty.add(10002);
+        ArrayList<Integer> faculty = new ArrayList();
+        faculty.add(10002);
 //
-//        if (add_course_offering("CSC501", "SPRING", 2017, faculty, "TTH", "11:45", "13:00", 1, 1, "1234 EB3"))
-//            System.out.println("course offering added successfully.");
+        System.out.println(add_course_offering("CSC501", "SPRING", 2014, faculty, "MT", "11:45", "13:00", 1, 1, "1234 EB3"));
 
 //        ArrayList<String> list = get_course_offering_list();
 //        for (int i = 0; i < list.size(); i++) {
@@ -192,8 +191,8 @@ public class SQL_Helper {
             for (byte b : digest) {
                 sb.append(String.format("%02x", b & 0xff));
             }
-//            System.out.println("original:" + password);
-//            System.out.println("digested(hex):" + sb.toString());
+            System.out.println("original:" + password);
+            System.out.println("digested(hex):" + sb.toString());
         } catch (NoSuchAlgorithmException e) {
             System.out.println(e);
         }
@@ -500,6 +499,8 @@ public class SQL_Helper {
                 next_semester_id = rs.getInt("semester_id");
             } else {
                 // create semester record/row
+                // first time --------
+                first_time = "T";
                 stmt.executeQuery("insert into semester (semester_id, "
                         + "semester_name, year) values (semester_seq.nextval" 
                         + ",'" + semester + "'," + year + ")");
@@ -515,11 +516,9 @@ public class SQL_Helper {
                     start_time + "' and end_time = '" + end_time + "'");
             if (rs.next()) {
                 // schedule exists
-                next_schedule_id = rs.getInt("semester_id");
+                next_schedule_id = rs.getInt("schedule_id");
             } else {
                 // insert days and start-end time in schedule table
-                // first time --------
-                first_time = "T";
                 stmt.executeQuery("insert into schedule (schedule_id, "
                         + "schedule_days, start_time, end_time) values (schedule_seq.nextval" 
                         + ",'" + days + "','" + start_time 
@@ -528,7 +527,6 @@ public class SQL_Helper {
                 rs.next();
                 next_schedule_id = rs.getInt("currval");
             }
-            
             // insert location into location table or get existing location id
             rs = stmt.executeQuery("select class_location_id from "
                     + "class_location where class_location_name = '" 
@@ -544,7 +542,6 @@ public class SQL_Helper {
                 rs.next();
                 class_location_id = rs.getInt("currval");
             }
-            
             // insert course offering             
             stmt.executeQuery("insert into course_offering (offering_id, "
                     + "semester_id, schedule_id, course_id, max_enrollment, "
@@ -557,9 +554,8 @@ public class SQL_Helper {
                 // (insert faculty list into teaches table), 
                 stmt.executeQuery("insert into teaches (faculty_id, "
                         + "offering_id) values (" + faculty_list.get(i) 
-                        + ", offering_seq.currval");
+                        + ", offering_seq.currval)");
             }
-            
             con.commit();
         } catch (SQLException e) {
             System.out.println(e);
