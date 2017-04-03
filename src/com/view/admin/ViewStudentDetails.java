@@ -8,7 +8,9 @@ package com.view.admin;
 import Connection.SQL_Helper;
 import dbpro.AdminViewController;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,7 +81,7 @@ public class ViewStudentDetails extends javax.swing.JPanel {
         lName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         dobLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        dobLabel.setText("D.O.B(MM-DD-YYYY) :");
+        dobLabel.setText("D.O.B(DD-MMM-YY) :");
 
         dob.setEditable(false);
         dob.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -310,9 +312,15 @@ static int flag=0;
         ArrayList<String> sd= SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim()));
         
         System.out.println("SD has: "+sd);
+      
+        try{
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        
+            Date d=format.parse(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(2).trim());
+                SimpleDateFormat format1 = new SimpleDateFormat("dd-MMM-yy");
         fName.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(0).trim());
         lName.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(1).trim());
-        dob.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(2).trim());
+        dob.setText(format1.format(d));
         sLevel.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(3).trim());
         sResStatus.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(4).trim());
         amount.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(5).trim());
@@ -320,6 +328,9 @@ static int flag=0;
         phone.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(7).trim());
         email.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(8).trim());
         address.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(9).trim());
+        }
+        catch(Exception e){
+                        }
     }//GEN-LAST:event_findButtonActionPerformed
 
 

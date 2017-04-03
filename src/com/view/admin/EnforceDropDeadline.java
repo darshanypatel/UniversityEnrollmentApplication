@@ -7,6 +7,7 @@ package com.view.admin;
 
 import Connection.SQL_Helper;
 import dbpro.AdminViewController;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,6 +35,8 @@ public class EnforceDropDeadline extends javax.swing.JPanel {
         yes = new javax.swing.JButton();
         no = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        semNameLabel = new javax.swing.JLabel();
+        semYear = new javax.swing.JComboBox<>();
 
         deadline.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         deadline.setText("Are you sure you want to enforce deadlines ?");
@@ -48,12 +51,32 @@ public class EnforceDropDeadline extends javax.swing.JPanel {
 
         no.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         no.setText("No");
+        no.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noActionPerformed(evt);
+            }
+        });
 
         back.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         back.setText("Go Back");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
+            }
+        });
+
+        semNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        semNameLabel.setText("Semester - Year :");
+
+        semYear.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        String[] data=new String[SQL_Helper.get_semester_year_list().size()];
+        for(int i=0;i<SQL_Helper.get_semester_year_list().size();i++){
+            data[i]=SQL_Helper.get_semester_year_list().get(i);
+        }
+        semYear.setModel(new javax.swing.DefaultComboBoxModel<>(data));
+        semYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                semYearActionPerformed(evt);
             }
         });
 
@@ -64,35 +87,53 @@ public class EnforceDropDeadline extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(deadline))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(yes)
                         .addGap(37, 37, 37)
                         .addComponent(no)
                         .addGap(42, 42, 42)
-                        .addComponent(back)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                        .addComponent(back))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(semNameLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(semYear, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(deadline))))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addComponent(deadline)
-                .addGap(89, 89, 89)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(semNameLabel)
+                    .addComponent(semYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yes)
                     .addComponent(no)
                     .addComponent(back))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void yesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesActionPerformed
         // TODO add your handling code here:
+        String[] output=SQL_Helper.get_semester_year_list().get(semYear.getSelectedIndex()).split(" ");
         
-        
+      String res= SQL_Helper.enforce_addDrop_deadline(output[0].trim(), Integer.parseInt(output[1].trim()), "Yes");
+        if(res.equals("Success"))
+                {   
+                JOptionPane.showMessageDialog(null, "Deadlines Enforced Successfully!!!");  
+                AdminViewController.closeEnforceDropDeadline();
+                AdminViewController.showAdminHomePage();
+                }
+            else
+                JOptionPane.showMessageDialog(null, "Error Occured with error code:\n\n"+res);  
     }//GEN-LAST:event_yesActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -101,11 +142,32 @@ public class EnforceDropDeadline extends javax.swing.JPanel {
         AdminViewController.showAdminHomePage();
     }//GEN-LAST:event_backActionPerformed
 
+    private void semYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_semYearActionPerformed
+
+    private void noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noActionPerformed
+        // TODO add your handling code here:
+         String[] output=SQL_Helper.get_semester_year_list().get(semYear.getSelectedIndex()).split(" ");
+        
+      String res= SQL_Helper.enforce_addDrop_deadline(output[0].trim(), Integer.parseInt(output[1].trim()), "No");
+        if(res.equals("Success"))
+                {   
+                JOptionPane.showMessageDialog(null, "Deadlines not Enforced as yet!!!");  
+                AdminViewController.closeEnforceDropDeadline();
+                AdminViewController.showAdminHomePage();
+                }
+            else
+                JOptionPane.showMessageDialog(null, "Error Occured with error code:\n\n"+res);  
+    }//GEN-LAST:event_noActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JLabel deadline;
     private javax.swing.JButton no;
+    private javax.swing.JLabel semNameLabel;
+    private javax.swing.JComboBox<String> semYear;
     private javax.swing.JButton yes;
     // End of variables declaration//GEN-END:variables
 }

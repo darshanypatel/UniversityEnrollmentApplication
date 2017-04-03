@@ -161,13 +161,16 @@
     <Component class="javax.swing.JTextField" name="dob">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor" postCode="try{SimpleDateFormat format = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);&#xa;Date d=format.parse(profile.get(2));&#xa;SimpleDateFormat format1 = new SimpleDateFormat(&quot;dd-MMM-yy&quot;);">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="profile.get(2)" type="code"/>
+          <Connection code="format1.format(d)" type="code"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="}&#xa;catch(Exception e){System.out.print(e);}"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="eidLabel">
       <Properties>

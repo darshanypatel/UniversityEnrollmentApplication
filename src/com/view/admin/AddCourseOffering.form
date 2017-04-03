@@ -27,34 +27,6 @@
                               <Component id="year" min="-2" pref="170" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cStartLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cSizeLabel" min="-2" max="-2" attributes="0"/>
-                                  <Component id="wlSizeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="submit" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cEndLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="locationLabel" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="back" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="location" max="32767" attributes="0"/>
-                                          <Component id="classStart" max="32767" attributes="0"/>
-                                          <Component id="classEnd" max="32767" attributes="0"/>
-                                          <Component id="classSize" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="waitlist" pref="265" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Component id="semLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Component id="sem" min="-2" pref="426" max="-2" attributes="0"/>
@@ -79,6 +51,39 @@
                               </Group>
                               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                               <Component id="showFaculty" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="locationLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                                  <Component id="location" min="-2" pref="265" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="cStartLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cSizeLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="wlSizeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="submit" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cEndLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="back" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="classStart" max="32767" attributes="0"/>
+                                              <Component id="classEnd" max="32767" attributes="0"/>
+                                              <Component id="classSize" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="waitlist" pref="265" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -142,12 +147,12 @@
                   <Component id="wlSizeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="waitlist" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="location" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="locationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="submit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="back" alignment="3" min="-2" max="-2" attributes="0"/>

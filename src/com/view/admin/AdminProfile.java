@@ -8,7 +8,12 @@ package com.view.admin;
 import Connection.SQL_Helper;
 import dbpro.AdminViewController;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -73,7 +78,12 @@ public class AdminProfile extends javax.swing.JPanel {
 
         dob.setEditable(false);
         dob.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        dob.setText(profile.get(2));
+        try{SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date d=format.parse(profile.get(2));
+            SimpleDateFormat format1 = new SimpleDateFormat("dd-MMM-yy");
+            dob.setText(format1.format(d));
+        }
+        catch(Exception e){System.out.print(e);}
 
         eidLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         eidLabel.setForeground(new java.awt.Color(0, 0, 153));
