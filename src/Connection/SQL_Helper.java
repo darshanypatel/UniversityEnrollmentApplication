@@ -944,7 +944,12 @@ public class SQL_Helper {
             result2.add(temp);
             return result2;
         }
-    return result;
+        if (result.isEmpty()) {
+            temp = new ArrayList<>();
+            temp.add("No requests found");
+            result.add(temp);
+        }
+        return result;
     }
     
     // chandu - approve_enrollment_request
