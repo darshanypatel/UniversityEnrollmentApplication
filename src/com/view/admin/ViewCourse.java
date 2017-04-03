@@ -247,6 +247,7 @@ public class ViewCourse extends javax.swing.JPanel {
     }//GEN-LAST:event_backActionPerformed
 
     private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
+<<<<<<< HEAD
         // TODO add your handling code here:
         
         ArrayList<String> course= SQL_Helper.get_course_details(courseId.getText().trim());
@@ -264,6 +265,30 @@ public class ViewCourse extends javax.swing.JPanel {
             credits.setText(course.get(7));
         else
             credits.setText(course.get(7)+" - "+course.get(8));
+=======
+
+            // TODO add your handling code here:
+            ArrayList<String> course= SQL_Helper.get_course_details(courseId.getText().trim());
+            
+            System.out.println(course + "Size is:"+ course.size());
+            
+            
+            courseName.setText(course.get(0));
+            deptName.setText(course.get(1));
+            level.setText(course.get(2));
+            gpa.setText(course.get(3));
+            preReq.setText(course.get(4));
+            preGrade.setText(course.get(5));
+            spApproval.setText(course.get(6));
+            if(course.get(7).equals(course.get(8)))
+                    credits.setText(course.get(7));
+            else if(course.get(8) == null)
+                    credits.setText(course.get(7));
+            else
+              credits.setText(course.get(7)+" - "+course.get(8));  
+            
+       
+>>>>>>> origin/master
         
     }//GEN-LAST:event_showActionPerformed
 

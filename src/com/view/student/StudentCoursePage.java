@@ -5,7 +5,14 @@
  */
 package com.view.student;
 
+import Connection.SQL_Helper;
+import dbpro.StudentViewController;
+import java.sql.SQLException;
 import javax.swing.JFrame;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,6 +44,10 @@ public class StudentCoursePage extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         jButton1.setText("View Available Courses");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -52,9 +63,9 @@ public class StudentCoursePage extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Enter Course Id to Enroll");
+        jLabel1.setText("Enter Course Offering Id to Enroll*");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("Offering ID");
 
         jButton3.setText("View My Courses");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -70,89 +81,139 @@ public class StudentCoursePage extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText("Enter Credits*");
+
+        jTextField2.setText("0.0");
+
+        jButton5.setText("View Pending Courses");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Drop Course");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addContainerGap(69, Short.MAX_VALUE))
+                        .addComponent(jButton2)
+                        .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jButton2))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(59, 59, 59)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jButton4)
+                .addGap(0, 32, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3)
+                    .addComponent(jButton6))
+                .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addGap(34, 34, 34)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton1))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(103, 103, 103)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton2))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ViewAvailableCourses home_page=new ViewAvailableCourses();
-       stuAvail = new JFrame();
-       stuAvail.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuAvail.add(home_page); // Add JPanel with components to JFrame
-        stuAvail.setVisible(true); 
-        stuAvail.setSize(700,600);
-        this.setVisible(false);
-       stuAvail.setVisible(true); 
+     StudentViewController.showViewAvailableCourses();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        ViewMyCourse home_page=new ViewMyCourse();
-       stuMyGrade = new JFrame();
-       stuMyGrade.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuMyGrade.add(home_page); // Add JPanel with components to JFrame
-        stuMyGrade.setVisible(true); 
-        stuMyGrade.setSize(700,600);
-        this.setVisible(false);
-       stuMyGrade.setVisible(true); 
+       this.setVisible(false);
+       StudentViewController.showViewMyCourse();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        StudentHomePage home_page=new StudentHomePage();
-       stuHome = new JFrame();
-       stuHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuHome.add(home_page); // Add JPanel with components to JFrame
-        stuHome.setVisible(true); 
-        stuHome.setSize(700,600);
-        this.setVisible(false);
-       stuHome.setVisible(true); 
+       this.setVisible(false);
+       StudentViewController.showStudentHomePage();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        long offering_id=0;
+        int credits=0;
+        try{
+        offering_id = Long.parseLong(jTextField1.getText().trim());
+        credits = Integer.parseInt(jTextField2.getText().trim());
+        if(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()){
+           JOptionPane.showMessageDialog(null, "Invalid Input : Offering ID and Credits must be entered");   
+        }
+        else{
+         
+             String result = SQL_Helper.enroll_course(offering_id,credits);
+             if(!result.contentEquals("Success")){
+               JOptionPane.showMessageDialog(null, result);
+             }else{
+                JOptionPane.showMessageDialog(null,"Enrolled Successfully");
+             }
+         }
+        }catch(NumberFormatException ex){
+          JOptionPane.showMessageDialog(null, "Invalid Input : Offering ID and Credits must be valid"); 
+          Logger.getLogger(StudentCoursePage.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(SQLException ex){
+            Logger.getLogger(StudentCoursePage.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+       this.setVisible(false);
+       StudentViewController.showViewPendingCourses();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+         this.setVisible(false);
+       StudentViewController.showDropCourse();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -160,7 +221,11 @@ public class StudentCoursePage extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

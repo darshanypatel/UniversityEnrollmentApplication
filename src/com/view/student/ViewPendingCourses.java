@@ -8,18 +8,17 @@ package com.view.student;
 import Connection.SQL_Helper;
 import dbpro.StudentViewController;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 
 /**
  *
  * @author Jasleen
  */
-public class ViewMyCourse extends javax.swing.JPanel {
- private static JFrame stuHome;
+public class ViewPendingCourses extends javax.swing.JPanel {
+
     /**
-     * Creates new form ViewMyCourse
+     * Creates new form ViewPendingCourses
      */
-    public ViewMyCourse() {
+    public ViewPendingCourses() {
         initComponents();
     }
 
@@ -32,24 +31,24 @@ public class ViewMyCourse extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jButton1.setText("Back");
+        jButton1.setText("View Pending Courses");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Show my Courses");
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -61,46 +60,44 @@ public class ViewMyCourse extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(182, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(166, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(140, 140, 140))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(jButton1)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private static ArrayList<ArrayList<String>> pending_courses;
+    private static ArrayList<String> pc;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        StudentViewController.showStudentCoursePage();
+        pending_courses = new ArrayList<ArrayList<String>>();
+        pending_courses = SQL_Helper.view_pending_course();
+        for(int i =0; i< pending_courses.size();i++){
+        jTextArea1.setText(pending_courses.get(i).get(0)+" "+pending_courses.get(i).get(1)+"\n");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private static ArrayList<ArrayList<String>> my_courses;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        my_courses = new ArrayList<ArrayList<String>>();
-        my_courses = SQL_Helper.view_course_status();
-        String ac="";
-        for(int i=0;i < my_courses.size();i++){
-         ac = ac + my_courses.get(i).get(3)+" "+my_courses.get(i).get(2)+"\n";
-       }
-        jTextArea1.setText(ac);
+            this.setVisible(false);
+        StudentViewController.showStudentCoursePage();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
