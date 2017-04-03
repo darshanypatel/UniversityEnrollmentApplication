@@ -687,7 +687,7 @@ public class SQL_Helper {
             
             ResultSet c = stmt.executeQuery("select offering_id, student_id from enrolls where student_id = " + student_id + " and offering_id = " + offering_id);
             if (c.next()) {
-                c = stmt.executeQuery("select offering_id, student_id from enrolls where status <> 'D' and student_id = " + student_id + " and offering_id = " + offering_id);
+                c = stmt.executeQuery("select offering_id, student_id from enrolls where status = 'D' and student_id = " + student_id + " and offering_id = " + offering_id);
                 if (c.next()) {
                     stmt.executeQuery("delete from enrolls where student_id = " + student_id + " and offering_id = " + offering_id);
                     enroll_course(offering_id, credits);
@@ -920,7 +920,7 @@ public class SQL_Helper {
     }
     
   // chandu - approve_enrollment_request
-    public static String approve_reject_enrollment_request(String student_id, String offering_id, String status) {
+    public static String approve_reject_enrollment_request(long student_id, long offering_id, String status) {
         try {
             String s = "";
             if(status.equals("approve")) {
@@ -940,6 +940,10 @@ public class SQL_Helper {
             return e.getMessage();
         }
         return "Success";
+    }
+    
+    public static String insert_requests_record(long student_id, long admin_id, long offering_id, String status) {
+        
     }
     
     public static ArrayList<ArrayList<String>> view_course_status() {
