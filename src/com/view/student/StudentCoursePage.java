@@ -65,7 +65,7 @@ public class StudentCoursePage extends javax.swing.JPanel {
 
         jLabel1.setText("Enter Course Offering Id to Enroll*");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("Offering ID");
 
         jButton3.setText("View My Courses");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +83,7 @@ public class StudentCoursePage extends javax.swing.JPanel {
 
         jLabel2.setText("Enter Credits*");
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("0");
 
         jButton5.setText("View Pending Courses");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +119,7 @@ public class StudentCoursePage extends javax.swing.JPanel {
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jButton4)
-                .addGap(0, 34, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

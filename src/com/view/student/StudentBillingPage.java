@@ -53,7 +53,7 @@ public class StudentBillingPage extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("0.0");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);

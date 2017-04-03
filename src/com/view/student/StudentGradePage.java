@@ -20,8 +20,12 @@ public class StudentGradePage extends javax.swing.JPanel {
     /**
      * Creates new form StudentGradePage
      */
+     private static double sp;
     public StudentGradePage() {
+         
         initComponents();
+        sp = SQL_Helper.get_gpa(-1);
+        jTextField1.setText(Double.toString(sp));
     }
 
     /**
@@ -47,7 +51,7 @@ public class StudentGradePage extends javax.swing.JPanel {
 
         jLabel1.setText("Current GPA");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("0.0");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -78,7 +82,7 @@ public class StudentGradePage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(jButton2)))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,11 +111,9 @@ public class StudentGradePage extends javax.swing.JPanel {
         StudentViewController.showStudentHomePage();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private static ArrayList<String> sp;
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        sp = SQL_Helper.get_student_profile(-1);
-        jTextField1.setText(sp.get(6));
+      
     }//GEN-LAST:event_jTextField1ActionPerformed
 
 
