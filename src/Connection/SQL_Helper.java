@@ -467,8 +467,7 @@ public class SQL_Helper {
     public static String add_course_offering(String id, String semester, 
             int year, ArrayList<Integer> faculty_list, String days, 
             String start_time, String end_time, 
-            int class_size, int max_waitlist_size, String location) 
-            throws SQLException {
+            int class_size, int max_waitlist_size, String location) {
         String first_time = "F";
         int course_id = 0, next_semester_id, next_schedule_id
                 , class_location_id;
@@ -556,7 +555,11 @@ public class SQL_Helper {
             con.commit();
         } catch (SQLException e) {
             System.out.println(e);
-            con.rollback();
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                return e.getMessage();
+            }
             return e.getMessage();
         }
         if (first_time.equals("T")) {
@@ -806,8 +809,7 @@ public class SQL_Helper {
         }
         return grades_list;        
     }
-    
-    
+        
     // returning -1 if student_id is incorrect
     // pass -1 to get current_student gpa
     public static double get_gpa(long id) {
