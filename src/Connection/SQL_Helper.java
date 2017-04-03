@@ -5,13 +5,11 @@
  */
 package Connection;
 
-import com.view.student.StudentProfilePage;
 import java.sql.*;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -405,11 +403,11 @@ public class SQL_Helper {
         ResultSet prereq_courses_rs = stmt.executeQuery("select PREREQ_COURSE_ID, grade from "
                 + "prereq_courses where prereq_id = " + prereq_id);
 
-        double temp_grade;
+        String temp_grade;
         String grades = "", courses = "";
         while (prereq_courses_rs.next()) {
             prereq_course_id = prereq_courses_rs.getInt("prereq_course_id");
-            temp_grade = prereq_courses_rs.getDouble("grade");
+            temp_grade = prereq_courses_rs.getString("grade");
             ResultSet prereq_course_name_rs = stmt2.executeQuery("select id "
                     + "from course where course_id = " + prereq_course_id);
             prereq_course_name_rs.next();
