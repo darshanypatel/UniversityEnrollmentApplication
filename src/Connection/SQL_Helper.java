@@ -66,13 +66,12 @@ public class SQL_Helper {
 //        System.out.println(add_student(200157726L, "jkjabbal", "jasleen", "jabbal", "01-MAR-92", "Graduate", "International", 0, "CS", "jkjabbal@ncsu.edu", 8923047643L, "Champion Court"));            
     
 //        current_student_id = 200157725L;
-//        if (edit_student_profile("Chandu", "Dash", "01-JAN-93", "Undergraduate", "International", "ECE", "cdashudu@ncsu.edu", 5108906594L, "2309 Champion Court", "cdrinku"))
-//            System.out.println("student profile updated!");
+//        System.out.println(edit_student_profile("Chanduuu", "Dashud", "01-JAN-93", "cdashudu@ncsu.edu", 5108906594L, "2309 Champion Court"));
 
 //        update_student_grade(200157724, 4.0);
 
 //        current_student_id = 200157726;
-//        ArrayList<String> list = get_student_profile();
+//        ArrayList<String> list = get_student_profile(current_student_id);
 //        for (int i = 0; i < list.size(); i++) {
 //            System.out.println(list.get(i));
 //        } 
@@ -93,8 +92,8 @@ public class SQL_Helper {
 //            System.out.println(list.get(i));
 //        } 
 
-        current_student_id = 200157725L;
-        System.out.println(enroll_course(2, 3));
+        current_student_id = 200157724;
+        System.out.println(enroll_course(1, 3));
 
         disconnect();
         
@@ -402,6 +401,7 @@ public class SQL_Helper {
                 + "prereq_courses where prereq_id = " + prereq_id);
 
         double temp_grade;
+        String grades = "", courses = "";
         while (prereq_courses_rs.next()) {
             prereq_course_id = prereq_courses_rs.getInt("prereq_course_id");
             temp_grade = prereq_courses_rs.getDouble("grade");
@@ -409,11 +409,16 @@ public class SQL_Helper {
                     + "from course where course_id = " + prereq_course_id);
             prereq_course_name_rs.next();
             
-            result.add(prereq_course_name_rs.getString("id"));
-            result.add(temp_grade + "");
+            courses += prereq_course_name_rs.getString("id") + ",";
+            grades += temp_grade + ",";
+            
         }
+
+        result.add(courses);
+        result.add(grades);
+
         
-        result.add(special_permission);
+        result.add(special_permission + "");
         result.add(min_credits + "");
         result.add(max_credits + "");
         } catch (SQLException e) {
@@ -701,6 +706,11 @@ public class SQL_Helper {
         double min_gpa;
         try {
             con.setAutoCommit(false);
+            
+            ResultSet c = stmt.executeQuery("select offering_id, student_id from enrolls where student_id = " + student_id + " and offering_id = " + offering_id);
+            if (c.next()) {
+                return "Already enrolled for this course!";
+            }
             
             ResultSet p = stmt.executeQuery("select (case when (select MAX_ENROLLMENT + WAIT_LIST_MAX from course_offering "
                         + "where offering_id = " + offering_id + ") = (select CURRENT_ENROLLMENT "
@@ -995,14 +1005,13 @@ public class SQL_Helper {
 }
 
 // TODO 
-// add record in 'belongs' table when adding a student or else drop 'belongs' table    
+// drop 'belongs' table    
 // create page to add a new department
 // add one page which adds faculty
 // remove course_id from course_prereq table? or drop 'has' table (better to drop table 'has')
 // get_course_offering_list can be changed to view courses of particular SemYear
 
-// trigger for after update profile of student, if CL or RL changes => bill
 // trigger for after enroll if enrolled then change bill
 // trigger for after drop if dropped then change bill
 // trigger for after approving enrollment request, update current_enrollment in course_offering table
-// trigger for before insert on enroll calculate credits of student
+// trigger for before insert on enroll calculate credits of student ??
