@@ -101,7 +101,7 @@ public class DropCourse extends javax.swing.JPanel {
         if(!result.contentEquals("Success")){
           JOptionPane.showMessageDialog(null, result);
         }else{
-         JOptionPane.showMessageDialog(null, "Invalid Input : Offering ID must be entered");
+         JOptionPane.showMessageDialog(null,"Successfully dropped the course");
         }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -177,23 +177,30 @@ public class StudentCoursePage extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        long offering_id = Long.parseLong(jTextField1.getText().trim());
-        int credits = Integer.parseInt(jTextField2.getText().trim());
+        long offering_id=0;
+        int credits=0;
+        try{
+        offering_id = Long.parseLong(jTextField1.getText().trim());
+        credits = Integer.parseInt(jTextField2.getText().trim());
         if(jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty()){
            JOptionPane.showMessageDialog(null, "Invalid Input : Offering ID and Credits must be entered");   
         }
         else{
-         try {
+         
              String result = SQL_Helper.enroll_course(offering_id,credits);
              if(!result.contentEquals("Success")){
                JOptionPane.showMessageDialog(null, result);
              }else{
                 JOptionPane.showMessageDialog(null,"Enrolled Successfully");
              }
-         }catch(SQLException ex){
+         }
+        }catch(NumberFormatException ex){
+          JOptionPane.showMessageDialog(null, "Invalid Input : Offering ID and Credits must be valid"); 
+          Logger.getLogger(StudentCoursePage.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(SQLException ex){
             Logger.getLogger(StudentCoursePage.class.getName()).log(Level.SEVERE, null, ex);
          }
-        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
