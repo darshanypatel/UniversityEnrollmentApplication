@@ -79,10 +79,10 @@ public class SQL_Helper {
 //            System.out.println(list.get(i));
 //        } 
 
-        ArrayList<Integer> faculty = new ArrayList();
-        faculty.add(10002);
+//        ArrayList<Integer> faculty = new ArrayList();
+//        faculty.add(10002);
 //
-        System.out.println(add_course_offering("CSC501", "SPRING", 2014, faculty, "MT", "11:45", "13:00", 1, 1, "1234 EB3"));
+//        System.out.println(add_course_offering("CSC501", "SPRING", 2014, faculty, "MT", "11:45", "13:00", 1, 1, "1234 EB3"));
 
 //        ArrayList<String> list = get_course_offering_list();
 //        for (int i = 0; i < list.size(); i++) {
@@ -99,8 +99,8 @@ public class SQL_Helper {
 
 //        insert_requests_record(200157724L, 1111, 1, "A");
 
-//        current_student_id = 200157724;
-//        System.out.println(deadline_check());
+        current_student_id = 200157724;
+        System.out.println(deadline_check());
 
         disconnect();
         
@@ -1111,13 +1111,15 @@ public class SQL_Helper {
             // check if add_deadline is passed
             ResultSet rs = stmt.executeQuery("select (case when (select "
                     + "current_date from dual) > (select s.add_deadline from "
-                    + "semester s, semester_duration sd where s.semester_name "
+                    + "semester s, semester_duration sd where "
+                    + "s.year = EXTRACT(YEAR FROM sd.start_date) and s.semester_name "
                     + "= sd.semester_name and current_date between "
                     + "sd.start_date and sd.end_date) then 'T' else 'F' end) "
                     + "as add_deadline_passed from dual");
             ResultSet rs2 = stmt2.executeQuery("select (case when (select "
                     + "current_date from dual) > (select s.drop_deadline "
-                    + "from semester s, semester_duration sd where s.semester_name "
+                    + "from semester s, semester_duration sd where "
+                    + "s.year = EXTRACT(YEAR FROM sd.start_date) and s.semester_name "
                     + "= sd.semester_name and current_date between sd.start_date "
                     + "and sd.end_date) then 'T' else 'F' end) as "
                     + "drop_deadline_passed from dual");
@@ -1130,7 +1132,12 @@ public class SQL_Helper {
             }
             if (add_deadline_passed.equals("T") || drop_deadline_passed.equals("T")) {
                 // get currently credits enrolled
-                rs = stmt.executeQuery("select sum(e.credits) as s from enrolls e, course_offering co, semester s, semester_duration sd where e.student_id = " + student_id + " and e.status = 'E' and e.offering_id = co.offering_id and co.semester_id = s.semester_id and s.semester_name = sd.semester_name and current_date between sd.start_date and sd.end_date");
+                rs = stmt.executeQuery("select sum(e.credits) as s from enrolls e,"
+                        + " course_offering co, semester s, semester_duration sd "
+                        + "where e.student_id = " + student_id + " and e.status = 'E' "
+                        + "and e.offering_id = co.offering_id and co.semester_id = s.semester_id "
+                        + "and s.semester_name = sd.semester_name and current_date between "
+                        + "sd.start_date and sd.end_date");
                 if (rs.next()) {
                     credits_enrolled = rs.getInt("s");                
                 } else {
@@ -1179,3 +1186,4 @@ public class SQL_Helper {
 // trigger for after approving enrollment request, update current_enrollment in course_offering table
 // trigger for before insert on enroll calculate credits of student ??
 
+//select (case when (select current_date from dual) > (select s.add_deadline from semester s, semester_duration sd where s.year = EXTRACT(YEAR FROM sd.start_date) and s.semester_name = sd.semester_name and current_date between sd.start_date and sd.end_date) then 'T' else 'F' end) as add_deadline_passed from dual
