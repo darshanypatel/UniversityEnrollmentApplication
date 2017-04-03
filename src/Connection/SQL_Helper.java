@@ -781,6 +781,7 @@ public class SQL_Helper {
     
     // pass -1 to get current_student grades
     // blank array if wrong student id is passed
+    // grades which are not null
     public static ArrayList<String> get_grades(long id) {
         long student_id;
         student_id = id == -1 ? current_student_id : id;
@@ -792,10 +793,35 @@ public class SQL_Helper {
                             + "grade is not null");
             while (rs.next()) {
                 ResultSet rs2 = stmt2.executeQuery("select c.id from course c, "
-                        + "course_offering co where c.course_id = co.offering_id"
+                        + "course_offering co where c.course_id = co.course_id"
                         + " and co.offering_id = " + rs.getInt("offering_id"));
                 rs2.next();
                 grades_list.add(rs2.getInt("course_id") + " " + rs2.getString("id") + " " + rs.getString("grade"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return new ArrayList();
+        }
+        return grades_list;        
+    }
+    
+    // all the grades
+    public static ArrayList<String> get_all_grades(long id) {
+        long student_id;
+        student_id = id == -1 ? current_student_id : id;
+        
+        ArrayList<String> grades_list = new ArrayList();
+        try {
+            ResultSet rs = stmt.executeQuery("select * from enrolls where "
+                    + "student_id = " + student_id);
+            while (rs.next()) {
+                ResultSet rs2 = stmt2.executeQuery("select c.id from course c, "
+                        + "course_offering co where c.course_id = co.course_id"
+                        + " and co.offering_id = " + rs.getInt("offering_id"));
+                rs2.next();
+                grades_list.add(rs.getInt("offering_id") + "," 
+                        + rs2.getString("id") + "," + rs2.getString("title") 
+                        + "," + rs.getString("grade"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
