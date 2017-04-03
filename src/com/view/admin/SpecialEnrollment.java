@@ -65,61 +65,61 @@ public class SpecialEnrollment extends javax.swing.JPanel {
         for(int i=0;i<er.size();i++){
             cur=new String();
             for(int j=0;j<er.get(i).size();j++){
-                cur.concat(er.get(i).get(j));
-                cur.concat(" ");
+                cur = cur + er.get(i).get(j);
+                cur= cur + " ";
+
+                eReqs[i+1]=cur;
             }
-            eReqs[i+1]=cur;
-        }
-        select.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        select.setModel(new javax.swing.DefaultComboBoxModel<>(eReqs));
+            select.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+            select.setModel(new javax.swing.DefaultComboBoxModel<>(eReqs));
 
-        reject.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        reject.setText("Reject");
-        reject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rejectActionPerformed(evt);
-            }
-        });
+            reject.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+            reject.setText("Reject");
+            reject.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    rejectActionPerformed(evt);
+                }
+            });
 
-        enrollLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enrollLabel.setText("Select Enrollment Request:");
+            enrollLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+            enrollLabel.setText("Select Enrollment Request:");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(enrollLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(355, 355, 355)
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+            this.setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(77, 77, 77)
+                            .addComponent(enrollLabel)
+                            .addGap(18, 18, 18)
+                            .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(355, 355, 355)
+                            .addComponent(approve)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(reject)
+                            .addGap(18, 18, 18)
+                            .addComponent(back)))
+                    .addContainerGap(69, Short.MAX_VALUE))
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(63, 63, 63)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(enrollLabel))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(approve)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(reject)
-                        .addGap(18, 18, 18)
-                        .addComponent(back)))
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(select, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enrollLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(approve)
-                    .addComponent(back)
-                    .addComponent(reject))
-                .addContainerGap(167, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
-
+                        .addComponent(back)
+                        .addComponent(reject))
+                    .addContainerGap(167, Short.MAX_VALUE))
+            );
+        }// </editor-fold>//GEN-END:initComponents
+    }
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
        AdminViewController.closeSpecialEnrollment();
@@ -128,8 +128,10 @@ public class SpecialEnrollment extends javax.swing.JPanel {
 
     private void approveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveActionPerformed
         // TODO add your handling code here:
-        String offeringID = SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()).get(1);
-        String stuID=SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()).get(2);
+       // System.out.println("Before this  ");
+        String offeringID = SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()-1).get(1);
+        String stuID=SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()-1).get(2);
+     //   System.out.println("Offering ID : "+offeringID + "   stuID : "+ stuID);
        String status= SQL_Helper.approve_reject_enrollment_request(Long.parseLong(stuID),Long.parseLong(offeringID), "approve");
         if(status.equals("Success")){
              JOptionPane.showMessageDialog(null, "Request Approved Successfully!");
@@ -143,8 +145,8 @@ public class SpecialEnrollment extends javax.swing.JPanel {
 
     private void rejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectActionPerformed
         // TODO add your handling code here:
-        String offeringID = SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()).get(1);
-        String stuID=SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()).get(2);
+        String offeringID = SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()-1).get(1);
+        String stuID=SQL_Helper.view_enrollment_requests().get(select.getSelectedIndex()-1).get(2);
           String status= SQL_Helper.approve_reject_enrollment_request(Long.parseLong(stuID),Long.parseLong(offeringID), "reject");
          if(status.equals("Success")){
              JOptionPane.showMessageDialog(null, "Request Rejected Successfully!");

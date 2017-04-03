@@ -8,6 +8,7 @@ package com.view.admin;
 import Connection.SQL_Helper;
 import dbpro.AdminViewController;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,6 +46,7 @@ public class EditStudentGrade extends javax.swing.JPanel {
         submitNewGrade = new javax.swing.JButton();
         back = new javax.swing.JButton();
 
+        gradeList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gradeList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {"",""};
             public int getSize() { return strings.length; }
@@ -96,19 +98,9 @@ public class EditStudentGrade extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(sIDLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(sID, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addComponent(getGrades))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
                         .addComponent(courseLabel)
                         .addGap(18, 18, 18)
                         .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,11 +109,18 @@ public class EditStudentGrade extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(grade, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
+                        .addGap(103, 103, 103)
                         .addComponent(submitNewGrade)
                         .addGap(54, 54, 54)
-                        .addComponent(back)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                        .addComponent(back))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(sIDLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(sID, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(getGrades)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,8 +131,8 @@ public class EditStudentGrade extends javax.swing.JPanel {
                     .addComponent(sID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(getGrades))
                 .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(courseLabel)
                     .addComponent(courseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,7 +142,7 @@ public class EditStudentGrade extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitNewGrade)
                     .addComponent(back))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,8 +167,15 @@ gradeList.setModel(new javax.swing.AbstractListModel<String>() {
 
     private void submitNewGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitNewGradeActionPerformed
         // TODO add your handling code here:
-        
-        SQL_Helper.update_student_grade(HEIGHT, Long.parseLong(sID.getText().trim()), grade.getText().trim());
+        String ss=SQL_Helper.update_student_grade(Long.parseLong(courseID.getText().trim()), Long.parseLong(sID.getText().trim()), grade.getText().trim());
+        if(ss.equals("Success")){
+             JOptionPane.showMessageDialog(null, "Grade updates Successfully!!!");  
+                AdminViewController.closeEditStudentGrades();
+                AdminViewController.showAdminHomePage();
+                }
+            else
+                JOptionPane.showMessageDialog(null, "Error Occured with error code:\n\n"+ss);
+     
     }//GEN-LAST:event_submitNewGradeActionPerformed
 
 

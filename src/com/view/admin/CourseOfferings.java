@@ -35,10 +35,10 @@ public class CourseOfferings extends javax.swing.JPanel {
         facultyLabel = new javax.swing.JLabel();
         close = new javax.swing.JButton();
 
-        String[] cOffLists=new String[SQL_Helper.get_course_offering_list().size()+1];
+        String[] cOffLists=new String[SQL_Helper.get_course_offering_list(false).size()+1];
         cOffLists[0]="ID CourseID Sem-Year";
-        for(int i=0;i<SQL_Helper.get_course_offering_list().size();i++)
-        cOffLists[i+1]=SQL_Helper.get_course_offering_list().get(i);
+        for(int i=0;i<SQL_Helper.get_course_offering_list(false).size();i++)
+        cOffLists[i+1]=SQL_Helper.get_course_offering_list(false).get(i);
         cOffList.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cOffList.setModel(new javax.swing.DefaultComboBoxModel<>(cOffLists));
         cOffList.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +69,7 @@ public class CourseOfferings extends javax.swing.JPanel {
                     .addComponent(facultyLabel))
                 .addGap(18, 18, 18)
                 .addComponent(cOffList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
