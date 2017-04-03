@@ -731,7 +731,7 @@ public class SQL_Helper {
             String str[];
             for (int i = 0; i < grades_list.size(); i++) {
                 str = grades_list.get(i).split(" ");
-                grades.put(Integer.parseInt(str[0]), str[2]);
+                grades.put(Integer.parseInt(str[0]), str[1]);
             }
             
             rs = stmt.executeQuery("select PREREQ_COURSE_ID, GRADE from prereq_courses where prereq_id = " + prereq_id);
@@ -790,7 +790,7 @@ public class SQL_Helper {
             ResultSet rs = stmt.executeQuery("select * from enrolls where "
                     + "student_id = " + student_id);
             while (rs.next()) {
-                ResultSet rs2 = stmt2.executeQuery("select c.id, c.title from course c, "
+                ResultSet rs2 = stmt2.executeQuery("select c.course_id, c.id, c.title from course c, "
                         + "course_offering co where c.course_id = co.course_id"
                         + " and co.offering_id = " + rs.getInt("offering_id"));
                 rs2.next();
@@ -798,7 +798,7 @@ public class SQL_Helper {
                 if (g == null) {
                     g = "";
                 }
-                grades_list.add(rs2.getString("id") + " " + rs2.getString("title") + " " + g);
+                grades_list.add(rs2.getInt("course_id") + " " + g + " " + rs2.getString("id") + " " + rs2.getString("title"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
