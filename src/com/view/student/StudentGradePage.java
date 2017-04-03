@@ -51,6 +51,7 @@ public class StudentGradePage extends javax.swing.JPanel {
 
         jLabel1.setText("Current GPA");
 
+        jTextField1.setEditable(false);
         jTextField1.setText("0.0");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

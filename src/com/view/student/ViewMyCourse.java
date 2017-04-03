@@ -96,9 +96,11 @@ public class ViewMyCourse extends javax.swing.JPanel {
         // TODO add your handling code here:
         my_courses = new ArrayList<ArrayList<String>>();
         my_courses = SQL_Helper.view_course_status();
+        String ac="";
         for(int i=0;i < my_courses.size();i++){
-         jTextArea1.setText(my_courses.get(i).get(3)+" "+my_courses.get(i).get(2)+"\n");
+         ac = ac + my_courses.get(i).get(3)+" "+my_courses.get(i).get(2)+"\n";
        }
+        jTextArea1.setText(ac);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
