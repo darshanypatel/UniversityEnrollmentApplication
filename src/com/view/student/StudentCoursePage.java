@@ -83,7 +83,7 @@ public class StudentCoursePage extends javax.swing.JPanel {
 
         jLabel2.setText("Enter Credits*");
 
-        jTextField2.setText("0");
+        jTextField2.setText("0.0");
 
         jButton5.setText("View Pending Courses");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -114,9 +114,9 @@ public class StudentCoursePage extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jButton4)
                 .addGap(0, 32, Short.MAX_VALUE))
@@ -184,7 +184,12 @@ public class StudentCoursePage extends javax.swing.JPanel {
         }
         else{
          try {
-             SQL_Helper.enroll_course(offering_id,credits);
+             String result = SQL_Helper.enroll_course(offering_id,credits);
+             if(!result.contentEquals("Success")){
+               JOptionPane.showMessageDialog(null, result);
+             }else{
+                JOptionPane.showMessageDialog(null,"Enrolled Successfully");
+             }
          }catch(SQLException ex){
             Logger.getLogger(StudentCoursePage.class.getName()).log(Level.SEVERE, null, ex);
          }

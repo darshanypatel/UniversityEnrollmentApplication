@@ -266,6 +266,8 @@ public class StudentProfilePage extends javax.swing.JPanel {
         String result = SQL_Helper.edit_student_profile(fname, lname, date, email, phone, address);
          if(!result.contentEquals("Success")){
           JOptionPane.showMessageDialog(null, result); 
+         }else{
+           JOptionPane.showMessageDialog(null,"Saved Successfully");
          }
          }catch(SQLException ex){
           Logger.getLogger(StudentProfilePage.class.getName()).log(Level.SEVERE, null, ex);
