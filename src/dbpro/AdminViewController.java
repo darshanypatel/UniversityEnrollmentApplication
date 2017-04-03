@@ -30,6 +30,7 @@ public class AdminViewController {
    private static JFrame addCourses;
    private static JFrame addCourseOffering;
    private static JFrame addDropDeadline;
+   private static JFrame courseAddDropDeadline;
    private static JFrame enforceDropDeadline;
    private static JFrame adminHomePage;
    private static JFrame adminProfile;
@@ -42,6 +43,7 @@ public class AdminViewController {
    private static JFrame viewStudentDetails;
    private static JFrame facultyList;
    private static JFrame cOffList;
+   private static JFrame editStudentGrade;
    
    public static void showAddCourse(){
        AddCourse ac=new AddCourse();
@@ -73,6 +75,16 @@ public class AdminViewController {
        addDropDeadline.setVisible(true);
     }    
     
+    public static void showCourseAddDropDeadline(String semm, String yearr){
+       CourseAddDropDeadline add=new CourseAddDropDeadline(semm,yearr);
+       courseAddDropDeadline = new JFrame();
+       courseAddDropDeadline.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       courseAddDropDeadline.add(add); // Add JPanel with components to JFrame
+       courseAddDropDeadline.setSize(600,500);
+       //adminHomePage.setVisible(false);
+       courseAddDropDeadline.setVisible(true);
+    } 
+    
     public static void showEnforceDropDeadline(){
        EnforceDropDeadline enf=new EnforceDropDeadline();
        enforceDropDeadline = new JFrame();
@@ -88,7 +100,7 @@ public class AdminViewController {
        adminHomePage = new JFrame();
        adminHomePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        adminHomePage.add(ahp); // Add JPanel with components to JFrame
-       adminHomePage.setSize(1100,600);  
+       adminHomePage.setSize(1100,700);  
        adminHomePage.setVisible(true);
     } 
     
@@ -117,7 +129,7 @@ public class AdminViewController {
        specialEnrollment = new JFrame();
        specialEnrollment.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        specialEnrollment.add(se); // Add JPanel with components to JFrame
-       specialEnrollment.setSize(600,400);
+       specialEnrollment.setSize(1200,400);
        adminHomePage.setVisible(false);
        specialEnrollment.setVisible(true);
     } 
@@ -130,6 +142,16 @@ public class AdminViewController {
        viewAddCourse.setSize(500,300);
        adminHomePage.setVisible(false);
        viewAddCourse.setVisible(true);
+    } 
+      
+      public static void showEditStudentGrade(){
+       EditStudentGrade esd=new EditStudentGrade();
+       editStudentGrade = new JFrame();
+       editStudentGrade.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       editStudentGrade.add(esd); // Add JPanel with components to JFrame
+       editStudentGrade.setSize(800,500);
+       adminHomePage.setVisible(false);
+       editStudentGrade.setVisible(true);
     } 
       
       public static void showViewAddCourseOffering(){
@@ -178,7 +200,7 @@ public class AdminViewController {
        viewCourseOffering = new JFrame();
        viewCourseOffering.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        viewCourseOffering.add(vco); // Add JPanel with components to JFrame
-       viewCourseOffering.setSize(1000,900);
+       viewCourseOffering.setSize(1000,750);
        adminHomePage.setVisible(false);
        viewCourseOffering.setVisible(true);
     }
@@ -188,7 +210,7 @@ public class AdminViewController {
        viewStudentDetails = new JFrame();
        viewStudentDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        viewStudentDetails.add(vsd); // Add JPanel with components to JFrame
-       viewStudentDetails.setSize(1100,750);
+       viewStudentDetails.setSize(1100,850);
        adminHomePage.setVisible(false);
        viewStudentDetails.setVisible(true);
     }
@@ -207,6 +229,10 @@ public class AdminViewController {
       
       public static void closeAddDropDeadline(){
           addDropDeadline.setVisible(false);
+      } 
+      
+      public static void closeCourseAddDropDeadline(){
+          courseAddDropDeadline.setVisible(false);
       } 
       
       public static void closeEnforceDropDeadline(){
@@ -252,5 +278,9 @@ public class AdminViewController {
        
        public static void closeViewStudentDetails(){
           viewStudentDetails.setVisible(false);
+      } 
+       
+       public static void closeEditStudentGrades(){
+          editStudentGrade.setVisible(false);
       } 
 }

@@ -13,14 +13,21 @@ import javax.swing.JOptionPane;
  *
  * @author Yash
  */
-public class AddDropDeadline extends javax.swing.JPanel {
+
+public class CourseAddDropDeadline extends javax.swing.JPanel {
 
     /**
      * Creates new form AddDropDeadline
      */
-    public AddDropDeadline() {
+    private static String sem;
+    private static String year;
+    public CourseAddDropDeadline(String semm, String yearr) {
+        sem=semm;
+        year=yearr;
         initComponents();
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,12 +41,12 @@ public class AddDropDeadline extends javax.swing.JPanel {
         submit = new javax.swing.JButton();
         back = new javax.swing.JButton();
         semNameLabel = new javax.swing.JLabel();
-        addLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         add = new javax.swing.JTextField();
-        dropLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         drop = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        semYear = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         submit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         submit.setText("Submit");
@@ -58,15 +65,15 @@ public class AddDropDeadline extends javax.swing.JPanel {
         });
 
         semNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        semNameLabel.setText("Semester - Year :");
+        semNameLabel.setText("Semester : "+sem);
 
-        addLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addLabel.setText("Add Deadline :");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("Add Deadline :");
 
         add.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        dropLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        dropLabel.setText("Drop Deadline :");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setText("Drop Deadline :");
 
         drop.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -74,17 +81,8 @@ public class AddDropDeadline extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 51, 153));
         jLabel1.setText("Add Drop Deadline");
 
-        semYear.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        String[] data=new String[SQL_Helper.get_semester_year_list().size()];
-        for(int i=0;i<SQL_Helper.get_semester_year_list().size();i++){
-            data[i]=SQL_Helper.get_semester_year_list().get(i);
-        }
-        semYear.setModel(new javax.swing.DefaultComboBoxModel<>(data));
-        semYear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                semYearActionPerformed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Year : "+year);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,8 +95,8 @@ public class AddDropDeadline extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(submit)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(addLabel)
-                                .addComponent(dropLabel)))
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(71, 71, 71)
@@ -115,26 +113,26 @@ public class AddDropDeadline extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(semNameLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(semYear, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(149, 149, 149)
+                                .addComponent(jLabel2)))
+                        .addGap(0, 155, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(semNameLabel)
-                    .addComponent(semYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                    .addComponent(jLabel2))
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addLabel)
+                    .addComponent(jLabel3)
                     .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dropLabel)
+                    .addComponent(jLabel4)
                     .addComponent(drop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -146,8 +144,7 @@ public class AddDropDeadline extends javax.swing.JPanel {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
-        String sem_year[]= semYear.getSelectedItem().toString().split(" ");
-        String ss=SQL_Helper.update_add_drop_deadline(sem_year[0].trim(), Integer.parseInt(sem_year[1].trim()),add.getText().trim(),drop.getText().trim() );
+        String ss=SQL_Helper.update_add_drop_deadline(year.trim(), Integer.parseInt(year),add.getText().trim(),drop.getText().trim() );
                 if(ss.equals("Success")){
                     JOptionPane.showMessageDialog(null, "Deadlines Added Successfully!!!");  
                 AdminViewController.closeAddDropDeadline();
@@ -157,29 +154,24 @@ public class AddDropDeadline extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Error Occured with error code:\n\n"+ss);
         
         
-        
     }//GEN-LAST:event_submitActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        AdminViewController.closeAddDropDeadline();
-        AdminViewController.showAdminHomePage();
+        AdminViewController.closeCourseAddDropDeadline();
+        AdminViewController.showViewAddCourseOffering();
     }//GEN-LAST:event_backActionPerformed
-
-    private void semYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semYearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_semYearActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField add;
-    private javax.swing.JLabel addLabel;
     private javax.swing.JButton back;
     private javax.swing.JTextField drop;
-    private javax.swing.JLabel dropLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel semNameLabel;
-    private javax.swing.JComboBox<String> semYear;
     private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
 }

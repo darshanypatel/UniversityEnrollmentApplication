@@ -5,7 +5,12 @@
  */
 package com.view.admin;
 
+import Connection.SQL_Helper;
 import dbpro.AdminViewController;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,6 +59,7 @@ public class ViewStudentDetails extends javax.swing.JPanel {
         address = new javax.swing.JTextField();
         editGrade = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         sIdLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         sIdLabel.setText("Enter Student ID:");
@@ -104,6 +110,11 @@ public class ViewStudentDetails extends javax.swing.JPanel {
 
         findButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         findButton.setText("Find");
+        findButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findButtonActionPerformed(evt);
+            }
+        });
 
         phoneLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         phoneLabel.setText("Phone :");
@@ -124,7 +135,7 @@ public class ViewStudentDetails extends javax.swing.JPanel {
         address.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         editGrade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        editGrade.setText("Edit Grade");
+        editGrade.setText("Edit GPA");
         editGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editGradeActionPerformed(evt);
@@ -138,6 +149,10 @@ public class ViewStudentDetails extends javax.swing.JPanel {
                 backButtonActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("View Student Details");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -196,9 +211,12 @@ public class ViewStudentDetails extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(sLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(sIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(sId, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(sIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(sId, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(32, 32, 32)
                                         .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,13 +227,15 @@ public class ViewStudentDetails extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -255,8 +275,8 @@ public class ViewStudentDetails extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addressLabel)
-                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -265,11 +285,42 @@ public class ViewStudentDetails extends javax.swing.JPanel {
          AdminViewController.closeViewStudentDetails();
         AdminViewController.showAdminHomePage();
     }//GEN-LAST:event_backButtonActionPerformed
-
+static int flag=0;
     private void editGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editGradeActionPerformed
         // TODO add your handling code here:
+        if(flag==0){
         gpa.setEditable(true);
+        editGrade.setText("Save Grade");
+        flag=1;
+        }
+        else{
+            gpa.setEditable(false);
+            editGrade.setText("Edit Grade");
+            try {
+                SQL_Helper.update_student_gpa(Long.parseLong(sId.getText().trim()),Double.parseDouble(gpa.getText().trim()));
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            flag=0;
+        }
     }//GEN-LAST:event_editGradeActionPerformed
+
+    private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
+        
+        ArrayList<String> sd= SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim()));
+        
+        System.out.println("SD has: "+sd);
+        fName.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(0).trim());
+        lName.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(1).trim());
+        dob.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(2).trim());
+        sLevel.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(3).trim());
+        sResStatus.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(4).trim());
+        amount.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(5).trim());
+        gpa.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(6).trim());
+        phone.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(7).trim());
+        email.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(8).trim());
+        address.setText(SQL_Helper.get_student_profile(Long.parseLong(sId.getText().trim())).get(9).trim());
+    }//GEN-LAST:event_findButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -288,6 +339,7 @@ public class ViewStudentDetails extends javax.swing.JPanel {
     private javax.swing.JButton findButton;
     private javax.swing.JTextField gpa;
     private javax.swing.JLabel gpaLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField lName;
     private javax.swing.JLabel lNameLabel;
     private javax.swing.JTextField phone;

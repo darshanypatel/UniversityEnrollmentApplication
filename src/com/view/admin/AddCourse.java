@@ -254,20 +254,20 @@ public class AddCourse extends javax.swing.JPanel {
         else{
             prereq_courses.add(preReq.getText().trim());
         }
-        ArrayList<Double> prereq_grades=new ArrayList<Double>();
+        ArrayList<String> prereq_grades=new ArrayList<String>();
         
         if(preGrade.getText().contains(""))
-               prereq_grades=new ArrayList<Double>();
+               prereq_grades=new ArrayList<String>();
         
         else if(gpa.getText().contains(",")){
         
        String prg[]=gpa.getText().split(",");
        
        for(int i=0;i<prg.length;i++)
-                prereq_grades.add(Double.parseDouble(prg[i].trim()));
+                prereq_grades.add(prg[i].trim());
         }
         else 
-            prereq_grades.add(Double.parseDouble(gpa.getText().trim()));
+            prereq_grades.add(gpa.getText().trim());
        int min=0;
        int max=0;
         if(credits.getText().contains("-")){
@@ -296,14 +296,14 @@ public class AddCourse extends javax.swing.JPanel {
         else
             GPA=Double.parseDouble(gpa.getText().trim());
         try {
-            if(SQL_Helper.add_course(courseID.getText().trim(),courseName.getText().trim() , dept.getText().trim(), level.getText().trim(), GPA, prereq_courses, prereq_grades, approval.getText().trim(), min,max ))
+            if((SQL_Helper.add_course(courseID.getText().trim(),courseName.getText().trim() , dept.getText().trim(), level.getText().trim(), GPA, prereq_courses, prereq_grades, approval.getText().trim(), min,max )).equals("Success"))
             {   
                 JOptionPane.showMessageDialog(null, "Course Added Successfully!!!");  
                 AdminViewController.closeAddCourse();
                 AdminViewController.showViewAddCourse();
-                ;}
+                }
             else
-                JOptionPane.showMessageDialog(null, "Error Occured!");  
+                JOptionPane.showMessageDialog(null, "Error Occured with error code:\n\n"+SQL_Helper.add_course(courseID.getText().trim(),courseName.getText().trim() , dept.getText().trim(), level.getText().trim(), GPA, prereq_courses, prereq_grades, approval.getText().trim(), min,max ));  
         } catch (SQLException ex) {
             Logger.getLogger(AddCourse.class.getName()).log(Level.SEVERE, null, ex);
         }
