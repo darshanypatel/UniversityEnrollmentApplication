@@ -247,17 +247,24 @@ public class ViewCourse extends javax.swing.JPanel {
     }//GEN-LAST:event_backActionPerformed
 
     private void showActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showActionPerformed
-<<<<<<< HEAD
         // TODO add your handling code here:
         
         ArrayList<String> course= SQL_Helper.get_course_details(courseId.getText().trim());
         System.out.println(course + "Size is:"+ course.size());
-        courseName.setText(course.get(0));
-        deptName.setText(course.get(1));
-        level.setText(course.get(2));
-        gpa.setText(course.get(3));
-        preReq.setText(course.get(4));
-        preGrade.setText(course.get(5));
+        courseName.setText(course.get(0).trim());
+        deptName.setText(course.get(1).trim());
+        level.setText(course.get(2).trim());
+        gpa.setText(course.get(3).trim());
+        if (course.get(4).equals("")) {
+            preReq.setText("");
+        } else {
+            preReq.setText(course.get(4).substring(0, course.get(4).length()-1));
+        }
+        if (course.get(5).equals("")) {
+            preGrade.setText("");
+        } else {
+            preGrade.setText(course.get(5).substring(0, course.get(5).length()-1));
+        }
         spApproval.setText(course.get(6));
         if(course.get(7).equals(course.get(8)))
             credits.setText(course.get(7));
@@ -265,30 +272,6 @@ public class ViewCourse extends javax.swing.JPanel {
             credits.setText(course.get(7));
         else
             credits.setText(course.get(7)+" - "+course.get(8));
-=======
-
-            // TODO add your handling code here:
-            ArrayList<String> course= SQL_Helper.get_course_details(courseId.getText().trim());
-            
-            System.out.println(course + "Size is:"+ course.size());
-            
-            
-            courseName.setText(course.get(0));
-            deptName.setText(course.get(1));
-            level.setText(course.get(2));
-            gpa.setText(course.get(3));
-            preReq.setText(course.get(4));
-            preGrade.setText(course.get(5));
-            spApproval.setText(course.get(6));
-            if(course.get(7).equals(course.get(8)))
-                    credits.setText(course.get(7));
-            else if(course.get(8) == null)
-                    credits.setText(course.get(7));
-            else
-              credits.setText(course.get(7)+" - "+course.get(8));  
-            
-       
->>>>>>> origin/master
         
     }//GEN-LAST:event_showActionPerformed
 

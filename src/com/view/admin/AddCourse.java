@@ -241,7 +241,7 @@ public class AddCourse extends javax.swing.JPanel {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         ArrayList<String> prereq_courses=new ArrayList<String>();
         
-        if(preReq.getText().contains(""))
+        if(preReq.getText().equals(""))
                 prereq_courses=new ArrayList<String>();
         
         else if(preReq.getText().contains(",")){
@@ -256,18 +256,18 @@ public class AddCourse extends javax.swing.JPanel {
         }
         ArrayList<String> prereq_grades=new ArrayList<String>();
         
-        if(preGrade.getText().contains(""))
+        if(preGrade.getText().equals(""))
                prereq_grades=new ArrayList<String>();
         
-        else if(gpa.getText().contains(",")){
+        else if(preGrade.getText().contains(",")){
         
-       String prg[]=gpa.getText().split(",");
+       String prg[]=preGrade.getText().split(",");
        
        for(int i=0;i<prg.length;i++)
                 prereq_grades.add(prg[i].trim());
         }
         else 
-            prereq_grades.add(gpa.getText().trim());
+            prereq_grades.add(preGrade.getText().trim());
        int min=0;
        int max=0;
         if(credits.getText().contains("-")){
@@ -296,6 +296,7 @@ public class AddCourse extends javax.swing.JPanel {
         else
             GPA=Double.parseDouble(gpa.getText().trim());
         try {
+            System.out.println("PreReq_Courses : "+prereq_courses + " Prereq_Grades :"+prereq_grades);
             if((SQL_Helper.add_course(courseID.getText().trim(),courseName.getText().trim() , dept.getText().trim(), level.getText().trim(), GPA, prereq_courses, prereq_grades, approval.getText().trim(), min,max )).equals("Success"))
             {   
                 JOptionPane.showMessageDialog(null, "Course Added Successfully!!!");  
