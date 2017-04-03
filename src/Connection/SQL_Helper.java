@@ -311,7 +311,7 @@ public class SQL_Helper {
     }
     
     // done - checking of gpa should be on the UI side
-    public static void update_student_grade(long student_id, double gpa)
+    public static void update_student_gpa(long student_id, double gpa)
     throws SQLException {
         stmt.executeQuery("update students set gpa = " + gpa + " where "
                           + "student_id = " + student_id);
@@ -671,31 +671,6 @@ public class SQL_Helper {
         return "Success";
     }
     
-    public static ArrayList<String> get_semester_year_list() {
-        ArrayList<String> result = new ArrayList();
-        try {
-            ResultSet rs = stmt.executeQuery("select * from semester where ENFORCE_DEADLINE = 'F'");
-            while (rs.next()) {
-                result.add(rs.getString("semeseter_name") + " " + rs.getInt("year"));
-            }
-        } catch (SQLException e) {
-            return new ArrayList();
-        }
-        return result;
-    }
-    
-    public static String update_add_drop_deadline(String semester_name, 
-            int year, String add_date, String drop_date) {
-        try {
-            stmt.executeQuery("update semester set add_date = '" + add_date 
-                + "', drop_date = '" + drop_date + "' where "
-                + "semester_name = '" + semester_name + "' and year = " + year);
-        } catch (SQLException e) {
-            return e.getMessage();
-        }
-        return "Success";
-    }
-    
     // implement methods after this point
     // not tested
     // enroll for a course (check if classification is same as course cl_id)
@@ -813,14 +788,13 @@ public class SQL_Helper {
         ArrayList<String> grades_list = new ArrayList();
         try {
             ResultSet rs = stmt.executeQuery("select * from enrolls where "
-                    + "student_id = " + student_id + " and "
-                            + "grade is not null");
+                    + "student_id = " + student_id);
             while (rs.next()) {
-                ResultSet rs2 = stmt2.executeQuery("select c.id from course c, "
-                        + "course_offering co where c.course_id = co.offering_id"
+                ResultSet rs2 = stmt2.executeQuery("select c.id, c.title from course c, "
+                        + "course_offering co where c.course_id = co.course_id"
                         + " and co.offering_id = " + rs.getInt("offering_id"));
                 rs2.next();
-                grades_list.add(rs2.getInt("course_id") + " " + rs2.getString("id") + " " + rs.getString("grade"));
+                grades_list.add(rs2.getString("id") + " " + rs2.getString("title") + " " + rs.getString("grade"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -828,6 +802,7 @@ public class SQL_Helper {
         }
         return grades_list;        
     }
+    
     
     // returning -1 if student_id is incorrect
     // pass -1 to get current_student gpa
@@ -1001,6 +976,67 @@ public class SQL_Helper {
         }
         return result;
     }
+    
+    public static ArrayList<String> get_semester_year_list() {
+        ArrayList<String> result = new ArrayList();
+        try {
+            ResultSet rs = stmt.executeQuery("select * from semester where ENFORCE_DEADLINE = 'F'");
+            while (rs.next()) {
+                result.add(rs.getString("semeseter_name") + " " + rs.getInt("year"));
+            }
+        } catch (SQLException e) {
+            return new ArrayList();
+        }
+        return result;
+    }
+    
+    public static String update_add_drop_deadline(String semester_name, 
+            int year, String add_date, String drop_date) {
+        try {
+            stmt.executeQuery("update semester set add_date = '" + add_date 
+                + "', drop_date = '" + drop_date + "' where "
+                + "semester_name = '" + semester_name + "' and year = " + year);
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+        return "Success";
+    }
+    
+    public static String update_student_grade(long offering_id, 
+            long student_id, String grade) {
+        try {
+            stmt.executeQuery("update enrolls set grade = '" + grade + "' where "
+                          + "student_id = " + student_id + " and offering_id = " + offering_id);
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+        return "Success";
+    }
+    
+    // all the grades
+    public static ArrayList<String> get_all_grades(long id) {
+        long student_id;
+        student_id = id == -1 ? current_student_id : id;
+        
+        ArrayList<String> grades_list = new ArrayList();
+        try {
+            ResultSet rs = stmt.executeQuery("select * from enrolls where "
+                    + "student_id = " + student_id);
+            while (rs.next()) {
+                ResultSet rs2 = stmt2.executeQuery("select c.id, c.title from course c, "
+                        + "course_offering co where c.course_id = co.course_id"
+                        + " and co.offering_id = " + rs.getInt("offering_id"));
+                rs2.next();
+                grades_list.add(rs.getInt("offering_id") + "," 
+                        + rs2.getString("id") + "," + rs2.getString("title") 
+                        + "," + rs.getString("grade"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return new ArrayList();
+        }
+        return grades_list;        
+    }    
     
 }
 
