@@ -937,14 +937,17 @@ public class SQL_Helper {
                 result.add(temp);
             }
              
-        } catch (SQLException ex) {
-             
-            return new ArrayList<ArrayList<String>>();
+        } catch (SQLException ex) {             
+            ArrayList<ArrayList<String>> result2 = new ArrayList<ArrayList<String>>();
+            temp = new ArrayList<>();
+            temp.add(ex.getMessage());
+            result2.add(temp);
+            return result2;
         }
     return result;
     }
     
-  // chandu - approve_enrollment_request
+    // chandu - approve_enrollment_request
     public static String approve_reject_enrollment_request(long student_id, long offering_id, String status) {
         try {
             String s;
@@ -1095,7 +1098,20 @@ public class SQL_Helper {
         return grades_list;        
     }
 
-    //public static 
+    public static String deadline_check() {
+        try {
+            long student_id = current_student_id;
+            
+            // get currently credits enrolled
+            stmt.executeQuery("select sum(credits) from enrolls where student_id = " + student_id + " and status = 'E' ");
+            
+            return "Success";
+        } catch (SQLException ex) {
+            Logger.getLogger(SQL_Helper.class.getName()).log(Level.SEVERE, null, ex);
+            return ex.getMessage();
+        }
+    }
+    
     
 }
 
