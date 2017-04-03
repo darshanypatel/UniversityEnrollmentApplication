@@ -95,8 +95,10 @@ public class SQL_Helper {
 //            System.out.println(list.get(i));
 //        } 
 
-        current_student_id = 200157724;
-        System.out.println(enroll_course(1, 3));
+//        current_student_id = 200157724;
+//        System.out.println(enroll_course(1, 3));
+
+        insert_requests_record(200157724L, 1111, 1, "A");
 
         disconnect();
         
@@ -753,25 +755,29 @@ public class SQL_Helper {
                     String temp = grades.get(prereq_course_id);
                     ResultSet rs2 = stmt2.executeQuery("select (case when "
                             + "(select grade_points from grades where grade = '" + temp + "') >= "
-                            + "(select grade_points from grades where grade = '" + required_grade + "' then 'T' else 'F' end) as check from dual");
-                    if (rs2.getString("check").equals("F")) {
+                            + "(select grade_points from grades where grade = '" + required_grade + "') then 'T' else 'F' end) as c from dual");
+                    rs2.next();
+                    if (rs2.getString("c").equals("F")) {
                         rs = stmt.executeQuery("select id, title from course where course_id = " + prereq_course_id);
+                        rs.next();
                         return "Not enough grade pointer in - " + rs.getString("id") + " " + rs.getString("title");
                     }
                 } else {
                     rs = stmt.executeQuery("select id, title from course where course_id = " + prereq_course_id);
+                    rs.next();
                     return "course - " + rs.getString("id") + " " + rs.getString("title") + " is required as a prerequisite";
                 }
             }
             
             String status;
-            if (special_permission != null && special_permission.equals("T")) {                
+            if (special_permission != null && special_permission.equals("Y")) {                
                 status = "P";
             } else {
                 // check current enrollment count and decide E/W accordingly
                 rs = stmt.executeQuery("select (case when (select MAX_ENROLLMENT from course_offering "
                         + "where offering_id = " + offering_id + ") <= (select CURRENT_ENROLLMENT "
-                        + "from course_offering where offering_id = " + offering_id + ") then 'W' else 'E' end) as status from dual");
+                        + "from course_offering where offering_id = " + offering_id 
+                        + ") then 'W' else 'E' end) as status from dual");
                 rs.next();
                 if (rs.getString("status").equals("E")) {
                     status = "E";
@@ -779,7 +785,9 @@ public class SQL_Helper {
                     status = "W";
             }
             
-            stmt.executeQuery("insert into enrolls (STUDENT_ID, OFFERING_ID, CREDITS, STATUS) values (" + student_id + "," + offering_id + "," + credits + ",'" + status + "')");
+            stmt.executeQuery("insert into enrolls (STUDENT_ID, OFFERING_ID,"
+                    + " CREDITS, STATUS) values (" + student_id + "," 
+                    + offering_id + "," + credits + ",'" + status + "')");
             
             con.commit();
         } catch (SQLException e) {
@@ -1028,8 +1036,8 @@ public class SQL_Helper {
     public static String update_add_drop_deadline(String semester_name, 
             int year, String add_date, String drop_date) {
         try {
-            stmt.executeQuery("update semester set add_date = '" + add_date 
-                + "', drop_date = '" + drop_date + "' where "
+            stmt.executeQuery("update semester set ADD_DEADLINE = '" + add_date 
+                + "', DROP_DEADLINE = '" + drop_date + "' where "
                 + "semester_name = '" + semester_name + "' and year = " + year);
         } catch (SQLException e) {
             return e.getMessage();
