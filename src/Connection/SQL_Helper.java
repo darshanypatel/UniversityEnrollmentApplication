@@ -794,7 +794,11 @@ public class SQL_Helper {
                         + "course_offering co where c.course_id = co.course_id"
                         + " and co.offering_id = " + rs.getInt("offering_id"));
                 rs2.next();
-                grades_list.add(rs2.getString("id") + " " + rs2.getString("title") + " " + rs.getString("grade"));
+                String g = rs.getString("grade");
+                if (g == null) {
+                    g = "";
+                }
+                grades_list.add(rs2.getString("id") + " " + rs2.getString("title") + " " + g);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
