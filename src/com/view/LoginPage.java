@@ -127,7 +127,7 @@ public class LoginPage extends javax.swing.JPanel {
             else{
             //SQL_Helper.connect();
                // System.out.println("Password is: "+new String(passwordText.getPassword()));
-            if(SQL_Helper.check_login_credentials(userIDText.getText(), new String(passwordText.getPassword()), category.getSelectedIndex())){
+            if((SQL_Helper.check_login_credentials(userIDText.getText(), new String(passwordText.getPassword()), category.getSelectedIndex()).equals("Success"))){
                 
                 if(category.getSelectedIndex() == 0)
                     dbpro.DBPro.ShowStudentPage();
