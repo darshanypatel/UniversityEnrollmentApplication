@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -947,15 +948,19 @@ public class SQL_Helper {
     }
     
     public static String insert_requests_record(long student_id, long admin_id, long offering_id, String status) {
-        String input_pattern = "yyyy-MM-dd";
-        String output_pattern = "dd-MMM-yy";
-        String date = "";
-        //try{
-//            date = new SimpleDateFormat(output_pattern).format(new SimpleDateFormat(input_pattern).parse(System.));
-       // } catch (ParseException ex) {
-          //Logger.getLogger(StudentProfilePage.class.getName()).log(Level.SEVERE, null, ex);
-        //}
-        //stmt.executeQuery("insert into requests (STUDENT_ID, ADMIN_ID, OFFERING_ID, DATE_APPROVED, APPROVED_BY, STATUS) values (" + student_id + "," + admin_id + "," + offering_id + "," +  + ",'" + status + "')")
+        //String input_pattern = "yyyy/MM/dd";
+        //String output_pattern = "dd-MMM-yy";
+        String date;
+        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yy");
+        java.util.Date d = new java.util.Date();
+        //date = new SimpleDateFormat(output_pattern).format(new SimpleDateFormat(input_pattern).parse(dateFormat.format(d)));
+        date = dateFormat.format(d);
+        try {
+            stmt.executeQuery("insert into requests (STUDENT_ID, ADMIN_ID, OFFERING_ID, DATE_APPROVED, APPROVED_BY, STATUS) values (" + student_id + "," + admin_id + "," + offering_id + ",'" + date + "','" + status + "')");
+        } catch (SQLException ex) {
+            Logger.getLogger(SQL_Helper.class.getName()).log(Level.SEVERE, null, ex);
+            return ex.getMessage();
+        }
         return "Success";
     }
     
