@@ -685,7 +685,7 @@ public class SQL_Helper {
         try {
             con.setAutoCommit(false);
             
-            ResultSet c = stmt.executeQuery("select offering_id, student_id from enrolls where student_id = " + student_id + " and offering_id = " + offering_id);
+            ResultSet c = stmt.executeQuery("select offering_id, student_id from enrolls where status <> 'D' and student_id = " + student_id + " and offering_id = " + offering_id);
             if (c.next()) {
                 return "Already enrolled for this course!";
             }
@@ -917,14 +917,18 @@ public class SQL_Helper {
   // chandu - approve_enrollment_request
     public static String approve_reject_enrollment_request(String student_id, String offering_id, String status) {
         try {
-            
-            if(status.equals("approve"))
+            String s = "";
+            if(status.equals("approve")) {
                 stmt.executeQuery("update enrolls e set e.status = (Case when "
                     + "((select c.current_enrollment from course_offering c where c.offering_id= " + offering_id + ") < "
                     + "(select c.max_enrollment from course_offering c where c.offering_id=" + offering_id + " )) "
                     + "then 'E' ELSE 'W' END) where student_id = " + student_id + " and e.offering_id = " + offering_id);       
-            else
+                s = "A";
+            } else {
                stmt.executeQuery("update enrolls e set e.status = 'R' where e.offering_id = " + offering_id + " and e.student_id = " + student_id);
+               s = "R";
+            }
+            insert_requests_record(student_id, current_admin_id, offering_id, s);
             
         } catch(SQLException e) {
             System.out.println(e);
@@ -940,7 +944,7 @@ public class SQL_Helper {
             
             ResultSet rs=stmt.executeQuery("select s.semester_name, s.year, e.status, c.id, c.title from "
                     + "course c, enrolls e, semester s, course_offering co "
-                    + "where co.offering_id=e.offering_id and co.course_id=c.course_id and co.semester_id=s.semester_id and "
+                    + "where e.status <> 'D' and co.offering_id=e.offering_id and co.course_id=c.course_id and co.semester_id=s.semester_id and "
                     + "e.student_id="+current_student_id);
             while(rs.next())
             {
