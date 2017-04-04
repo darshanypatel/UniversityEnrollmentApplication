@@ -402,7 +402,11 @@ public class SQL_Helper {
         result.add(rs.getString("title"));
         result.add(rs.getString("dept_name"));
         result.add(rs.getString("cl"));
-        result.add(rs.getDouble("min_gpa") + "");
+        if (rs.getDouble("min_gpa") == -1) {
+            result.add("0");
+        } else {
+            result.add(rs.getDouble("min_gpa") + "");
+        }
         
         // find prereq_courses from "prereq_id"
         ResultSet prereq_courses_rs = stmt.executeQuery("select PREREQ_COURSE_ID, grade from "
