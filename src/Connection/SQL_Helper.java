@@ -351,7 +351,7 @@ public class SQL_Helper {
             
             for (int i = 0; i < prereq_courses.size(); i++) {
                 try {
-                stmt.executeQuery("insert into prereq_courses (prereq_id, "
+                    stmt.executeQuery("insert into prereq_courses (prereq_id, "
                         + "prereq_course_id, grade) select prereq_seq.currval "
                         + "as prereq_id, c.course_id as prereq_course_id, '" 
                         + prereq_grades.get(i) + "' as grade from course c where"
@@ -743,7 +743,7 @@ public class SQL_Helper {
             special_permission = rs.getString("special_permission");
             min_gpa = rs.getDouble("min_gpa");
             
-            if (min_gpa > get_gpa(student_id)) {
+            if (min_gpa >= get_gpa(student_id)) {
                 return "Minimum gpa is more than current gpa";
             }
             
@@ -758,7 +758,7 @@ public class SQL_Helper {
             rs = stmt.executeQuery("select PREREQ_COURSE_ID, GRADE from prereq_courses where prereq_id = " + prereq_id);
             while (rs.next()) {
                 prereq_course_id = rs.getInt("prereq_course_id");
-                required_grade = rs.getString("grade");
+                required_grade = rs.getString("grade");                
                 if (grades.containsKey(prereq_course_id)) {
                     String temp = grades.get(prereq_course_id);
                     ResultSet rs2 = stmt2.executeQuery("select (case when "
