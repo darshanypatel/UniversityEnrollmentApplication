@@ -693,7 +693,7 @@ public class SQL_Helper {
     public static String enroll_course(long offering_id, int credits) throws SQLException {
         long student_id = current_student_id;
         int course_id, cl_id_of_current_student, cl_id_of_course, prereq_id, min_credits, max_credits, prereq_course_id;
-        String special_permission, required_grade;
+        String special_permission, required_grade, add_deadline_passed = "F";
         double min_gpa;
         try {
             con.setAutoCommit(false);
@@ -708,6 +708,22 @@ public class SQL_Helper {
                 return "Already enrolled for this course!";
             }
             
+            ResultSet rs = stmt.executeQuery("select (case when (select "
+                    + "current_date from dual) > (select s.add_deadline from "
+                    + "semester s, semester_duration sd where "
+                    + "s.year = EXTRACT(YEAR FROM sd.start_date) and s.semester_name "
+                    + "= sd.semester_name and current_date between "
+                    + "sd.start_date and sd.end_date) then 'T' else 'F' end) "
+                    + "as add_deadline_passed from dual");
+            
+            if (rs.next()) {
+                add_deadline_passed = rs.getString("add_deadline_passed");
+            }
+            
+            if (add_deadline_passed.equals("T")) {
+                return "Can't enroll after add course deadline";
+            }
+            
             ResultSet p = stmt.executeQuery("select (case when (select MAX_ENROLLMENT + WAIT_LIST_MAX from course_offering "
                         + "where offering_id = " + offering_id + ") = (select CURRENT_ENROLLMENT "
                         + "from course_offering where offering_id = " + offering_id + ") then 'N' else 'Y' end) as possible from dual");
@@ -716,7 +732,7 @@ public class SQL_Helper {
                 return "Can't enroll. Course is full";
             }
             
-            ResultSet rs = stmt.executeQuery("select course_id from course_offering where offering_id = " + offering_id);
+            rs = stmt.executeQuery("select course_id from course_offering where offering_id = " + offering_id);
             rs.next();
             course_id = rs.getInt("course_id");            
             
@@ -889,6 +905,23 @@ public class SQL_Helper {
     // chandu - drop course
     public static String drop_course(long offering_id) {
         try {
+            String drop_deadline_passed = "F";
+            ResultSet rs = stmt2.executeQuery("select (case when (select "
+                    + "current_date from dual) > (select s.drop_deadline "
+                    + "from semester s, semester_duration sd where "
+                    + "s.year = EXTRACT(YEAR FROM sd.start_date) and s.semester_name "
+                    + "= sd.semester_name and current_date between sd.start_date "
+                    + "and sd.end_date) then 'T' else 'F' end) as "
+                    + "drop_deadline_passed from dual");
+            
+            if (rs.next()) {
+                drop_deadline_passed = rs.getString("drop_deadline_passed");
+            }
+            
+            if (drop_deadline_passed.equals("T")) {
+                return "Can't drop course now!";                
+            }
+            
             stmt.executeQuery("update enrolls set status='D' where offering_id="+offering_id+" and student_id="+current_student_id);
             
             
@@ -1123,7 +1156,6 @@ public class SQL_Helper {
                     + "= sd.semester_name and current_date between sd.start_date "
                     + "and sd.end_date) then 'T' else 'F' end) as "
                     + "drop_deadline_passed from dual");
-            //System.out.println("2");
             if (rs.next()) {
                 add_deadline_passed = rs.getString("add_deadline_passed");
             }
