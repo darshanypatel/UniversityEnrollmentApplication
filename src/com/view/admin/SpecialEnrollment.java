@@ -135,10 +135,13 @@ public class SpecialEnrollment extends javax.swing.JPanel {
        String status= SQL_Helper.approve_reject_enrollment_request(Long.parseLong(stuID),Long.parseLong(offeringID), "approve");
         if(status.equals("Success")){
              JOptionPane.showMessageDialog(null, "Request Approved Successfully!");
+             AdminViewController.closeSpecialEnrollment();
+             AdminViewController.showAdminHomePage();
         }
         else
              JOptionPane.showMessageDialog(null, "Some Error Occurred with error Code:\n"+status);
-        
+             AdminViewController.closeSpecialEnrollment();
+             AdminViewController.showAdminHomePage();
              this.repaint();
             
     }//GEN-LAST:event_approveActionPerformed
@@ -150,9 +153,13 @@ public class SpecialEnrollment extends javax.swing.JPanel {
           String status= SQL_Helper.approve_reject_enrollment_request(Long.parseLong(stuID),Long.parseLong(offeringID), "reject");
          if(status.equals("Success")){
              JOptionPane.showMessageDialog(null, "Request Rejected Successfully!");
+             AdminViewController.closeSpecialEnrollment();
+             AdminViewController.showAdminHomePage();
         }
         else
              JOptionPane.showMessageDialog(null, "Some Error Occurred with error Code:\n"+status);
+             AdminViewController.closeSpecialEnrollment();
+             AdminViewController.showAdminHomePage();
     }//GEN-LAST:event_rejectActionPerformed
 
 
