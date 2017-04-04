@@ -55,13 +55,9 @@ public class DBPro {
     
     
    public static void ShowStudentPage(){
-       StudentHomePage sp=new StudentHomePage();
-       stuPage = new JFrame();
-       stuPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        stuPage.add(sp); // Add JPanel with components to JFrame
-        stuPage.setSize(700,600);
+       
         login.setVisible(false);
-        stuPage.setVisible(true);
+       StudentViewController.showStudentHomePage();
      }
    
    public static void ShowAdminHomePage(){       

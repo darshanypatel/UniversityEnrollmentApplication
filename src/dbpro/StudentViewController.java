@@ -34,8 +34,8 @@ public class StudentViewController {
        studentBillingPage = new JFrame();
        studentBillingPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        studentBillingPage.add(ac); // Add JPanel with components to JFrame
-       studentBillingPage.setSize(700,800);
-//       studentHomePage.setVisible(false);
+       studentBillingPage.setSize(700,400);
+      studentHomePage.setVisible(false);
        studentBillingPage.setVisible(true);
     }
     
@@ -43,10 +43,9 @@ public class StudentViewController {
        StudentGradePage home_page=new StudentGradePage();
        studentGradePage = new JFrame();
        studentGradePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        studentGradePage.add(home_page); // Add JPanel with components to JFrame
-        studentGradePage.setVisible(true); 
-        studentGradePage.setSize(700,600);
-//        studentHomePage.setVisible(false);
+        studentGradePage.add(home_page); // Add JPanel with components to JFrame      
+        studentGradePage.setSize(400,300);
+       studentHomePage.setVisible(false);
        studentGradePage.setVisible(true);
     }
     
@@ -55,9 +54,8 @@ public class StudentViewController {
        studentCoursePage = new JFrame();
        studentCoursePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         studentCoursePage.add(home_page); // Add JPanel with components to JFrame
-        studentCoursePage.setVisible(true); 
         studentCoursePage.setSize(700,600);
-//        studentHomePage.setVisible(false);
+      studentHomePage.setVisible(false);
        studentCoursePage.setVisible(true);
     }
     
@@ -66,9 +64,8 @@ public class StudentViewController {
        studentProfilePage = new JFrame();
        studentProfilePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         studentProfilePage.add(home_page); // Add JPanel with components to JFrame
-        studentProfilePage.setVisible(true); 
-        studentProfilePage.setSize(700,600);
-       // studentHomePage.setVisible(false);
+       studentProfilePage.setSize(700,600);
+       studentHomePage.setVisible(false);
        studentProfilePage.setVisible(true); 
     }
     
@@ -77,8 +74,7 @@ public class StudentViewController {
        studentHomePage = new JFrame();
        studentHomePage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         studentHomePage.add(home_page); // Add JPanel with components to JFrame
-        studentHomePage.setVisible(true); 
-        studentHomePage.setSize(700,600);
+        studentHomePage.setSize(800,600);
        studentHomePage.setVisible(true); 
     }
     
@@ -87,8 +83,7 @@ public class StudentViewController {
        viewAvailableCourses = new JFrame();
        viewAvailableCourses.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewAvailableCourses.add(home_page); // Add JPanel with components to JFrame
-        viewAvailableCourses.setVisible(true); 
-        viewAvailableCourses.setSize(700,600);
+       viewAvailableCourses.setSize(700,600);
         studentCoursePage.setVisible(false);
        viewAvailableCourses.setVisible(true); 
     }
@@ -98,7 +93,6 @@ public class StudentViewController {
        viewMyCourses = new JFrame();
        viewMyCourses.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewMyCourses.add(home_page); // Add JPanel with components to JFrame
-        viewMyCourses.setVisible(true); 
         viewMyCourses.setSize(700,600);
        viewMyCourses.setVisible(true); 
     }
@@ -108,7 +102,6 @@ public class StudentViewController {
        viewGrades = new JFrame();
        viewGrades.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewGrades.add(home_page); // Add JPanel with components to JFrame
-        viewGrades.setVisible(true); 
         viewGrades.setSize(700,600);
        viewGrades.setVisible(true); 
     }
@@ -118,7 +111,6 @@ public class StudentViewController {
        viewPendingCourses = new JFrame();
        viewPendingCourses.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewPendingCourses.add(home_page); // Add JPanel with components to JFrame
-        viewPendingCourses.setVisible(true); 
         viewPendingCourses.setSize(700,600);
        viewPendingCourses.setVisible(true); 
     }
@@ -128,8 +120,7 @@ public class StudentViewController {
        dropCourse = new JFrame();
        dropCourse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         dropCourse.add(home_page); // Add JPanel with components to JFrame
-        dropCourse.setVisible(true); 
-        dropCourse.setSize(700,600);
+       dropCourse.setSize(700,600);
        dropCourse.setVisible(true); 
     }
      
@@ -138,7 +129,6 @@ public class StudentViewController {
        changePassword = new JFrame();
        changePassword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         changePassword.add(home_page); // Add JPanel with components to JFrame
-        changePassword.setVisible(true); 
         changePassword.setSize(700,600);
        changePassword.setVisible(true); 
     }
@@ -148,8 +138,50 @@ public class StudentViewController {
        loginPage = new JFrame();
        loginPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginPage.add(home_page); // Add JPanel with components to JFrame
-        loginPage.setVisible(true); 
         loginPage.setSize(700,600);
        loginPage.setVisible(true); 
     }
+      
+      public static void closeChangePassword(){
+          changePassword.setVisible(false);
+      }
+      public static void closeDropCourse(){
+          dropCourse.setVisible(false);
+      }
+      
+      public static void closeStudentBillingPage(){
+          studentBillingPage.setVisible(false);
+      }
+      
+      public static void closeStudentCoursePage(){
+          studentCoursePage.setVisible(false);
+      }
+      
+      public static void closeStudentGradePage(){
+          studentGradePage.setVisible(false);
+      }
+      
+      public static void closeStudentHomePage(){
+          studentHomePage.setVisible(false);
+      }
+      
+      public static void closeStudentProfilePage(){
+          studentProfilePage.setVisible(false);
+      }
+      
+      public static void closeViewAvailableCourses(){
+          viewAvailableCourses.setVisible(false);
+      }
+      
+      public static void closeViewGerades(){
+          viewGrades.setVisible(false);
+      }
+      
+      public static void closeViewMyCourse(){
+          viewMyCourses.setVisible(false);
+      }
+      
+      public static void closeViewPendingCourses(){
+          viewPendingCourses.setVisible(false);
+      }
 }
