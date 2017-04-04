@@ -47,7 +47,7 @@ public class ViewPendingCourses extends javax.swing.JPanel {
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -103,7 +103,7 @@ public class ViewPendingCourses extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-            this.setVisible(false);
+    StudentViewController.closeViewPendingCourses();
         StudentViewController.showStudentCoursePage();
     }//GEN-LAST:event_jButton2ActionPerformed
 

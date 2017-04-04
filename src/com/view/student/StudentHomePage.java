@@ -253,7 +253,7 @@ public class StudentHomePage extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        StudentViewController.closeStudentHomePage();
         StudentViewController.showLoginPage();
     }//GEN-LAST:event_jButton2ActionPerformed
 

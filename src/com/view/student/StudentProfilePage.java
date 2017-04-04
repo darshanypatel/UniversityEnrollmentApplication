@@ -311,7 +311,7 @@ public class StudentProfilePage extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        StudentViewController.closeStudentProfilePage();
         StudentViewController.showStudentHomePage();
     }//GEN-LAST:event_jButton4ActionPerformed
 

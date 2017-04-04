@@ -185,18 +185,19 @@ public class StudentCoursePage extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-     StudentViewController.showViewAvailableCourses();
+        StudentViewController.closeStudentCoursePage();
+        StudentViewController.showViewAvailableCourses();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-       this.setVisible(false);
+       StudentViewController.closeStudentCoursePage();
        StudentViewController.showViewMyCourse();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-       this.setVisible(false);
+       StudentViewController.closeStudentCoursePage();
        StudentViewController.showStudentHomePage();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -230,13 +231,13 @@ public class StudentCoursePage extends javax.swing.JPanel {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-       this.setVisible(false);
+       StudentViewController.closeStudentCoursePage();
        StudentViewController.showViewPendingCourses();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-         this.setVisible(false);
+          StudentViewController.closeStudentCoursePage();
        StudentViewController.showDropCourse();
     }//GEN-LAST:event_jButton6ActionPerformed
 
