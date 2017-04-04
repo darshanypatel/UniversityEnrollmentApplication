@@ -240,13 +240,13 @@ public class AddCourse extends javax.swing.JPanel {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         ArrayList<String> prereq_courses=new ArrayList<String>();
-        
+         String pr[]={""};
         if(preReq.getText().equals(""))
                 prereq_courses=new ArrayList<String>();
         
         else if(preReq.getText().contains(",")){
         
-        String pr[]=preReq.getText().split(",");
+        pr=preReq.getText().split(",");
        
        for(int i=0;i<pr.length;i++)
                 prereq_courses.add(pr[i].trim());
@@ -256,8 +256,11 @@ public class AddCourse extends javax.swing.JPanel {
         }
         ArrayList<String> prereq_grades=new ArrayList<String>();
         
-        if(preGrade.getText().equals(""))
+        if(preGrade.getText().equals("")){
                prereq_grades=new ArrayList<String>();
+               for(int i=0;i<pr.length;i++)
+                    prereq_grades.add("P");
+        }
         
         else if(preGrade.getText().contains(",")){
         
