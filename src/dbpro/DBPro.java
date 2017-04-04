@@ -7,7 +7,7 @@ package dbpro;
 
 import Connection.SQL_Helper;
 import com.view.LoginPage;
-import com.view.StudentPage;
+import com.view.student.StudentHomePage;
 import com.view.admin.AdminHomePage;
 import com.view.admin.EnrollStudent;
 import java.sql.SQLException;
@@ -55,7 +55,7 @@ public class DBPro {
     
     
    public static void ShowStudentPage(){
-       StudentPage sp=new StudentPage();
+       StudentHomePage sp=new StudentHomePage();
        stuPage = new JFrame();
        stuPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         stuPage.add(sp); // Add JPanel with components to JFrame
