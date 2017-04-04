@@ -100,7 +100,8 @@ public class SQL_Helper {
 //        insert_requests_record(200157724L, 1111, 1, "A");
 
         current_student_id = 200157724;
-        System.out.println(deadline_check());
+        System.out.println(update_student_grade(83, 102, "B+"));
+//        System.out.println(deadline_check());
 
         disconnect();
         
@@ -1103,9 +1104,32 @@ public class SQL_Helper {
     public static String update_student_grade(long offering_id, 
             long student_id, String grade) {
         try {
+            con.setAutoCommit(false);
+            
             stmt.executeQuery("update enrolls set grade = '" + grade + "' where "
                           + "student_id = " + student_id + " and offering_id = " + offering_id);
+            stmt.executeQuery("update enrolls e set e.status = 'C' where e.student_id = " + student_id + " and e.offering_id = " + offering_id);
+            ResultSet rs = stmt.executeQuery("select avg(g.grade_points) as avg from "
+                    + "enrolls e, grades g where g.grade = e.grade and e.student_id = " 
+                    + student_id + " and e.status = 'C' group by e.student_id");
+            if (rs.next()) {
+                double avg = rs.getDouble("avg");
+                if (avg > 4) {
+                    avg = 4;
+                }
+                stmt.executeQuery("update students set gpa = " + avg + " where student_id = " + student_id);
+            }
+            
+//            stmt.executeQuery("execute update_status(" + student_id + "," + offering_id + ")");
+//            stmt.executeQuery("execute update_gpa(" + student_id + ")");
+            con.commit();
         } catch (SQLException e) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(SQL_Helper.class.getName()).log(Level.SEVERE, null, ex);
+                return ex.getMessage();
+            }
             return e.getMessage();
         }
         return "Success";
@@ -1201,21 +1225,5 @@ public class SQL_Helper {
             Logger.getLogger(SQL_Helper.class.getName()).log(Level.SEVERE, null, ex);
             return ex.getMessage();
         }
-    }
-    
-    
+    }   
 }
-
-// TODO 
-// drop 'belongs' table    
-// create page to add a new department
-// add one page which adds faculty
-// remove course_id from course_prereq table? or drop 'has' table (better to drop table 'has')
-// get_course_offering_list can be changed to view courses of particular SemYear
-
-// trigger for after enroll if enrolled then change bill
-// trigger for after drop if dropped then change bill
-// trigger for after approving enrollment request, update current_enrollment in course_offering table
-// trigger for before insert on enroll calculate credits of student ??
-
-//select (case when (select current_date from dual) > (select s.add_deadline from semester s, semester_duration sd where s.year = EXTRACT(YEAR FROM sd.start_date) and s.semester_name = sd.semester_name and current_date between sd.start_date and sd.end_date) then 'T' else 'F' end) as add_deadline_passed from dual
